@@ -33,3 +33,6 @@
 /// Called from the base of '/obj/item/bodypart/proc/drop_limb(special)' ()
 #define COMSIG_MOB_DISMEMBER "mob_drop_limb"
 	#define COMPONENT_CANCEL_DISMEMBER (1<<0) //cancel the drop limb
+
+#define COMSIG_CARBON_GAIN_COLLAR "carbon_gain_collar"
+#define COMSIG_CARBON_LOSE_COLLAR "carbon_lose_collar"
