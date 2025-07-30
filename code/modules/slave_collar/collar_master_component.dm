@@ -627,7 +627,7 @@ GLOBAL_LIST_EMPTY(collar_masters)
         mindparent.current.verbs += list(
             /mob/proc/collar_master_control_menu,
             /mob/proc/collar_master_help,
-			/mob/proc/release_all_pets
+			/mob/proc/collar_master_releaseall
         )
 
 /datum/component/collar_master/_RemoveFromParent()
