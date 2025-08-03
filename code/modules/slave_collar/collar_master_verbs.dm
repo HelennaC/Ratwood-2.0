@@ -32,7 +32,6 @@
 		"Forbid/permit Clothing" = /mob/proc/collar_master_clothing,
 		"Toggle Pet Speech" = /mob/proc/collar_master_toggle_speech,
 		"Force Action" = /mob/proc/collar_master_force_action,
-		"Dominate Pet" = /mob/proc/collar_master_dominate,
 		"Force Love" = /mob/proc/collar_master_force_love,
 		"Toggle Arousal" = /mob/proc/collar_master_force_arousal,
 		"Toggle Orgasm Denial" = /mob/proc/collar_master_toggle_denial,

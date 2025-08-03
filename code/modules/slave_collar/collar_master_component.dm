@@ -167,18 +167,18 @@ GLOBAL_LIST_EMPTY(collar_masters)
     return TRUE
 
 /datum/component/collar_master/proc/on_pet_attack(datum/source, atom/target)
-    SIGNAL_HANDLER
-    var/mob/living/carbon/human/pet = source
-    if(!pet || !(pet in my_pets))
-        return COMPONENT_CANCEL_ATTACK
+	SIGNAL_HANDLER
+	var/mob/living/carbon/human/pet = source
+	if(!pet || !(pet in my_pets))
+		return COMPONENT_CANCEL_ATTACK
 
-    // Block attacks against the master only if on harm intent
-    if(target == mindparent?.current && pet.used_intent.type == INTENT_HARM)
-        to_chat(pet, span_warning("Your collar shocks you as you try to attack your master!"))
-        shock_pet(pet, 10)
-        return COMPONENT_CANCEL_ATTACK
+	// Block attacks against the master only if on harm intent
+	if(target == mindparent?.current && pet.used_intent.type == INTENT_HARM)
+		to_chat(pet, span_warning("Your collar shocks you as you try to attack your master!"))
+		INVOKE_ASYNC(src, PROC_REF(shock_pet), pet, 10)
+		return COMPONENT_CANCEL_ATTACK
 
-    return COMPONENT_CANCEL_ATTACK
+	return COMPONENT_CANCEL_ATTACK
 
 /datum/component/collar_master/proc/shock_pet(mob/living/carbon/human/pet, intensity = 10)
     if(!pet || !(pet in my_pets))
