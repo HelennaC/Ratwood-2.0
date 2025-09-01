@@ -165,6 +165,7 @@
 	mob_traits = list(TRAIT_SOUL_EXAMINE, TRAIT_NOSTINK)	//No stink is generic but they deal with dead bodies so.. makes sense, I suppose?
 	miracles = list(/obj/effect/proc_holder/spell/targeted/touch/orison			= CLERIC_ORI,
 					/obj/effect/proc_holder/spell/invoked/necras_sight			= CLERIC_T0,
+					/obj/effect/proc_holder/spell/targeted/burialrite			= CLERIC_T0,
 					/obj/effect/proc_holder/spell/invoked/lesser_heal 			= CLERIC_T1,
 					/obj/effect/proc_holder/spell/invoked/blood_heal			= CLERIC_T1,
 					/obj/effect/proc_holder/spell/invoked/avert					= CLERIC_T1,
@@ -173,7 +174,6 @@
 					/obj/effect/proc_holder/spell/invoked/raise_spirits_vengeance = CLERIC_T2,
 					/obj/effect/proc_holder/spell/invoked/wound_heal			= CLERIC_T3,
 					/obj/effect/proc_holder/spell/invoked/speakwithdead		= CLERIC_T3,
-					/obj/effect/proc_holder/spell/invoked/fieldburials			= CLERIC_T3,
 	)
 	confess_lines = list(
 		"ALL SOULS FIND THEIR WAY TO NECRA!",
