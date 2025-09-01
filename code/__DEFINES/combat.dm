@@ -166,6 +166,7 @@
 #define SPEAR_CAST          /datum/intent/spear/cast
 #define PARTIZAN_REND		/datum/intent/rend/reach/partizan
 #define PARTIZAN_PEEL		/datum/intent/partizan/peel
+#define PARTIZAN_PEEL_BAD	/datum/intent/partizan/peel/nag
 
 #define MESSER_CHOP			/datum/intent/sword/chop/messer
 
