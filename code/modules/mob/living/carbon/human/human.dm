@@ -80,7 +80,7 @@
 		if(user.mind)
 			var/riding_skill = user.get_skill_level(/datum/skill/misc/riding)
 			if(riding_skill)
-				riding_datum.vehicle_move_delay = max(1, 4 - (riding_skill * 0.2))
+				riding_datum.vehicle_move_delay = max(1, 3 - (riding_skill * 0.2))
 		return TRUE
 #endif
 
