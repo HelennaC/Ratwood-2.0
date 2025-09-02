@@ -56,6 +56,32 @@
 					legwear_socks.forceMove(get_turf(src))
 					src.put_in_hands(legwear_socks)
 					legwear_socks = null
+	else if(HAS_TRAIT(src, TRAIT_PONYGIRL_RIDEABLE))
+		var/mob/living/livinguser = user
+		user.visible_message(span_notice("[livinguser] is trying to mount [src]..."))
+		if(!do_after(livinguser, 15, target = src))
+			return
+		if(!istype(livinguser))
+			return
+		if(livinguser.incapacitated())
+			return
+		if(livinguser.restrained())
+			return
+		if(livinguser.mobility_flags & (MOBILITY_MOVE|MOBILITY_STAND) != (MOBILITY_MOVE|MOBILITY_STAND))
+			return
+		if(!can_buckle)
+			return
+		if(buckled_mobs?.len)
+			return
+		if(!buckle_mob(user, TRUE, FALSE))
+			return
+		var/datum/component/riding/human/riding_datum = LoadComponent(/datum/component/riding/human)
+		riding_datum.vehicle_move_delay = 4
+		if(user.mind)
+			var/riding_skill = user.get_skill_level(/datum/skill/misc/riding)
+			if(riding_skill)
+				riding_datum.vehicle_move_delay = max(1, 3 - (riding_skill * 0.2))
+		return TRUE
 #endif
 
 /mob/living/carbon/human/Initialize()

@@ -1045,24 +1045,36 @@
 	if(buckled && last_special <= world.time)
 		changeNext_move(CLICK_CD_RESIST)
 		resist_buckle()
+		return
 
 	//Breaking out of a container (Locker, sleeper, cryo...)
-	else if(isobj(loc))
+	if(isobj(loc))
 		changeNext_move(CLICK_CD_RESIST)
 		var/obj/C = loc
 		C.container_resist(src)
+		return
 
-	else if(mobility_flags & MOBILITY_MOVE)
+	if(mobility_flags & MOBILITY_MOVE)
 		if(on_fire)
 			resist_fire() //stop, drop, and roll
 			changeNext_move(CLICK_CD_RESIST)
-		else if(has_status_effect(/datum/status_effect/leash_pet))
+			return
+		if(has_status_effect(/datum/status_effect/leash_pet))
 			if(istype(src, /mob/living/carbon))
 				src:resist_leash()
 				changeNext_move(CLICK_CD_RESIST)
-		else if(last_special <= world.time)
+				return
+		if(last_special <= world.time)
 			resist_restraints() //trying to remove cuffs.
+			if(restrained() && !prob(5))
+				changeNext_move(CLICK_CD_RESIST)
+				return
+			var/datum/component/riding/human/riding_datum = GetComponent(/datum/component/riding/human)
+			if(HAS_TRAIT(src, TRAIT_PONYGIRL_RIDEABLE) && riding_datum)
+				for(var/mob/M in buckled_mobs)
+					riding_datum.force_dismount(M)
 			changeNext_move(CLICK_CD_RESIST)
+			return
 
 /mob/living/proc/submit(var/instant = FALSE)
 	set name = "Yield"
