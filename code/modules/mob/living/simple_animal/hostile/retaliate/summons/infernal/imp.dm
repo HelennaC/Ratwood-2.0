@@ -21,7 +21,7 @@
 	melee_damage_upper = 17
 	vision_range = 7
 	aggro_vision_range = 9
-	environment_smash = ENVIRONMENT_SMASH_NONE
+	environment_smash = ENVIRONMENT_SMASH_STRUCTURES
 	simple_detect_bonus = 20
 	projectiletype = /obj/projectile/magic/firebolt
 	retreat_distance = 4

@@ -52,10 +52,10 @@
 	id = "hawkseyes"
 	alert_type = /atom/movable/screen/alert/status_effect/buff/hawks_eyes
 	effectedstats = list("perception" = 5)
-	duration = 1 MINUTES
+	duration = 1.5 MINUTES
 
 /datum/status_effect/buff/hawks_eyes/other
-	duration = 2 MINUTES
+	duration = 3 MINUTES
 
 /datum/status_effect/buff/hawks_eyes/on_apply()
 	. = ..()

@@ -53,10 +53,10 @@
 	id = "giantstrength"
 	alert_type = /atom/movable/screen/alert/status_effect/buff/giants_strength
 	effectedstats = list("strength" = 3)
-	duration = 1 MINUTES
+	duration = 1.5 MINUTES
 
 /datum/status_effect/buff/giants_strength/other
-	duration = 2 MINUTES
+	duration = 3 MINUTES
 
 /datum/status_effect/buff/giants_strength/on_apply()
 	. = ..()

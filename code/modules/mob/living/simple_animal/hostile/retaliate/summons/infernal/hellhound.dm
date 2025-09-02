@@ -24,7 +24,7 @@
 	melee_damage_upper = 17
 	vision_range = 7
 	aggro_vision_range = 9
-	environment_smash = ENVIRONMENT_SMASH_NONE
+	environment_smash = ENVIRONMENT_SMASH_STRUCTURES
 	simple_detect_bonus = 20
 	ranged = TRUE
 	projectiletype = /obj/projectile/magic/firebolt
@@ -57,6 +57,7 @@
 	new /obj/item/magic/hellhoundfang(deathspot)
 	new /obj/item/magic/hellhoundfang(deathspot)
 	new /obj/item/magic/hellhoundfang(deathspot)
+	new /obj/item/magic/infernalash(deathspot)
 	new /obj/item/magic/infernalash(deathspot)
 	new /obj/item/magic/infernalash(deathspot)
 	new /obj/item/magic/infernalash(deathspot)
