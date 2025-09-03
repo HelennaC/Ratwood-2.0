@@ -4,13 +4,34 @@
 /datum/species/vulpkanin		//These should technically not exist, but completely exploding people's savefiles is too high a price to pay for some minor race bloat.
 	name = "Venardine"
 	id = "vulpkanin"
-	desc = "<b>Venardine</b><br>\
-	Based on the writings of the living Fietje von Zenitstadt: A subspecies of the more common \"Lupian\", found almost exclusively in thick forests.\
-	They are usually shorter and meeker, but in turn more perceptive than their Volf-like brethren. \
-	Their name is quite obvious, coming from the Venards they closely resemble. \
-	Venardines are often much more solitary than Lupians, lacking the fervent pack mentality of their parent race. \
-	To this dae, their origin is heavily disputed by few archivists across Psydonia - though the rest, perhaps for sanity's sake, consider them to be just Lupians.<br>\
+	desc = "<b>Venardine</b> <br>\
+	Venardine are a fox-like Beastling race with the majority hailing from the Kingdom \
+	of Vulpkheim, which borders Hammerhold. However, there are a few Venardine tribes that \
+	originate elsewhere but are still considered Venardine, despite not hailing from Vulpkheim. \
+	Venardine are a crafty, cunning, and perceptive people. Many Venardine have used their nature \
+	to take advantage of other races, causing them to be known for their wit and charm at the expense \
+	of a reputation as cheats, frauds, tricksters, and thieves.<br>\
 	(+1 Perception, +1 Intelligence)"
+
+	expanded_desc = "Venardine are a fox-like Beastling race with the majority hailing from the Kingdom \
+	of Vulpkheim, which borders Hammerhold. However, there are a few Venardine tribes that \
+	originate elsewhere but are still considered Venardine, despite not hailing from Vulpkheim. \
+	Venardine are a crafty, cunning, and perceptive people. Many Venardine have used their nature \
+	to take advantage of other races, causing them to be known for their wit and charm at the expense \
+	of a reputation as cheats, frauds, tricksters, and thieves. \
+	<br><br> \
+	Due to their nature and their reputation, Xylix often patronizes Venardine and their descendants. \
+	These traits, combined with the fact that the average Venardine pregnancy consists of twins, triplets, \
+	or even quadruplets, have allowed the Venardine tribes to dominate the other Beastling tribes within the \
+	great forest of Vargheim. This ultimately led to establishment of the Kingdom of Vulpkheim, which \
+	the Venardine rule and politically dominate. \
+	<br><br> \
+	Many Venardine suffer from wanderlust and set off upon reaching adulthood to explore the world, with \
+	most beginning their journey in Hammerhold. This has led to Venardine being widely accepted in the lands \
+	of Hammerhold. However, their fox-like features often leave people in foreign lands wary, as many \
+	Hammerhold raiders bear fox-like features due to the strong relationship between the two peoples and their \
+	kingdoms. Consequently, they are often looked upon with suspicion and fear in lands under threat by Hammerhold sea raiders."
+
 	default_color = "444"
 	species_traits = list(
 		MUTCOLORS,
