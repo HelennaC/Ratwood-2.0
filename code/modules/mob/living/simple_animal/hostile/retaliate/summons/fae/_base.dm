@@ -1,3 +1,6 @@
+/mob/living/simple_animal/hostile/retaliate/rogue/fae
+	obj_damage = 75
+
 /mob/living/simple_animal/hostile/retaliate/rogue/fae/Initialize()
 	. = ..()
 	ADD_TRAIT(src, TRAIT_KNEESTINGER_IMMUNITY, TRAIT_GENERIC)
@@ -51,3 +54,10 @@
 		if(BODY_ZONE_L_ARM)
 			return "foreleg"
 	return ..()
+
+/mob/living/simple_animal/hostile/retaliate/rogue/fae/attackby(obj/item/P, mob/living/carbon/human/user, params)
+	if(istype(P, /obj/item/magic/fairydust))
+		src.health += 100
+	if(istype(P, /obj/item/magic/melded))
+		src.health = src.maxHealth
+	..()

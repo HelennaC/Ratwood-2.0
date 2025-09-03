@@ -46,8 +46,6 @@
 		user.change_stat("endurance", -1)
 		to_chat(user, span_notice("I feel mundane once more"))
 
-
-
 /datum/magic_item/mundane/xylix
 	name = "Xylix's boon"
 	description = "It almost seems to give off the faint sound of laughter."
