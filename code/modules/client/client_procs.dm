@@ -141,6 +141,9 @@ GLOBAL_LIST_EMPTY(respawncounts)
 		answer_schizohelp(locate(href_list["schizohelp"]))
 		return
 
+	if(href_list["view_species_info"])
+		view_species_info(href_list["view_species_info"])
+
 	switch(href_list["_src_"])
 		if("holder")
 			hsrc = holder
@@ -257,7 +260,7 @@ GLOBAL_LIST_EMPTY(respawncounts)
 	// Centered container with left-aligned content
 	data += "<div style='text-align: center;'>"
 	data += "<div style='display: inline-block; text-align: left; margin-left: auto; margin-right: auto;'>"
-	
+
 	var/stat_is_object = GLOB.featured_stats[current_featured]["object_stat"]
 	var/has_entries = length(GLOB.featured_stats[current_featured]["entries"])
 
@@ -268,7 +271,7 @@ GLOBAL_LIST_EMPTY(respawncounts)
 			data += format_top_ten(current_featured)
 	else
 		data += "<div style='margin-top: 20px;'>[stat_is_object ? "None" : "Nobody"]</div>"
-	
+
 	data += "</div>"
 	data += "</div>"
 	data += "</div>"
@@ -1137,7 +1140,7 @@ GLOBAL_LIST_EMPTY(external_rsc_urls)
 			qdel(query_client_in_db)
 			qdel(src)
 			return
-		
+
 		new_player = 1
 		account_join_date = findJoinDate()
 		var/datum/DBQuery/query_add_player = SSdbcore.NewQuery({"
