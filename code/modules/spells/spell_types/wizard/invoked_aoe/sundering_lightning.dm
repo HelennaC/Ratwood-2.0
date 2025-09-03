@@ -3,6 +3,7 @@
 	desc = "Summons forth dangerous rapid lightning strikes."
 	overlay_state = "lightning_sunder"
 	cost = 9
+	spell_tier = 4 // Highest tier AOE
 	releasedrain = 50
 	chargedrain = 1
 	chargetime = 50
