@@ -10,7 +10,7 @@ var/global/list/colorlist = list(
 	"Royal Red"="#8b2323",
 	"Red Ochre" = "#913831",
 	"Maroon" = "#550000",
-	"Reach's Scarlet" = "#bb0a1e",
+	"Scarlet" = "#bb0a1e",
 	"Royal Orange" = "#df8405",
 	"Madroot Red"="#AD4545",
 	"Marigold Orange"="#E2A844",
@@ -143,7 +143,7 @@ var/global/list/pridelist = list(
 		dat += "Detail Color: <font color='[activecolor_detail]'>&#10070;</font>"
 		dat += "<A href='?src=\ref[src];paint_detail=1'>Apply new color</A> | "
 		dat += "<A href='?src=\ref[src];clear_detail=1'>Remove paintjob</A><BR><BR>"
-			
+
 	if(inserted_item.altdetail_color)
 		dat += "<A href='?src=\ref[src];select_altdetail=1'>Select new tertiary color.</A><BR>"
 		dat += "Alt. Detail Color: <font color='[activecolor_altdetail]'>&#10070;</font>"
