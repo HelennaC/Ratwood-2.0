@@ -350,7 +350,7 @@ GLOBAL_LIST(teleport_runes)
 	. = ..()
 
 
-/obj/effect/decal/cleanable/roguerune/arcyne/knowledge	//used for better quality of learning, grants temporary 2 minute INT bonus.
+/obj/effect/decal/cleanable/roguerune/arcyne/knowledge
 	name = "Knowledge rune"
 	desc = "arcane symbols pulse upon the ground..."
 	icon_state = "6"
@@ -387,7 +387,7 @@ GLOBAL_LIST(teleport_runes)
 	do_invoke_glow()
 
 
-/obj/effect/decal/cleanable/roguerune/arcyne/empowerment	//used for better quality of learning, grants temporary 2 minute INT bonus.
+/obj/effect/decal/cleanable/roguerune/arcyne/empowerment
 	name = "Empowerment Array"
 	desc = "arcane symbols pulse upon the ground..."
 	icon = 'icons/effects/96x96.dmi'
