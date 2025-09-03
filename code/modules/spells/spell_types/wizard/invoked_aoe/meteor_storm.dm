@@ -83,4 +83,4 @@
 			flame_hit[L] = TRUE
 		else
 			L.adjustFireLoss(10) //if we've already hit them, do way less damage
-	explosion(T, -1, exp_heavy, exp_light, exp_flash, 0, flame_range = exp_fire, hotspot_range = exp_hotspot, soundin = explode_sound)
+	explosion(T, -1, exp_heavy, exp_light, exp_flash, 0, flame_range = exp_fire, soundin = explode_sound)
