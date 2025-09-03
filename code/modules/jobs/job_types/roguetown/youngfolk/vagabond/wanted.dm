@@ -21,7 +21,7 @@
 	if(prob(33))
 		cloak = /obj/item/clothing/cloak/half/brown
 		gloves = /obj/item/clothing/gloves/roguetown/fingerless
-	
+
 	if (H.mind)
 		H.adjust_skillrank(/datum/skill/misc/sneaking, 4, TRUE)
 		H.adjust_skillrank(/datum/skill/misc/stealing, 4, TRUE)
@@ -42,6 +42,6 @@
 				bounty_total = rand(101, 150)
 			if ("Massive")
 				bounty_total = rand(150, 200)
-	
-		add_bounty(H.real_name, bounty_total, FALSE, my_crime, "The Justiciary of Azuria")
+
+		add_bounty(H.real_name, bounty_total, FALSE, my_crime, "The Justiciary of Rotwood")
 		to_chat(H, span_notice("I'm on the run from the law, and there's a [lowertext(bounty_amount)] sum of mammons out on my head... better lay low."))

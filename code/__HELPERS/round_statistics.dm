@@ -13,6 +13,7 @@
 #define STATS_ALIVE_HALFKIN "alive_halfkin"
 #define STATS_ALIVE_WILDKIN "alive_wildkin"
 #define STATS_ALIVE_CONSTRUCTS "alive_constructs"
+#define STATS_ALIVE_DOLLS "alive_dolls"
 #define STATS_ALIVE_VERMINFOLK "alive_verminfolk"
 #define STATS_ALIVE_DRACON "alive_dracon"
 #define STATS_ALIVE_AXIAN "alive_axian"
@@ -138,6 +139,7 @@
 #define STATS_ALCOHOL_CONSUMED "alcohol_consumed"
 #define STATS_ALCOHOLICS "alcoholics"
 #define STATS_JUNKIES "junkies"
+#define STATS_KNOTTED "knottings"
 
 //Matthios
 #define STATS_ITEMS_PICKPOCKETED "items_pickpocketed"
@@ -251,6 +253,7 @@ GLOBAL_LIST_INIT(azure_round_stats, list(
 	STATS_ALIVE_TRADESMEN = 0,
 	STATS_LUX_REVIVALS = 0,
 	STATS_PLEASURES = 0,
+	STATS_KNOTTED = 0,
 	STATS_SKILLS_DREAMED = 0,
 ))
 

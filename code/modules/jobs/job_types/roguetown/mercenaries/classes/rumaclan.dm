@@ -7,8 +7,8 @@
 	category_tags = list(CTAG_MERCENARY)
 	traits_applied = list(TRAIT_OUTLANDER)
 	cmode_music = 'sound/music/combat_kazengite.ogg'
-	classes = list("Kyodai" = "You are relatively versed in the art of \"swinging a sword until enemy death.\" - You would gladly take up most jobs for money, or a chance to cut loose.",
-					"Ishu" = "You are an archer. Pretty good in the art of \"pelting until enemy death.\" - You would gladly take up most jobs for money, or a chance to shoot loose.")
+	classes = list("Gun-in" = "You are relatively versed in the art of \"swinging a sword until enemy death.\" - You would gladly take up most jobs for money, or a chance to cut loose.",
+					"Sasu" = "You are an archer. Pretty good in the art of \"pelting until enemy death.\" - You would gladly take up most jobs for money, or a chance to shoot loose.")
 /datum/outfit/job/roguetown/mercenary/rumaclan/pre_equip(mob/living/carbon/human/H)
 	..()
 
@@ -23,10 +23,10 @@
 			to_chat(H, span_warning("You are well versed and experienced in swordfighting, you have no problem in taking up most jobs so long as the coin is good, for either yourself or the clan and the seonjang."))
 			belt = /obj/item/storage/belt/rogue/leather
 			beltr = /obj/item/rogueweapon/scabbard/sword/kazengun/steel
+			neck = /obj/item/clothing/neck/roguetown/leather //minimal defense
 			beltl = /obj/item/rogueweapon/sword/sabre/mulyeog/rumahench
 			shirt = /obj/item/clothing/suit/roguetown/shirt/undershirt/eastshirt2
 			cloak = /obj/item/clothing/cloak/eastcloak1
-			armor = /obj/item/clothing/suit/roguetown/shirt/undershirt/easttats
 			pants = /obj/item/clothing/under/roguetown/heavy_leather_pants/eastpants2
 			shoes = /obj/item/clothing/shoes/roguetown/armor/rumaclan
 			gloves = /obj/item/clothing/gloves/roguetown/eastgloves2
@@ -50,16 +50,18 @@
 			H.change_stat("constitution", 3)
 			H.change_stat("perception", 1)
 			H.change_stat("speed", -1)
-
+			if(should_wear_masc_clothes(H))
+				armor = /obj/item/clothing/suit/roguetown/shirt/undershirt/easttats
+			
 		if("Sasu")
 			H.set_blindness(0)
 			to_chat(H, span_warning("You are an archer of the clan, many have called you an true marksman for your skills with the bow. You have no problem in taking up most jobs so long as the coin is good, for either yourself or the clan and the seonjang."))
 			belt = /obj/item/storage/belt/rogue/leather
 			beltr = /obj/item/quiver/arrows
+			neck = /obj/item/clothing/neck/roguetown/leather //minimal defense
 			beltl = /obj/item/flashlight/flare/torch/lantern
 			shirt = /obj/item/clothing/suit/roguetown/shirt/undershirt/eastshirt2
 			cloak = /obj/item/clothing/cloak/eastcloak1
-			armor = /obj/item/clothing/suit/roguetown/shirt/undershirt/easttats
 			pants = /obj/item/clothing/under/roguetown/heavy_leather_pants/eastpants2
 			shoes = /obj/item/clothing/shoes/roguetown/armor/rumaclan
 			gloves = /obj/item/clothing/gloves/roguetown/eastgloves2
@@ -87,8 +89,12 @@
 			H.change_stat("perception", 2)
 			H.change_stat("speed", 4)
 			H.change_stat("strength", -1)
+			if(should_wear_masc_clothes(H))
+				armor = /obj/item/clothing/suit/roguetown/shirt/undershirt/easttats
 
 	ADD_TRAIT(H, TRAIT_CRITICAL_RESISTANCE, TRAIT_GENERIC)
+	ADD_TRAIT(H, TRAIT_HARDDISMEMBER, TRAIT_GENERIC) // To make up for not having armor
 	ADD_TRAIT(H, TRAIT_NOPAINSTUN, TRAIT_GENERIC) //i swear this isn't as good as it sounds
+	ADD_TRAIT(H, TRAIT_STEELHEARTED, TRAIT_GENERIC)
 	H.grant_language(/datum/language/kazengunese)
 	H.merctype = 9

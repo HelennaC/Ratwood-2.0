@@ -20,6 +20,8 @@
 	flags_inv = HIDECROTCH
 	experimental_inhand = FALSE
 	salvage_amount = 2
+	grid_height = 32
+	grid_width = 64
 
 /obj/item/clothing/under/roguetown/AdjustClothes(mob/user)
 #ifdef MATURESERVER

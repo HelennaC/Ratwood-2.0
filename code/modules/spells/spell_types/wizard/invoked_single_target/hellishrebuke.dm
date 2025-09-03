@@ -1,4 +1,5 @@
-/obj/effect/proc_holder/spell/invoked/rebuke 
+//Disabled outside of staff use. Good god don't give this out.
+/obj/effect/proc_holder/spell/invoked/rebuke
 	name = "Hellish Rebuke"
 	desc = "With a point of your finger, you shall cause a creechur in front of you to burst into flames, dealing damage over time. Able to cast whilst mouthgrabbed."
 	cost = 3

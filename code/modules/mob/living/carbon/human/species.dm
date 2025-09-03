@@ -106,6 +106,8 @@ GLOBAL_LIST_EMPTY(roundstart_races)
 	/// Wording for skin tone on examine and on character setup
 	var/skin_tone_wording = "Skin Tone"
 
+	/// Bodyparts to override base ones.
+	var/list/bodypart_overrides = list()
 	/// List of organs this species has.
 	var/list/organs = list(
 		ORGAN_SLOT_BRAIN = /obj/item/organ/brain,
@@ -126,6 +128,7 @@ GLOBAL_LIST_EMPTY(roundstart_races)
 	var/list/bodypart_features
 
 	var/list/allowed_taur_types = list()
+	var/forced_taur = FALSE
 
 	/// List of descriptor choices this species gets in preferences customization
 	var/list/descriptor_choices = list(
@@ -252,6 +255,9 @@ GLOBAL_LIST_EMPTY(roundstart_races)
 /datum/species/proc/get_skin_list()
 	return GLOB.skin_tones
 
+/datum/species/proc/get_skin_list_tooltip()
+	return GLOB.skin_tones
+
 /datum/species/proc/get_taur_list()
 	return allowed_taur_types
 
@@ -281,6 +287,23 @@ GLOBAL_LIST_EMPTY(roundstart_races)
 	returned["mcolor2"] = random_color()
 	returned["mcolor3"] = random_color()
 	return returned
+
+// Taken from TG and welded in. Probably a better way to do this, but from trying this seems like the easiest way.
+/datum/species/proc/replace_body(mob/living/carbon/target, datum/species/new_species)
+	new_species ||= target.dna.species //If no new species is provided, assume its src.
+	//Note for future: Potentionally add a new C.dna.species() to build a template species for more accurate limb replacement
+
+	var/list/final_bodypart_overrides = new_species.bodypart_overrides.Copy()
+
+	for(var/obj/item/bodypart/old_part as anything in target.bodyparts)
+
+		var/path = final_bodypart_overrides?[old_part.body_zone]
+		var/obj/item/bodypart/new_part
+		if(path)
+			new_part = new path()
+			new_part.replace_limb(target, TRUE)
+			new_part.update_limb(FALSE, target)
+			qdel(old_part)
 
 //Will regenerate missing organs
 /datum/species/proc/regenerate_organs(mob/living/carbon/C, datum/species/old_species, replace_current=TRUE, list/excluded_zones, datum/preferences/pref_load)
@@ -392,6 +415,8 @@ GLOBAL_LIST_EMPTY(roundstart_races)
 			C.dropItemToGround(thing)
 	if(C.hud_used)
 		C.hud_used.update_locked_slots()
+
+	replace_body(C, src)
 
 	// this needs to be FIRST because qdel calls update_body which checks if we have DIGITIGRADE legs or not and if not then removes DIGITIGRADE from species_traits
 	if(("legs" in C.dna.species.mutant_bodyparts) && C.dna.features["legs"] == "Digitigrade Legs")
@@ -739,8 +764,6 @@ GLOBAL_LIST_EMPTY(roundstart_races)
 		if(SLOT_CLOAK)
 			if(H.cloak)
 				return FALSE
-			if(is_nudist)
-				return FALSE
 			if( (I.slot_flags & ITEM_SLOT_BACK_R) )
 				if(H.backr)
 					if((H.backr.slot_flags & ITEM_SLOT_CLOAK) )
@@ -1016,7 +1039,7 @@ GLOBAL_LIST_EMPTY(roundstart_races)
 			H.remove_stress_list(list(/datum/stressevent/stuffed,/datum/stressevent/peckish,/datum/stressevent/hungry))
 			H.apply_status_effect(/datum/status_effect/debuff/hungryt3)
 			if(prob(3))
-				playsound(get_turf(H), pick('sound/vo/hungry1.ogg','sound/vo/hungry2.ogg','sound/vo/hungry3.ogg'), 100, TRUE, -1)
+				playsound(get_turf(H), pick('sound/body/hungry1.ogg','sound/body/hungry2.ogg','sound/body/hungry3.ogg'), 100, TRUE, -1)
 
 	switch(H.hydration)
 //		if(HYDRATION_LEVEL_WATERLOGGED to INFINITY)
@@ -1232,7 +1255,7 @@ GLOBAL_LIST_EMPTY(roundstart_races)
 			message_verb = "[pick(user.used_intent.attack_verb)]"
 		var/message_hit_area = ""
 		if(selzone)
-			message_hit_area = " in the [span_userdanger(parse_zone(selzone))]"
+			message_hit_area = " in the [span_userdanger(parse_zone(selzone, affecting))]"
 		var/attack_message = "[user] [message_verb] [target][message_hit_area]!"
 		var/attack_message_local = "[user] [message_verb] me[message_hit_area]!"
 		target.visible_message(span_danger("[attack_message][target.next_attack_msg.Join()]"),\
@@ -1408,9 +1431,14 @@ GLOBAL_LIST_EMPTY(roundstart_races)
 			else
 				if(affecting)
 					affecting.bodypart_attacked_by(BCLASS_BLUNT, damage, user, user.zone_selected, crit_message = TRUE)
-			target.visible_message(span_danger("[user] stomps [target]![target.next_attack_msg.Join()]"), \
-							span_danger("I'm stomped by [user]![target.next_attack_msg.Join()]"), span_hear("I hear a sickening kick!"), COMBAT_MESSAGE_RANGE, user)
-			to_chat(user, span_danger("I stomp on [target]![target.next_attack_msg.Join()]"))
+					if(!HAS_TRAIT(user, TRAIT_LAMIAN_TAIL))
+						target.visible_message(span_danger("[user] stomps [target]![target.next_attack_msg.Join()]"), \
+						span_danger("I'm stomped by [user]![target.next_attack_msg.Join()]"), span_hear("I hear a sickening kick!"), COMBAT_MESSAGE_RANGE, user)
+						to_chat(user, span_danger("I stomp on [target]![target.next_attack_msg.Join()]"))
+					else
+						target.visible_message(span_danger("[user] crushes [target] underneath them![target.next_attack_msg.Join()]"), \
+						span_danger("[user] crushes me underneath them![target.next_attack_msg.Join()]"), span_hear("I hear a sickening kick!"), COMBAT_MESSAGE_RANGE, user)
+						to_chat(user, span_danger("I crush [target] underneath myself![target.next_attack_msg.Join()]"))
 			target.next_attack_msg.Cut()
 			log_combat(user, target, "kicked")
 			user.do_attack_animation(target, ATTACK_EFFECT_DISARM)
@@ -1443,7 +1471,14 @@ GLOBAL_LIST_EMPTY(roundstart_races)
 			if(stander)
 				shove_blocked = TRUE
 		else
-			target.Move(target_shove_turf, shove_dir)
+			if(HAS_TRAIT(user, TRAIT_LAMIAN_TAIL)) // basically a 2-tile kick, straight up instant. Works with walls and tables for knockdowns
+				target.Move(target_shove_turf, shove_dir)
+				target_oldturf = target.loc
+				shove_dir = get_dir(user.loc, target_oldturf)
+				target_shove_turf = get_step(target.loc, shove_dir)
+				target.Move(target_shove_turf, shove_dir)
+			else
+				target.Move(target_shove_turf, shove_dir)
 			if(get_turf(target) == target_oldturf)
 				if(stander)
 					target_table = locate(/obj/structure/table) in target_shove_turf.contents
@@ -1451,9 +1486,14 @@ GLOBAL_LIST_EMPTY(roundstart_races)
 			else
 				if((stander && target.stamina >= target.max_stamina) || target.IsOffBalanced()) //if you are kicked while fatigued, you are knocked down no matter what
 					target.Knockdown(target.IsOffBalanced() ? SHOVE_KNOCKDOWN_SOLID : 100)
-					target.visible_message(span_danger("[user.name] kicks [target.name], knocking them down!"),
-					span_danger("I'm knocked down from a kick by [user.name]!"), span_hear("I hear aggressive shuffling followed by a loud thud!"), COMBAT_MESSAGE_RANGE, user)
-					to_chat(user, span_danger("I kick [target.name], knocking them down!"))
+					if(!HAS_TRAIT(user, TRAIT_LAMIAN_TAIL))
+						target.visible_message(span_danger("[user.name] kicks [target.name], knocking them down!"),
+						span_danger("I'm knocked down from a kick by [user.name]!"), span_hear("I hear aggressive shuffling followed by a loud thud!"), COMBAT_MESSAGE_RANGE, user)
+						to_chat(user, span_danger("I kick [target.name], knocking them down!"))
+					else
+						target.visible_message(span_danger("[user.name] pulls [target.name] right down onto the ground!"),
+						span_danger("I'm pulled down by [user.name]'s tail!"), span_hear("I hear aggressive shuffling followed by a loud thud!"), COMBAT_MESSAGE_RANGE, user)
+						to_chat(user, span_danger("I pull [target.name], right down onto the ground!"))
 					log_combat(user, target, "kicked", "knocking them down")
 
 		if(shove_blocked && !target.is_shove_knockdown_blocked() && !target.buckled)
@@ -1471,29 +1511,51 @@ GLOBAL_LIST_EMPTY(roundstart_races)
 							break
 			if((!target_table && !target_collateral_mob) || directional_blocked)
 				target.Knockdown(SHOVE_KNOCKDOWN_SOLID)
-				target.visible_message(span_danger("[user.name] kicks [target.name], knocking them down!"),
-								span_danger("I'm knocked down from a kick by [user.name]!"), span_hear("I hear aggressive shuffling followed by a loud thud!"), COMBAT_MESSAGE_RANGE, user)
-				to_chat(user, span_danger("I kick [target.name], knocking them down!"))
+				if(!HAS_TRAIT(user, TRAIT_LAMIAN_TAIL))
+					target.visible_message(span_danger("[user.name] kicks [target.name], knocking them down!"),
+									span_danger("I'm knocked down from a kick by [user.name]!"), span_hear("I hear aggressive shuffling followed by a loud thud!"), COMBAT_MESSAGE_RANGE, user)
+					to_chat(user, span_danger("I kick [target.name], knocking them down!"))
+				else
+					target.visible_message(span_danger("[user.name] tailslams [target.name], knocking them down!"),
+									span_danger("I'm knocked down from a tailslam by [user.name]!"), span_hear("I hear aggressive shuffling followed by a loud thud!"), COMBAT_MESSAGE_RANGE, user)
+					to_chat(user, span_danger("I slam [target.name] with my tail, knocking them down!"))
 				log_combat(user, target, "kicked", "knocking them down")
 			else if(target_table)
 				target.Knockdown(SHOVE_KNOCKDOWN_TABLE)
-				target.visible_message(span_danger("[user.name] kicked [target.name] onto \the [target_table]!"),
-								span_danger("I'm kicked onto \the [target_table] by [user.name]!"), span_hear("I hear aggressive shuffling followed by a loud thud!"), COMBAT_MESSAGE_RANGE, user)
-				to_chat(user, span_danger("I kick [target.name] onto \the [target_table]!"))
-				target.throw_at(target_table, 1, 1, null, FALSE) //1 speed throws with no spin are basically just forcemoves with a hard collision check
+				if(!HAS_TRAIT(user, TRAIT_LAMIAN_TAIL))
+					target.visible_message(span_danger("[user.name] kicked [target.name] onto \the [target_table]!"),
+									span_danger("I'm kicked onto \the [target_table] by [user.name]!"), span_hear("I hear aggressive shuffling followed by a loud thud!"), COMBAT_MESSAGE_RANGE, user)
+					to_chat(user, span_danger("I kick [target.name] onto \the [target_table]!"))
+					target.throw_at(target_table, 1, 1, null, FALSE) //1 speed throws with no spin are basically just forcemoves with a hard collision check
+				else
+					target.visible_message(span_danger("[user.name]'s tail pushed [target.name] onto \the [target_table]!"),
+									span_danger("I'm pushed onto \the [target_table] by [user.name]'s tail!"), span_hear("I hear aggressive shuffling followed by a loud thud!"), COMBAT_MESSAGE_RANGE, user)
+					to_chat(user, span_danger("I push [target.name] onto \the [target_table] with my tail!"))
+					target.throw_at(target_table, 1, 1, null, FALSE) //1 speed throws with no spin are basically just forcemoves with a hard collision check
 				log_combat(user, target, "kicked", "onto [target_table] (table)")
 			else if(target_collateral_mob)
 				target.Knockdown(SHOVE_KNOCKDOWN_HUMAN)
 				target_collateral_mob.Knockdown(SHOVE_KNOCKDOWN_COLLATERAL)
-				target.visible_message(span_danger("[user.name] kicks [target.name] into [target_collateral_mob.name]!"),
-					span_danger("I'm kicked into [target_collateral_mob.name] by [user.name]!"), span_hear("I hear aggressive shuffling followed by a loud thud!"), COMBAT_MESSAGE_RANGE, user)
-				to_chat(user, span_danger("I kick [target.name] into [target_collateral_mob.name]!"))
+				if(!HAS_TRAIT(user, TRAIT_LAMIAN_TAIL))
+					target.visible_message(span_danger("[user.name] kicks [target.name] into [target_collateral_mob.name]!"),
+						span_danger("I'm kicked into [target_collateral_mob.name] by [user.name]!"), span_hear("I hear aggressive shuffling followed by a loud thud!"), COMBAT_MESSAGE_RANGE, user)
+					to_chat(user, span_danger("I kick [target.name] into [target_collateral_mob.name]!"))
+				else
+					target.visible_message(span_danger("[user.name]'s tail slams [target.name] into [target_collateral_mob.name]!"),
+						span_danger("I'm slammed into [target_collateral_mob.name] by [user.name]'s tail!"), span_hear("I hear aggressive shuffling followed by a loud thud!"), COMBAT_MESSAGE_RANGE, user)
+					to_chat(user, span_danger("I slam [target.name] into [target_collateral_mob.name] with my tail!"))
 				log_combat(user, target, "kicked", "into [target_collateral_mob.name]")
 		else
-			target.visible_message(span_danger("[user.name] kicks [target.name]!"),
-							span_danger("I'm kicked by [user.name]!"), span_hear("I hear aggressive shuffling!"), COMBAT_MESSAGE_RANGE, user)
-			to_chat(user, span_danger("I kick [target.name]!"))
+			if(!HAS_TRAIT(user, TRAIT_LAMIAN_TAIL))
+				target.visible_message(span_danger("[user.name] kicks [target.name]!"),
+								span_danger("I'm kicked by [user.name]!"), span_hear("I hear aggressive shuffling!"), COMBAT_MESSAGE_RANGE, user)
+				to_chat(user, span_danger("I kick [target.name]!"))
+			else
+				target.visible_message(span_danger("[user.name] tailslams [target.name]!"),
+								span_danger("I'm tailslammed by [user.name]!"), span_hear("I hear aggressive shuffling!"), COMBAT_MESSAGE_RANGE, user)
+				to_chat(user, span_danger("I slam [target.name] with my tail!"))
 			log_combat(user, target, "kicked")
+
 
 		var/selzone = accuracy_check(user.zone_selected, user, target, /datum/skill/combat/unarmed, user.used_intent)
 		var/obj/item/bodypart/affecting = target.get_bodypart(check_zone(selzone))
@@ -1656,7 +1718,7 @@ GLOBAL_LIST_EMPTY(roundstart_races)
 
 	//dismemberment
 	var/bloody = 0
-	var/probability = I.get_dismemberment_chance(affecting, user)
+	var/probability = I.get_dismemberment_chance(affecting, user, selzone)
 	if(affecting.brute_dam && prob(probability) && affecting.dismember(I.damtype, user.used_intent?.blade_class, user, selzone))
 		bloody = 1
 		I.add_mob_blood(H)
@@ -1761,8 +1823,8 @@ GLOBAL_LIST_EMPTY(roundstart_races)
 							H.emote("painscream")
 						else
 							H.emote("pain")
-				if(damage_amount > ((H.STACON*10) / 3) && !HAS_TRAIT(H, TRAIT_NOPAINSTUN))
-					H.Immobilize(8)
+				if(damage_amount > (H.STACON * 3.5) && !HAS_TRAIT(H, TRAIT_NOPAINSTUN)) //We want this effect only on heavy hits.
+					H.Immobilize(5) //The fastest you can swing a weapon is once each 0.6 seconds, anything higher than 0.5 Immob. opens the door for stunlocking (see: katar).
 					shake_camera(H, 2, 2)
 					H.stuttering += 5
 				if(damage_amount > 10 && !HAS_TRAIT(H, TRAIT_NOPAINSTUN))

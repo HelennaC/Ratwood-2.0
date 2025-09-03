@@ -40,12 +40,7 @@
 		/obj/item/storage/belt/rogue/leather/knifebelt/black/steel = 1,
 
 		// Money
-		/obj/item/roguecoin/copper = 5,
-		/obj/item/roguecoin/silver = 5,
-		/obj/item/roguecoin/gold = 5,
-		/obj/item/roguecoin/copper/pile = 3,
-		/obj/item/roguecoin/silver/pile = 2,
-		/obj/item/roguecoin/gold/pile = 1,
+		// has been removed
 
 		// Garbage and Miscellanous
 		/obj/item/rogue/instrument/flute = 3,
@@ -57,7 +52,7 @@
 		/obj/item/reagent_containers/glass/cup = 4,
 		/obj/item/reagent_containers/glass/cup/wooden = 4,
 		/obj/item/reagent_containers/glass/cup/steel = 3,
-		/obj/item/reagent_containers/glass/cup/golden = 1,
+		/obj/item/reagent_containers/glass/cup/golden/small = 1,
 		/obj/item/reagent_containers/glass/cup/skull = 1,
 		/obj/item/reagent_containers/glass/bucket = 3,
 		/obj/item/natural/feather = 4,
@@ -221,7 +216,7 @@
 		/obj/item/reagent_containers/glass/cup = 4,
 		/obj/item/reagent_containers/glass/cup/wooden = 4,
 		/obj/item/reagent_containers/glass/cup/steel = 3,
-		/obj/item/reagent_containers/glass/cup/golden = 1,
+		/obj/item/reagent_containers/glass/cup/golden/small = 1,
 		/obj/item/reagent_containers/glass/cup/skull = 1,
 		/obj/item/reagent_containers/glass/bucket = 3,
 		/obj/item/natural/feather = 4,

@@ -248,7 +248,7 @@
 					user.say("PSY 23:4... And so, ZEZUS wept; for he had been struck down by the silvered javelin of JVDAS, PSYDON's most devout.")
 					user.psydo_nyte()
 				else
-					user.say(m)	
+					user.say(m)
 
 /obj/item/book/rogue/bibble/psy/MiddleClick(mob/user, params)
 	. = ..()
@@ -318,6 +318,13 @@
 	icon_state ="book6_0"
 	base_icon_state = "book6"
 	bookfile = "thefireisgone.json"
+
+/obj/item/book/rogue/blackoak
+	name = "The Noblest Struggle"
+	desc = "A small black book. All Black Oaks carry this close."
+	icon_state ="book_0"
+	base_icon_state = "book"
+	bookfile = "blackoak.json"
 
 //player made books
 /obj/item/book/rogue/tales1
@@ -671,3 +678,26 @@
 	desc = "Apply on a written manuscript to create a book."
 	icon = 'icons/roguetown/items/misc.dmi'
 	icon_state = "book_crafting_kit"
+
+/obj/item/book/rogue/swatchbook
+	name = "Tailor's Swatchbook"
+	desc = "Allows you to pick out an exact hue and shade from the Tailors Guild's inordinately exhaustive all-encompassing selection of known colors. Once selected, use with a dyeing bin to apply the exact swatch."
+	icon_state = "swatchbook_0"
+	base_icon_state = "swatchbook"
+	title = "swatchbook"
+	var/swatchbookcolor = "#000000"
+
+/obj/item/book/rogue/swatchbook/read(mob/user)
+	if(istype(user, /mob/living) && src.loc == user)
+		if(!user.client || !user.hud_used)
+			return
+		else
+			var/hexcolor = "#FFFFFF"
+			hexcolor = sanitize_hexcolor(color_pick_sanitized(usr, "Choose your dye:", "Dyes", null, 0.2, 1), 6, TRUE)
+			if(hexcolor == "#000000")
+				swatchbookcolor = "#FFFFFF"
+			else
+				swatchbookcolor = hexcolor
+			updateUsrDialog()
+	else
+		return

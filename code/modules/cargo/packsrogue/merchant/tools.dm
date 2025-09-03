@@ -209,6 +209,11 @@
 	name = "Bottle Kit"
 	cost = 50
 	contains = list(/obj/item/bottle_kit)
+	
+/datum/supply_pack/rogue/tools/surgeonsbag
+	name = "Surgeon's bag, Full"
+	cost = 80
+	contains = list(/obj/item/storage/belt/rogue/surgery_bag)
 
 /datum/supply_pack/rogue/tools/spade
 	name = "Wooden Spade"

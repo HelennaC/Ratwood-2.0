@@ -145,7 +145,7 @@
 
 /obj/item/clothing/suit/roguetown/armor/brigandine/captain
 	name = "captain's brigandine"
-	desc = "A coat with plates specifically tailored and forged for the captain of Azure."
+	desc = "A coat with plates specifically tailored and forged for the captain of the vale."
 	icon_state = "capplate"
 	icon = 'icons/roguetown/clothing/special/captain.dmi'
 	mob_overlay_icon = 'icons/roguetown/clothing/special/onmob/captain.dmi'

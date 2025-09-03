@@ -414,12 +414,10 @@
 	item_state = "inqcoat"
 	sleevetype = "shirt"
 	max_integrity = 300
-	anvilrepair = /datum/skill/craft/armorsmithing
+	sewrepair = TRUE
 	equip_delay_self = 4 SECONDS
 	armor_class = ARMOR_CLASS_LIGHT
 	armor = ARMOR_LEATHER_STUDDED
-	smeltresult = /obj/item/ingot/iron
-	smelt_bar_num = 2
 	blocksound = SOFTHIT
 
 /obj/item/clothing/suit/roguetown/armor/plate/scale/inqcoat/ComponentInitialize()	//No movement rustle component.

@@ -57,6 +57,9 @@
 	sellprice = 1
 	var/naledicolor = FALSE
 
+	var/cansnout = FALSE //for masks - can we MMB this to change it into a snouty sprite?
+	var/snouting = FALSE //do we have the snout-snug sprite toggled?
+
 /obj/item
 	var/blocking_behavior
 	var/wetness = 0
@@ -508,6 +511,3 @@ BLIND     // can't see anything
 		if(!user.incapacitated())
 			return 1
 	return 0
-
-/obj/item/clothing/proc/step_action() //this was made to rewrite clown shoes squeaking
-	SEND_SIGNAL(src, COMSIG_CLOTHING_STEP_ACTION)

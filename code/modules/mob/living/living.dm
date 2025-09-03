@@ -422,7 +422,7 @@
 				log_combat(src, M, "tried grabbing", addition="passive grab")
 				stop_pulling()
 				return
-
+		
 		// Makes it so people who recently broke out of grabs cannot be grabbed again
 		if(TIMER_COOLDOWN_RUNNING(M, "broke_free") && M.stat == CONSCIOUS)
 			M.visible_message(span_warning("[M] slips from [src]'s grip."), \
@@ -484,6 +484,13 @@
 		src.put_in_hands(O)
 		O.update_hands(src)
 		update_grab_intents()
+
+	if(isliving(AM))
+		var/mob/living/M = AM
+		if(M.mind)
+			if(M.cmode && M.stat == CONSCIOUS && !M.restrained(ignore_grab = TRUE))
+				if(M.get_skill_level(/datum/skill/combat/wrestling) > 4 || src.get_skill_level(/datum/skill/combat/wrestling) < 5) //Grabber skill less than Master OR grabbed skill at Master or above.
+					M.resist_grab(freeresist = TRUE) //Automatically attempt to break a passive grab if defender's combat mode is on. Anti-grabspam measure.
 
 /mob/living/proc/send_pull_message(mob/living/target)
 	target.visible_message(span_warning("[src] grabs [target]."), \
@@ -877,6 +884,8 @@
 	if(H)
 		if(H.rotted || H.skeletonized || H.brainkill)
 			return FALSE
+	else
+		return FALSE
 
 
 /mob/living/proc/update_damage_overlays()
@@ -1013,14 +1022,13 @@
 	if(!can_resist() || surrendering)
 		return
 
-	changeNext_move(CLICK_CD_RESIST)
-
 	if(atkswinging)
 		stop_attack(FALSE)
 
 	SEND_SIGNAL(src, COMSIG_LIVING_RESIST, src)
 	//resisting grabs (as if it helps anyone...)
 	if(pulledby)
+		changeNext_move(8)
 		var/mob/living/P
 		if(isliving(pulledby))
 			P = pulledby
@@ -1035,18 +1043,38 @@
 
 	//unbuckling yourself
 	if(buckled && last_special <= world.time)
+		changeNext_move(CLICK_CD_RESIST)
 		resist_buckle()
+		return
 
 	//Breaking out of a container (Locker, sleeper, cryo...)
-	else if(isobj(loc))
+	if(isobj(loc))
+		changeNext_move(CLICK_CD_RESIST)
 		var/obj/C = loc
 		C.container_resist(src)
+		return
 
-	else if(mobility_flags & MOBILITY_MOVE)
+	if(mobility_flags & MOBILITY_MOVE)
 		if(on_fire)
 			resist_fire() //stop, drop, and roll
-		else if(last_special <= world.time)
+			changeNext_move(CLICK_CD_RESIST)
+			return
+		if(has_status_effect(/datum/status_effect/leash_pet))
+			if(istype(src, /mob/living/carbon))
+				src:resist_leash()
+				changeNext_move(CLICK_CD_RESIST)
+				return
+		if(last_special <= world.time)
 			resist_restraints() //trying to remove cuffs.
+			if(restrained() && !prob(5))
+				changeNext_move(CLICK_CD_RESIST)
+				return
+			var/datum/component/riding/human/riding_datum = GetComponent(/datum/component/riding/human)
+			if(HAS_TRAIT(src, TRAIT_PONYGIRL_RIDEABLE) && riding_datum)
+				for(var/mob/M in buckled_mobs)
+					riding_datum.force_dismount(M)
+			changeNext_move(CLICK_CD_RESIST)
+			return
 
 /mob/living/proc/submit(var/instant = FALSE)
 	set name = "Yield"
@@ -1121,7 +1149,7 @@
 /mob/proc/resist_grab(moving_resist)
 	return TRUE //returning 0 means we successfully broke free
 
-/mob/living/resist_grab(moving_resist)
+/mob/living/resist_grab(moving_resist, freeresist = FALSE)
 	. = TRUE
 
 	var/wrestling_diff = 0
@@ -1168,7 +1196,8 @@
 
 	if(moving_resist && client) //we resisted by trying to move
 		client.move_delay = world.time + 20
-	stamina_add(rand(5,15))
+	if(!freeresist)
+		stamina_add(rand(5,15))
 
 	if(!prob(resist_chance))
 		var/rchance = ""
@@ -2112,6 +2141,19 @@
 	if(client)
 		client.pixel_x = 0
 		client.pixel_y = 0
+
+	if(isdullahan(src))
+		var/mob/living/carbon/human/human = src
+		var/obj/item/organ/dullahan_vision/vision = human.getorganslot(ORGAN_SLOT_HUD)
+		var/datum/species/dullahan/species = human.dna.species
+		if(species.headless && vision.viewing_head)
+			var/obj/item/bodypart/head/dullahan/head = species.my_head
+			reset_perspective(head)
+			update_cone_show()
+			return
 	reset_perspective()
 	update_cone_show()
 //	UnregisterSignal(src, COMSIG_MOVABLE_PRE_MOVE)
+
+/mob/living/proc/resist_leash()
+	return

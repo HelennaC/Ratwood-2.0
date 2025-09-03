@@ -325,8 +325,9 @@ All foods are distributed among various categories. Use common sense.
 		for(var/datum/reagent/consumable/C in M.reagents.reagent_list) //we add the nutrition value of what we're currently digesting
 			fullness += C.nutriment_factor * C.volume / C.metabolization_rate
 
-		if(M == user)								//If you're eating it myself.
-/*			if(junkiness && M.satiety < -150 && M.nutrition > NUTRITION_LEVEL_STARVING + 50 && !HAS_TRAIT(user, TRAIT_VORACIOUS))
+		if(M == user) //If you're eating it yourself.
+		/*			
+			if(junkiness && M.satiety < -150 && M.nutrition > NUTRITION_LEVEL_STARVING + 50 && !HAS_TRAIT(user, TRAIT_VORACIOUS))
 				to_chat(M, span_warning("I don't feel like eating any more junk food at the moment!"))
 				return FALSE
 			else if(fullness <= 50)
@@ -341,7 +342,8 @@ All foods are distributed among various categories. Use common sense.
 				user.visible_message(span_warning("[user] cannot force any more of \the [src] to go down [user.p_their()] throat!"), span_warning("I cannot force any more of \the [src] to go down your throat!"))
 				return FALSE
 			if(HAS_TRAIT(M, TRAIT_VORACIOUS))
-				M.changeNext_move(CLICK_CD_MELEE * 0.5)*/
+				M.changeNext_move(CLICK_CD_MELEE * 0.5)
+		*/
 			switch(M.nutrition)
 				if(NUTRITION_LEVEL_FAT to INFINITY)
 					user.visible_message(span_notice("[user] forces [M.p_them()]self to eat \the [src]."), span_notice("I force myself to eat \the [src]."))
@@ -350,17 +352,19 @@ All foods are distributed among various categories. Use common sense.
 				if(0 to NUTRITION_LEVEL_STARVING)
 					user.visible_message(span_notice("[user] hungrily [eatverb]s \the [src], gobbling it down!"), span_notice("I hungrily [eatverb] \the [src], gobbling it down!"))
 					M.changeNext_move(CLICK_CD_MELEE * 0.5)
-/*			if(M.energy <= 50)
+		/*			
+			if(M.energy <= 50)
 				user.visible_message(span_notice("[user] hungrily [eatverb]s \the [src], gobbling it down!"), span_notice("I hungrily [eatverb] \the [src], gobbling it down!"))
 			else if(M.energy > 50 && M.energy < 500)
 				user.visible_message(span_notice("[user] hungrily [eatverb]s \the [src]."), span_notice("I hungrily [eatverb] \the [src]."))
 			else if(M.energy > 500 && M.energy < 1000)
 				user.visible_message(span_notice("[user] [eatverb]s \the [src]."), span_notice("I [eatverb] \the [src]."))
 			if(HAS_TRAIT(M, TRAIT_VORACIOUS))
-			M.changeNext_move(CLICK_CD_MELEE * 0.5) nom nom nom*/
+			M.changeNext_move(CLICK_CD_MELEE * 0.5) nom nom nom
+		*/
 		else
 			if(!isbrain(M))		//If you're feeding it to someone else.
-//				if(fullness <= (600 * (1 + M.overeatduration / 1000)))
+				// if(fullness <= (600 * (1 + M.overeatduration / 1000)))
 				if(M.nutrition in NUTRITION_LEVEL_FAT to INFINITY)
 					M.visible_message(span_warning("[user] cannot force any more of [src] down [M]'s throat!"), \
 										span_warning("[user] cannot force any more of [src] down your throat!"))
@@ -378,12 +382,12 @@ All foods are distributed among various categories. Use common sense.
 				if(!do_mob(user, M, double_progress = TRUE))
 					return
 				log_combat(user, M, "fed", reagents.log_list())
-//				M.visible_message(span_danger("[user] forces [M] to eat [src]!"), span_danger("[user] forces you to eat [src]!"))
+				// M.visible_message(span_danger("[user] forces [M] to eat [src]!"), span_danger("[user] forces you to eat [src]!"))
 			else
 				to_chat(user, span_warning("[M] doesn't seem to have a mouth!"))
 				return
 
-		if(reagents)								//Handle ingestion of the reagent.
+		if(reagents) //Handle ingestion of the reagent.
 			if(M.satiety > -200)
 				M.satiety -= junkiness
 			playsound(M.loc,'sound/misc/eat.ogg', rand(30,60), TRUE)
@@ -412,6 +416,35 @@ All foods are distributed among various categories. Use common sense.
 		return FALSE
 
 	return 0
+/obj/item/reagent_containers/food/snacks/proc/get_nutrition()
+	var/nutriment_count = 0
+	for(var/reagent in list_reagents)
+		if(ispath(reagent, /datum/reagent/consumable))
+			var/datum/reagent/consumable/R = reagent
+			nutriment_count += list_reagents[reagent] * R.nutriment_factor
+	return nutriment_count
+
+/obj/item/reagent_containers/food/snacks/proc/get_nutrition_to_text()
+	var/nutrition = get_nutrition()
+	switch(nutrition)
+		if(0)
+			return "an inedible item"
+		if(1 to BASE_NUTRIMENT_NUTRITION * SNACK_POOR)
+			return "a poor snack"
+		if(BASE_NUTRIMENT_NUTRITION * SNACK_POOR to BASE_NUTRIMENT_NUTRITION * SNACK_DECENT)
+			return "a decent snack"
+		if(BASE_NUTRIMENT_NUTRITION * SNACK_DECENT to BASE_NUTRIMENT_NUTRITION * SNACK_NUTRITIOUS)
+			return "a nutritious snack"
+		if(BASE_NUTRIMENT_NUTRITION * SNACK_NUTRITIOUS to BASE_NUTRIMENT_NUTRITION * SNACK_CHUNKY)
+			return "a chunky snack"
+		if(BASE_NUTRIMENT_NUTRITION * SNACK_CHUNKY to BASE_NUTRIMENT_NUTRITION * MEAL_MEAGRE)
+			return "a meagre meal"
+		if(BASE_NUTRIMENT_NUTRITION * MEAL_MEAGRE to BASE_NUTRIMENT_NUTRITION * MEAL_AVERAGE)
+			return "an adequate meal"
+		if(BASE_NUTRIMENT_NUTRITION * MEAL_AVERAGE to BASE_NUTRIMENT_NUTRITION * MEAL_FILLING)
+			return "a good meal"
+		else
+			return "a lavish, filling meal"
 
 /obj/item/reagent_containers/food/snacks/examine(mob/user)
 	. = ..()
@@ -419,35 +452,36 @@ All foods are distributed among various categories. Use common sense.
 		switch (bitecount)
 			if(0)
 			if(1)
-				. += ("[src] was bitten by someone!\n")
+				. += span_smallnotice("[src] was bitten by someone!\n")
 			if(2,3)
-				. += ("[src] was bitten [bitecount] times!\n")
+				. += span_smallnotice("[src] was bitten [bitecount] times!\n")
 			else
-				. += ("[src] was bitten multiple times!\n")
+				. += span_smallnotice("[src] was bitten multiple times!\n")
 	switch(faretype)
 		if(FARE_IMPOVERISHED)
-			. += ("It is food fit for the desperate.")
+			. += span_smallnotice("It is food fit for the desperate.")
 		if(FARE_POOR)
-			. += ("It is food fit for the poor.")
+			. += span_smallnotice("It is food fit for the poor.")
 		if(FARE_NEUTRAL)
-			. += ("It is decent food.")
+			. += span_smallnotice("It is decent food.")
 		if(FARE_FINE)
-			. += ("It is fine food.")
+			. += span_smallnotice("It is fine food.")
 		if(FARE_LAVISH)
-			. += ("It is lavish food.")
+			. += span_smallnotice("It is lavish food.")
 	if(portable)
-		. += ("It can be eaten without a table.")
+		. += span_smallnotice("It can be eaten without a table.")
 	else
-		. += ("Eating this without a table would be disgraceful for a noble.")
+		. += span_smallnotice("Eating this without a table would be disgraceful for a noble.")
+	. += span_smallnotice("It looks like [get_nutrition_to_text()]")
 	switch(eat_effect)
 		if(/datum/status_effect/debuff/uncookedfood)
-			. += span_warning("It is raw!")
+			. += span_smallred("It is raw!")
 		if(/datum/status_effect/debuff/rotfood)
-			. += span_warning("It is rotten!")
+			. += span_smallred("It is rotten!")
 		if(/datum/status_effect/debuff/burnedfood)
-			. += span_warning("It is burned!")
+			. += span_smallred("It is burned!")
 		if(/datum/status_effect/buff/foodbuff)
-			. += span_notice("It looks great!")
+			. += span_smallnotice("It looks great!")
 
 /obj/item/reagent_containers/food/snacks/attackby(obj/item/W, mob/user, params)
 	if(istype(W, /obj/item/kitchen/fork))
@@ -527,7 +561,8 @@ All foods are distributed among various categories. Use common sense.
 	if(chopping_sound)
 		playsound(get_turf(user), 'modular/Neu_Food/sound/chopping_block.ogg', 60, TRUE, -1) // added some choppy sound
 	if(slice_batch)
-		if(!do_after(user, 30, target = src))
+		var/cd = get_cooktime_divisor(user.get_skill_level(/datum/skill/craft/cooking))
+		if(!do_after(user, 1 SECONDS / cd, target = src))
 			return FALSE
 		var/reagents_per_slice = reagents.total_volume/slices_num
 		for(var/i in 1 to slices_num)

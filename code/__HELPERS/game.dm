@@ -216,6 +216,47 @@
 
 	return found_mobs
 
+
+// /proc/get_hearers_in_view(R, atom/source)
+// 	// Returns a list of hearers in view(R) from source (ignoring luminosity). Used in saycode.
+// 	var/turf/T = get_turf(source)
+// 	. = list()
+
+// 	if(!T)
+// 		return
+
+// 	var/list/processing_list = list()
+// 	if (R == 0) // if the range is zero, we know exactly where to look for, we can skip view
+// 		processing_list += T.contents // We can shave off one iteration by assuming turfs cannot hear
+// 	else  // A variation of get_hear inlined here to take advantage of the compiler's fastpath for obj/mob in view
+// 		var/lum = T.luminosity
+// 		T.luminosity = 6 // This is the maximum luminosity
+// 		for(var/mob/M in view(R, T))
+// 			processing_list += M
+// 		for(var/obj/O in view(R, T))
+// 			processing_list += O
+// 		T.luminosity = lum
+
+// 	while(processing_list.len) // recursive_hear_check inlined here
+// 		var/atom/A = processing_list[1]
+		
+// 		var/add = TRUE
+// 		if(isdullahan(A))
+// 			var/mob/living/carbon/human = A
+// 			// It's a headless Dullahan, they can't hear. Might have a relay in their inventory.
+// 			var/datum/species/dullahan/user_species = human.dna.species
+// 			if(user_species.headless)
+// 				add = FALSE
+
+// 		if((A.flags_1 & HEAR_1) && add)
+// 			. += A
+// 		else if(istype(A, /obj/item/bodypart/head/dullahan))
+// 			var/obj/item/bodypart/head/dullahan/head = A
+// 			. += head.original_owner
+
+// 		processing_list.Cut(1, 2)
+// 		processing_list += A.contents
+
 /// Like inLineOfSight, but it checks density instead of opacity.
 /proc/inLineOfTravel(mob/traveler, atom/target)
 	var/turf/our_turf = get_turf(traveler)

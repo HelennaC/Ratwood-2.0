@@ -15,6 +15,11 @@
 	if(capitalized)
 		. = capitalize(.)
 
+/datum/proc/p_themselves(capitalized, temp_gender)
+	. = "itself"
+	if(capitalized)
+		. = capitalize(.)
+
 /datum/proc/p_have(temp_gender)
 	. = "has"
 
@@ -222,6 +227,41 @@
 				. = "them"
 			if (IT_ITS)
 				. = "it"
+	// LETHALSTONE EDIT END
+	if(capitalized)
+		. = capitalize(.)
+
+/mob/p_themselves(capitalized, temp_gender)
+	if(!temp_gender)
+		temp_gender = gender
+	. = "it"
+	switch(temp_gender)
+		if(FEMALE)
+			. = "herself"
+		if(MALE)
+			. = "himself"
+		if(PLURAL)
+			. = "themselves"
+			if (capitalized)
+				. = capitalize(.)
+			return
+	// LETHALSTONE EDIT: if our mob has pronouns, use those instead
+	if (pronouns) 
+		switch (pronouns)
+			if (HE_HIM)
+				. = "himself"
+			if (HE_HIM_F)
+				. = "himhimself"
+			if (SHE_HER)
+				. = "herself"
+			if (SHE_HER_M)
+				. = "herself"
+			if (THEY_THEM)
+				. = "themselves"
+			if (THEY_THEM_F)
+				. = "themselves"
+			if (IT_ITS)
+				. = "itself"
 	// LETHALSTONE EDIT END
 	if(capitalized)
 		. = capitalize(.)

@@ -11,6 +11,7 @@
 	max_integrity = 200
 	integrity_failure = 0.1
 	drop_sound = 'sound/foley/dropsound/cloth_drop.ogg'
+	slot_flags = ITEM_SLOT_MOUTH
 	var/gendered
 	var/race
 	var/datum/bodypart_feature/underwear/undies_feature
@@ -18,6 +19,7 @@
 	sewrepair = TRUE
 	grid_height = 32
 	grid_width = 32
+	throw_speed = 0.5
 	var/sprite_acc = /datum/sprite_accessory/underwear/briefs
 
 /obj/item/undies/attack(mob/M, mob/user, def_zone)

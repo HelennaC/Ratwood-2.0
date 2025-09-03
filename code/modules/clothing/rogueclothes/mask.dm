@@ -1,11 +1,23 @@
 /obj/item/clothing/mask/rogue/MiddleClick(mob/user) 
-	overarmor = !overarmor
-	to_chat(user, span_info("I [overarmor ? "wear \the [src] under my hair" : "wear \the [src] over my hair"]."))
-	if(overarmor)
-		alternate_worn_layer = HOOD_LAYER //Below Hair Layer
+	if((user.zone_selected == BODY_ZONE_PRECISE_NOSE) && (cansnout == TRUE))
+		if(snouting == TRUE)
+			snouting = FALSE
+		else
+			snouting = TRUE
+		to_chat(user, span_info("I [snouting ? "make space for my snout in \the [src]" : "wear \the [src] tighter"]."))
+		if(snouting)
+			icon_state = "[initial(icon_state)]_snout"
+		else
+			icon_state = "[initial(icon_state)]"
+		user.update_inv_wear_mask()
 	else
-		alternate_worn_layer = BACK_LAYER //Above Hair Layer
-	user.update_inv_wear_mask()
+		overarmor = !overarmor
+		to_chat(user, span_info("I [overarmor ? "wear \the [src] under my hair" : "wear \the [src] over my hair"]."))
+		if(overarmor)
+			alternate_worn_layer = HOOD_LAYER //Below Hair Layer
+		else
+			alternate_worn_layer = BACK_LAYER //Above Hair Layer
+		user.update_inv_wear_mask()
 
 /obj/item/clothing/mask/rogue
 	name = ""
@@ -165,7 +177,7 @@
 
 /obj/item/clothing/mask/rogue/facemask/steel/confessor
 	name = "strange mask"
-	desc = "It is said that the original version of this mask was used for obscure rituals prior to the fall of the Empire of the Holy Celestia, and now it has been repurposed as a veil for the cunning hand of the Otavan Holy See.<br> <br>Others say it is a piece of heresy, a necessary evil, capable of keeping its user safe from left-handed magicks. You can taste copper whenever you draw breath."
+	desc = "It is said that the original version of this mask was used for obscure rituals prior to the fall of the Empire of the Holy Celestia, and now it has been repurposed as a veil for the cunning hand of the Otavan Orthodoxy.<br> <br>Others say it is a piece of heresy, a necessary evil, capable of keeping its user safe from left-handed magicks. You can taste copper whenever you draw breath."
 	icon_state = "confessormask"
 	max_integrity = 200
 	equip_sound = 'sound/items/confessormaskon.ogg'
@@ -202,7 +214,7 @@
 
 /obj/item/clothing/mask/rogue/facemask/steel/confessor/lensed
 	name = "stranger mask"
-	desc = "It is said that the original version of this mask was used for obscure rituals prior to the fall of the Empire of the Holy Celestia, and now it has been repurposed as a veil for the cunning hand of the Otavan Holy See.<br> <br>Others say it is a piece of heresy, a necessary evil, capable of keeping its user safe from left-handed magicks. You can taste copper whenever you draw breath."
+	desc = "It is said that the original version of this mask was used for obscure rituals prior to the fall of the Empire of the Holy Celestia, and now it has been repurposed as a veil for the cunning hand of the Otavan Orthodoxy.<br> <br>Others say it is a piece of heresy, a necessary evil, capable of keeping its user safe from left-handed magicks. You can taste copper whenever you draw breath."
 	icon_state = "confessormask_lens"
 	var/lensmoved = TRUE
 
@@ -309,10 +321,12 @@
 
 /obj/item/clothing/mask/rogue/facemask/prisoner
 	name = "cursed mask"
+	icon_state = "cursemask"
 	desc = "An iron mask that seals around the head, making it impossible to remove. It seems to be enchanted with some kind of vile magic..."
 	body_parts_covered = NONE //So that surgery can be done through the mask.
 	var/active_item
 	var/bounty_amount
+	cansnout = TRUE
 
 /obj/item/clothing/mask/rogue/facemask/prisoner/Initialize()
 	. = ..()
@@ -439,13 +453,14 @@
 /obj/item/clothing/mask/rogue/ragmask
 	name = "rag mask"
 	icon_state = "ragmask"
-	flags_inv = HIDEFACE|HIDEFACIALHAIR|HIDESNOUT
+	flags_inv = HIDEFACE|HIDEFACIALHAIR
 	body_parts_covered = NECK|MOUTH
 	slot_flags = ITEM_SLOT_MASK|ITEM_SLOT_HIP
 	adjustable = CAN_CADJUST
 	toggle_icon_state = TRUE
 	experimental_onhip = TRUE
 	sewrepair = TRUE
+	cansnout = TRUE
 
 /obj/item/clothing/mask/rogue/ragmask/ComponentInitialize()
 	AddComponent(/datum/component/adjustable_clothing, NECK, null, null, 'sound/foley/equip/rummaging-03.ogg', null, (UPD_HEAD|UPD_MASK))	//Standard mask
@@ -506,4 +521,15 @@
 	color = COLOR_ALMOST_BLACK	
 	detail_tag = "_detail"
 	detail_color = COLOR_SILVER
+	sewrepair = TRUE
+
+/obj/item/clothing/mask/rogue/hblinders
+	name = "head blinders"
+	desc = "Keeps the wearer focused ahead. Made of reinforced leather."
+	icon_state = "hblinders"
+	item_state = "hblinders"
+	body_parts_covered = HEAD
+	max_integrity = 400
+	armor = list("blunt" = 80, "slash" = 90, "stab" = 80, "piercing" = 80, "fire" = 0, "acid" = 0)
+	armor_class = ARMOR_CLASS_LIGHT
 	sewrepair = TRUE

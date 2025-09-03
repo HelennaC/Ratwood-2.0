@@ -158,7 +158,7 @@
 	contains = list(/obj/item/clothing/neck/roguetown/talkstone)
 
 /datum/supply_pack/rogue/Mage/serfstone
-	name = "Azurian serfstone"
+	name = "Vale serfstone"
 	cost = 80
 	contains = list(/obj/item/scomstone/bad)
 
@@ -176,7 +176,7 @@
 	cost = 2
 	contains = list(/obj/item/paper/scroll)
 
-/datum/supply_pack/rogue/bandit/Mage/cinnabar
+/datum/supply_pack/rogue/Mage/cinnabar
 	name = "Cinnabar Ore"
 	cost = 10
 	contains = list(/obj/item/rogueore/cinnabar = 1)

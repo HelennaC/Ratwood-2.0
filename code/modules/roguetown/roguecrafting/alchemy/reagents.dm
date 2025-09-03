@@ -350,7 +350,7 @@ If you want to expand on poisons theres tons of fun effects TG chemistry has tha
 	harmful = TRUE
 
 /datum/reagent/toxin/killersice/on_mob_life(mob/living/carbon/M)
-	M.adjustToxLoss(10, 0)
+	M.adjustToxLoss(20, 0)
 	return ..()
 
 //Potion reactions

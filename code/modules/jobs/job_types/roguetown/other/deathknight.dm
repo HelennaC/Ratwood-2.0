@@ -89,15 +89,16 @@
 	H.adjust_skillrank(/datum/skill/magic/arcane, 3, TRUE)
 	H.mind?.adjust_spellpoints(18)
 
-
+	wrists = /obj/item/clothing/wrists/roguetown/bracers
+	neck = /obj/item/clothing/neck/roguetown/bevor
 	belt = /obj/item/storage/belt/rogue/leather
 	pants = /obj/item/clothing/under/roguetown/platelegs/blk/death
 	shoes = /obj/item/clothing/shoes/roguetown/boots/armor/blkknight
 	shirt = /obj/item/clothing/suit/roguetown/shirt/undershirt/black
 	armor = /obj/item/clothing/suit/roguetown/armor/plate/blkknight/death
 	gloves = /obj/item/clothing/gloves/roguetown/plate/blk/death
-	backl = /obj/item/rogueweapon/sword/long/death
 	head = /obj/item/clothing/head/roguetown/helmet/heavy/knight/black
+	backl = /obj/item/rogueweapon/sword/long/death
 
 	H.change_stat("intelligence", 3)
 	H.change_stat("strength", 2)

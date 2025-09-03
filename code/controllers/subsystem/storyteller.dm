@@ -1150,6 +1150,7 @@ SUBSYSTEM_DEF(gamemode)
 	GLOB.azure_round_stats[STATS_ALIVE_HALFKIN] = 0
 	GLOB.azure_round_stats[STATS_ALIVE_WILDKIN] = 0
 	GLOB.azure_round_stats[STATS_ALIVE_CONSTRUCTS] = 0
+	GLOB.azure_round_stats[STATS_ALIVE_DOLLS] = 0
 	GLOB.azure_round_stats[STATS_ALIVE_VERMINFOLK] = 0
 	GLOB.azure_round_stats[STATS_ALIVE_DRACON] = 0
 	GLOB.azure_round_stats[STATS_ALIVE_AXIAN] = 0
@@ -1252,6 +1253,8 @@ SUBSYSTEM_DEF(gamemode)
 				GLOB.azure_round_stats[STATS_ALIVE_WILDKIN]++
 			if(isconstruct(human_mob))
 				GLOB.azure_round_stats[STATS_ALIVE_CONSTRUCTS]++
+			if(isdoll(human_mob))
+				GLOB.azure_round_stats[STATS_ALIVE_DOLLS]++
 			if(isvermin(human_mob))
 				GLOB.azure_round_stats[STATS_ALIVE_VERMINFOLK]++
 			if(isdracon(human_mob))

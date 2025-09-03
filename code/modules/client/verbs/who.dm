@@ -20,8 +20,8 @@
 				entry += " <i>(as [C.holder.fakekey])</i>"
 			if (isnewplayer(C.mob))
 				entry += " - <font color='darkgray'><b>In Lobby</b></font>"
-				/*if(C.ckey in GLOB.anonymize)
-					entry += " (as [get_fake_key(C.ckey)])"*/
+				if(C.ckey in GLOB.anonymize)
+					entry += " (as [get_fake_key(C.ckey)])"
 			else
 				if(ishuman(C.mob))
 					var/mob/living/carbon/human/H = C.mob
@@ -44,7 +44,8 @@
 					if(C.mob.mind.special_role)
 						entry += " - <b><font color='red'>[C.mob.mind.special_role]</font></b>"
 //			entry += " [ADMIN_QUE(C.mob)]"
-			entry += " ([CheckIPCountry(C.address)])"
+
+			// entry += " ([CheckIPCountry(C.address)])"
 			if(C.whitelisted())
 				wled++
 				entry += "(WL)"
@@ -77,8 +78,8 @@
 //			if(C.holder)
 //				continue
 			var/usedkey = C.key
-			/*if(C.ckey in GLOB.anonymize)
-				usedkey = get_fake_key(C.ckey)*/
+			if(C.ckey in GLOB.anonymize)
+				usedkey = get_fake_key(C.ckey)
 /*			if(WL)
 				Lines += span_biginfo("[usedkey]")
 			else

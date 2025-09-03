@@ -157,7 +157,7 @@ There are several things that need to be remembered:
 					armdam_overlays += armdam_overlay
 			wound_overlays = list()
 			for(var/datum/wound/wound as anything in BP.wounds)
-				if(!wound.mob_overlay)
+				if(isnull(wound) || isnull(wound.mob_overlay)) //Delinefortune: If the wound is null or has no mob overlay, skip it
 					continue
 				wound_overlays |= wound.mob_overlay
 			for(var/wound_overlay in wound_overlays)
@@ -1411,7 +1411,7 @@ There are several things that need to be remembered:
 /mob/living/carbon/human/update_inv_mouth()
 	remove_overlay(MOUTH_LAYER)
 
-	if(!get_bodypart(BODY_ZONE_HEAD)) //Decapitated
+	if(!isdullahan(src) && !get_bodypart(BODY_ZONE_HEAD)) //Decapitated
 		return
 
 	if(client && hud_used && hud_used.inv_slots[SLOT_MOUTH])

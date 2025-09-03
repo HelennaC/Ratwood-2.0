@@ -108,7 +108,7 @@
 
 	if (!msg)
 		return
-	
+
 	M.adjust_triumphs(msg)
 	log_text = "by [msg], from [old_triumphs] to [old_triumphs + msg]"
 
@@ -132,7 +132,7 @@
 
 	if(!amt)
 		return
-	
+
 	prompt = "Please specify a reason for the adjustment:"
 	reason = input("Message:", prompt) as text|null
 	if(!reason)
@@ -763,7 +763,7 @@ Traitors and the like can also be revived with the previous role mostly intact.
 			sleep(10)
 			target.gib(FALSE)
 		if(ADMIN_PUNISHMENT_GIB)
-			target.gib(FALSE)	
+			target.gib(FALSE)
 		if(ADMIN_PUNISHMENT_BSA)
 			bluespace_artillery(target)
 		if(ADMIN_PUNISHMENT_CBT)
@@ -805,7 +805,7 @@ Traitors and the like can also be revived with the previous role mostly intact.
 			direction = directions[direction]
 			var/target_tile = target.loc
 			for (var/i = 0; i < 10; i++)
-				var/turf/next_tile = get_step(target_tile, direction) 
+				var/turf/next_tile = get_step(target_tile, direction)
 				if (!next_tile)
 					break
 				target_tile = next_tile
@@ -830,7 +830,7 @@ Traitors and the like can also be revived with the previous role mostly intact.
 			humie.add_stress(/datum/stressevent/maniac_woke_up)
 			to_chat(humie, span_deadsay("<span class='reallybig'>... WHERE AM I? ...</span>"))
 			var/static/list/slop_lore = list(
-				span_deadsay("... Azure Peak? No ... It doesn't exist ..."),
+				span_deadsay("... Rotwood Vale? No ... It doesn't exist ..."),
 				span_deadsay("... My name is Trey. Trey Liam, Liamtific Troverseer ..."),
 				span_deadsay("... I'm on NT Liam, a self Treystaining ship, used to Treyserve what Liamains of roguemanity ..."),
 				span_deadsay("... Launched into the Grim Darkness, War and Grim Darkness preserves their grimness ... Their edge ..."),

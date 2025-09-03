@@ -1,6 +1,6 @@
 /datum/advclass/homesteader
 	name = "Homesteader"
-	tutorial = "Azure population's tendency to take up arms and become unwashed beastslayers had forced you to take up jobs, small and large of most professions.\n A jack of all trades, what will you be known as this week?"
+	tutorial = "Rotwood population's tendency to take up arms and become unwashed beastslayers had forced you to take up jobs, small and large of most professions.\n A jack of all trades, what will you be known as this week?"
 	allowed_sexes = list(MALE, FEMALE)
 	allowed_races = RACES_ALL_KINDS
 	outfit = /datum/outfit/job/roguetown/homesteader
@@ -90,7 +90,7 @@
 						/obj/item/hair_dye_cream = 3,
 						/obj/item/rogueweapon/chisel = 1,
 						/obj/item/natural/clay = 3,
-						/obj/item/natural/clay/glassbatch = 1, 
+						/obj/item/natural/clay/glassbatch = 1,
 						/obj/item/rogueore/coal = 1,
 						/obj/item/roguegear = 1,
 	)

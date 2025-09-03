@@ -155,9 +155,10 @@
 	. = ..()
 	var/static/list/slapcraft_recipe_list = list(
 		/datum/crafting_recipe/roguetown/survival/heatershield,
-		/datum/crafting_recipe/roguetown/survival/collar,
-		/datum/crafting_recipe/roguetown/survival/bell_collar,
-		)
+		/datum/crafting_recipe/roguetown/leather/neck/leather_collar,
+    /datum/crafting_recipe/roguetown/leather/neck/leather_leash
+	)
+
 
 /obj/item/natural/bundle/curred_hide
 	name = "bundle of cured leather"
@@ -173,9 +174,9 @@
 	icon2step = 10
 
 /obj/item/natural/cured/essence
-	name = "essense of wilderness"
+	name = "essence of wilderness"
 	icon_state = "wessence"
-	desc = "A mystical essense embued with the power of Dendor. Merely holding it transports one's mind to ancient times."
+	desc = "A large drop of mystical sap said to contain Dendor's own energies, often carried by hunters and other wildsmen as a token of luck."
 	resistance_flags = FLAMMABLE
 	w_class = WEIGHT_CLASS_SMALL
 	sellprice = 20

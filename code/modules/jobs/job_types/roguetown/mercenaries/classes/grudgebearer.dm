@@ -54,6 +54,7 @@
 					)
 				ADD_TRAIT(H, TRAIT_MEDIUMARMOR, TRAIT_GENERIC)
 				ADD_TRAIT(H, TRAIT_TRAINED_SMITH, TRAIT_GENERIC)
+				ADD_TRAIT(H, TRAIT_STEELHEARTED, TRAIT_GENERIC)	
 			if("Soldier")
 				H.change_stat("constitution", 5)
 				H.change_stat("endurance", 4)

@@ -129,10 +129,12 @@ h1.alert, h2.alert	{color: #c9c1ba;font-family: Pterra, TrueType;}
 .papyrus				{font-family: "Papyrus", cursive, sans-serif;}
 .robot					{font-family: "Courier New", cursive, sans-serif;}
 
+.orator					{font-family: "Project Sans", Pterra; font-size: 100%;}
+.sandwauk				{font-family: "Persian", Pterra; font-size: 100%;}
 .human					{font-family: "Honoka Mincho", Pterra;}
 .elf					{font-family: "Dauphin", cursive, Pterra;}
 .dwarf					{font-family: "MasonAlternate", Pterra;}
-.sandspeak				{font-family: "Arabolical", Pterra;}
+.sandspeak				{font-family: "Furqan", Pterra;}
 .delf					{font-family: "Dauphin", Pterra;}
 .hellspeak				{font-family: "Xaphan", Pterra; font-size: 110%}
 .undead					{font-family: "FriskyVampire", Pterra;}
@@ -141,6 +143,7 @@ h1.alert, h2.alert	{color: #c9c1ba;font-family: Pterra, TrueType;}
 .reptile				{font-family: "Kingthings Petrock", Pterra; font-size: 120%;}
 .grenzelhoftian			{font-family: "Emperialisme", Pterra; font-size: 120%;}
 .kazengunese 			{font-family: "Yuji Boku", Pterra;}
+.kazenaccent			{font-family: "Geishta", "Pterra"; font-size: 120%;}
 .otavan					{font-family: "Notredame", "Pterra"; font-size: 200%;}
 .etruscan				{font-family: "Feronia", "Pterra"; font-size: 100%;}
 .gronnic				{font-family: "Jorvik Informal", "Pterra"; font-size: 100%;}
@@ -187,4 +190,6 @@ h1.alert, h2.alert	{color: #c9c1ba;font-family: Pterra, TrueType;}
 .love_mid					{color: #e9a8d1;	font-size: 75%;}
 .love_high					{color: #f05ee1;	font-size: 75%;}
 .love_extreme					{color: #d146f5;	font-size: 75%;}
+
+.patreontalk			{color: #ff7a05;} /* TODO - CHANGE THIS TO THE DESIRED COLOR!!!! */
 </style>"}

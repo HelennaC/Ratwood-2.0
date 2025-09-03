@@ -20,7 +20,7 @@
 	skinned_type = /obj/item/ingot/steel
 	disliked_food = NONE
 	liked_food = NONE
-	inherent_traits = list(TRAIT_NOHUNGER, TRAIT_BLOODLOSS_IMMUNE, TRAIT_NOBREATH, TRAIT_NOSLEEP)
+	inherent_traits = list(TRAIT_NOHUNGER, TRAIT_BLOODLOSS_IMMUNE, TRAIT_NOBREATH, TRAIT_NOSLEEP, TRAIT_ZOMBIE_IMMUNE, TRAIT_NOMETABOLISM, TRAIT_NOPAIN)
 	changesource_flags = MIRROR_BADMIN | WABBAJACK | MIRROR_MAGIC | MIRROR_PRIDE | RACE_SWAP | SLIME_EXTRACT
 	limbs_icon_m = 'icons/roguetown/mob/bodies/m/mcom.dmi'
 	limbs_icon_f = 'icons/roguetown/mob/bodies/f/fcom.dmi'
@@ -32,7 +32,7 @@
 		OFFSET_ID = list(0,1), OFFSET_GLOVES = list(0,1), OFFSET_WRISTS = list(0,1),\
 		OFFSET_CLOAK = list(0,1), OFFSET_FACEMASK = list(0,1), OFFSET_HEAD = list(0,1), \
 		OFFSET_FACE = list(0,1), OFFSET_BELT = list(0,1), OFFSET_BACK = list(0,1), \
-		OFFSET_NECK = list(0,1), OFFSET_MOUTH = list(0,1), OFFSET_PANTS = list(0,1), \
+		OFFSET_NECK = list(0,1), OFFSET_MOUTH = list(0,1), OFFSET_PANTS = list(0,0), \
 		OFFSET_SHIRT = list(0,1), OFFSET_ARMOR = list(0,1), OFFSET_HANDS = list(0,1), OFFSET_UNDIES = list(0,1), \
 		OFFSET_ID_F = list(0,-1), OFFSET_GLOVES_F = list(0,0), OFFSET_WRISTS_F = list(0,0), OFFSET_HANDS_F = list(0,0), \
 		OFFSET_CLOAK_F = list(0,0), OFFSET_FACEMASK_F = list(0,-1), OFFSET_HEAD_F = list(0,-1), \
@@ -55,6 +55,8 @@
 	customizers = list(
 		/datum/customizer/organ/eyes/humanoid,
 		/datum/customizer/bodypart_feature/crest,
+		/datum/customizer/bodypart_feature/hair/head/humanoid,
+		/datum/customizer/bodypart_feature/hair/facial/humanoid,
 		/datum/customizer/bodypart_feature/accessory,
 		/datum/customizer/bodypart_feature/face_detail,
 		/datum/customizer/bodypart_feature/underwear,
@@ -62,6 +64,15 @@
 		/datum/customizer/organ/penis/anthro,
 		/datum/customizer/organ/breasts/human,
 		/datum/customizer/organ/vagina/human_anthro,
+		/datum/customizer/organ/ears/demihuman,
+		/datum/customizer/organ/horns/demihuman,
+		/datum/customizer/organ/tail/demihuman,
+		/datum/customizer/organ/snout/anthro,
+		/datum/customizer/organ/wings/anthro,
+		/datum/customizer/organ/penis/anthro,
+		/datum/customizer/organ/breasts/human,
+		/datum/customizer/organ/vagina/human_anthro,
+		/datum/customizer/organ/testicles/anthro,
 		)
 	body_marking_sets = list(
 		/datum/body_marking_set/none,
@@ -71,6 +82,7 @@
 		)
 	body_markings = list(
 		/datum/body_marking/eyeliner,
+		/datum/body_marking/plain,
 		/datum/body_marking/tonage,
 		/datum/body_marking/nose,
 		/datum/body_marking/construct_plating_light,
@@ -85,13 +97,28 @@
 
 /datum/species/construct/metal/check_roundstart_eligible()
 	return TRUE
-	
+
 /datum/species/construct/metal/get_skin_list()
 	return list(
-		"BRASS" = "dfbd6c",
-		"IRON" = "525352",
-		"STEEL" = "babbb9",
-		"BRONZE" = "e2a670",
+		"Brass" = CONSTRUCT_BRASS,
+		"Iron" = CONSTRUCT_IRON,
+		"Steel" = CONSTRUCT_STEEL,
+		"Bronze" = CONSTRUCT_BRONZE,
+		"Toper" = CONSTRUCT_TOPER,
+		"Coal" = CONSTRUCT_COAL,
+		"Cobalt" = CONSTRUCT_COBALT,
+		"Granite" = CONSTRUCT_GRANITE,
+		"Jade" = CONSTRUCT_JADE,
+		"Amythortz" = CONSTRUCT_AMETHYST,
+		"Silver" = CONSTRUCT_SILVER,
+		"Coral" = CONSTRUCT_CORAL,
+		"Gold" = CONSTRUCT_GOLD,
+		"Limestone" = CONSTRUCT_LIMESTONE,
+		"Copper" = CONSTRUCT_COPPER,
+		"Rust" = CONSTRUCT_RUST,
+		"Obsidian" = CONSTRUCT_OBSIDIAN,
+		"Lapis" = CONSTRUCT_LAPIS,
+		"Basalt" = CONSTRUCT_BASALT
 	)
 
 /datum/species/construct/metal/get_hairc_list()

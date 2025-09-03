@@ -38,11 +38,6 @@
 	cost = 30
 	contains = list(/obj/item/clothing/head/roguetown/helmet/sallet/visored)
 
-/datum/supply_pack/rogue/Brigand/wolfhelm
-	name = "Volf Plate Helm"
-	cost = 30
-	contains = list(/obj/item/clothing/head/roguetown/helmet/heavy/volfplate)
-
 //////////
 // NECK //
 //////////
@@ -91,6 +86,11 @@
 	cost = 20
 	contains =  list(/obj/item/clothing/suit/roguetown/armor/plate/half)
 
+/datum/supply_pack/rogue/Brigand/blksteelcuirass
+	name = "Blacksteel Cuirass"
+	cost = 300
+	contains = list(/obj/item/clothing/suit/roguetown/armor/plate/blacksteel_half_plate)
+
 /datum/supply_pack/rogue/Brigand/scalemail
 	name = "Scalemail"
 	cost = 20
@@ -101,10 +101,10 @@
 	cost = 30
 	contains = list(/obj/item/clothing/suit/roguetown/armor/plate/half/fluted)
 
-/datum/supply_pack/rogue/Brigand/blksteelcuirass
-	name = "Blacksteel Cuirass"
-	cost = 50
-	contains = list(/obj/item/clothing/suit/roguetown/armor/plate/blacksteel_half_plate)
+/datum/supply_pack/rogue/Brigand/brigandine
+	name = "Brigandine"
+	cost = 60
+	contains = list(/obj/item/clothing/suit/roguetown/armor/brigandine)
 
 ///////////////////
 // WRISTS/GLOVES //
@@ -114,6 +114,11 @@
 	name = "Steel Bracers"
 	cost = 10
 	contains = list(/obj/item/clothing/wrists/roguetown/bracers)
+
+/datum/supply_pack/rogue/Brigand/splintbracers
+	name = "Brigandine Rerebraces"
+	cost = 10
+	contains = list(/obj/item/clothing/wrists/roguetown/splintarms)
 
 /datum/supply_pack/rogue/Brigand/chaingauntlets
 	name = "Steel Chain Gauntlets"
@@ -128,6 +133,11 @@
 	name = "Steel Chain Chausses"
 	cost = 20
 	contains = list(/obj/item/clothing/under/roguetown/chainlegs)
+
+/datum/supply_pack/rogue/Brigand/splintlegs
+	name = "Brigandine Chausses"
+	cost = 20
+	contains = list(/obj/item/clothing/under/roguetown/splintlegs)
 
 /datum/supply_pack/rogue/Brigand/boots
 	name = "Steel Boots"

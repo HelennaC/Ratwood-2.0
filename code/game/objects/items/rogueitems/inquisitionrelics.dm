@@ -1431,3 +1431,17 @@ Inquisitorial armory down here
 /obj/item/inqarticles/spyglass/attack_self(mob/living/user)
 	. = ..()
 	
+
+/obj/item/skeleton_key
+	name = "skeleton key"
+	desc = "a quasiheretical object recovered from a raid on a Zizoid cult long ago. It can open any lock you wish it to."
+	icon_state = "skeleton_key"
+	icon = 'icons/roguetown/items/keys.dmi'
+	lefthand_file = 'icons/mob/inhands/misc/food_lefthand.dmi'
+	righthand_file = 'icons/mob/inhands/misc/food_righthand.dmi'
+	w_class = WEIGHT_CLASS_TINY
+	throwforce = 0
+	slot_flags = ITEM_SLOT_HIP|ITEM_SLOT_MOUTH|ITEM_SLOT_NECK
+	resistance_flags = FIRE_PROOF
+	max_integrity = 100
+	always_destroy = TRUE

@@ -22,7 +22,7 @@
 
 /datum/outfit/job/roguetown/prisonerb/pre_equip(mob/living/carbon/human/H)
 	..()
-	neck = /obj/item/clothing/neck/roguetown/gorget/prisoner
+	neck = /obj/item/clothing/neck/roguetown/gorget/cursed_collar
 	shoes = /obj/item/clothing/shoes/roguetown/shortboots
 	H.adjust_skillrank(/datum/skill/combat/wrestling, 1, TRUE)
 	H.adjust_skillrank(/datum/skill/combat/unarmed, 1, TRUE)

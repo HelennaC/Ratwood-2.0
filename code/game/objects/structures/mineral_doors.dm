@@ -66,8 +66,12 @@
 		return
 	if(door_opened)
 		playsound(src, 'sound/combat/hits/onwood/woodimpact (1).ogg', 100)
-		user.visible_message(span_warning("[user] kicks [src] shut!"), \
-			span_notice("I kick [src] shut!"))
+		if(HAS_TRAIT(user, TRAIT_LAMIAN_TAIL))
+			user.visible_message(span_warning("[user] slams [src] shut with [user.p_their()] tail!"), \
+				span_notice("I slam [src] shut with my tail!"))
+		else
+			user.visible_message(span_warning("[user] kicks [src] shut!"), \
+				span_notice("I kick [src] shut!"))
 		force_closed()
 	else
 		if(locked)
@@ -77,19 +81,31 @@
 					kickthresh--
 				if((prob(L.STASTR * 0.5) || kickthresh == 0) && (L.STASTR >= initial(kickthresh)))
 					playsound(src, 'sound/combat/hits/onwood/woodimpact (1).ogg', 100)
-					user.visible_message(span_warning("[user] kicks open [src]!"), \
-						span_notice("I kick open [src]!"))
+					if(HAS_TRAIT(user, TRAIT_LAMIAN_TAIL))
+						user.visible_message(span_warning("[user] slams [src] open with [user.p_their()] tail!"), \
+							span_notice("I tailslam [src] open!"))
+					else
+						user.visible_message(span_warning("[user] kicks open [src]!"), \
+							span_notice("I kick open [src]!"))
 					locked = 0
 					force_open()
 				else
 					playsound(src, 'sound/combat/hits/onwood/woodimpact (1).ogg', 100)
-					user.visible_message(span_warning("[user] kicks [src]!"), \
-						span_notice("I kick [src]!"))
+					if(HAS_TRAIT(user, TRAIT_LAMIAN_TAIL))
+						user.visible_message(span_warning("[user] tailslams [src]!"), \
+							span_notice("I slam [src] with my tail!"))
+					else
+						user.visible_message(span_warning("[user] kicks [src]!"), \
+							span_notice("I kick [src]!"))
 			//try to kick open, destroy lock
 		else
 			playsound(src, 'sound/combat/hits/onwood/woodimpact (1).ogg', 100)
-			user.visible_message(span_warning("[user] kicks open [src]!"), \
-				span_notice("I kick open [src]!"))
+			if(HAS_TRAIT(user, TRAIT_LAMIAN_TAIL))
+				user.visible_message(span_warning("[user] slams [src] open with [user.p_their()] tail!"), \
+					span_notice("I tailslam [src] open!"))
+			else
+				user.visible_message(span_warning("[user] kicks open [src]!"), \
+					span_notice("I kick open [src]!"))
 			force_open()
 
 /obj/structure/mineral_door/proc/force_open()
@@ -384,6 +400,8 @@
 			pickring.removefromring(user)
 			to_chat(user, span_warning("You clumsily drop a lockpick off the ring as you try to pick the lock with it."))
 		return
+	if(istype(I, /obj/item/skeleton_key))
+		tryskeletonlock(user)
 	else
 		if(repairable && (user.get_skill_level(repair_skill) > 0) && ((istype(I, repair_cost_first)) || (istype(I, repair_cost_second)))) // At least 1 skill level needed
 			repairdoor(I,user)
@@ -444,15 +462,85 @@
 
 /obj/structure/mineral_door/attack_right(mob/user)
 	user.changeNext_move(CLICK_CD_FAST)
-	var/obj/item = user.get_active_held_item()
-	if(istype(item, /obj/item/roguekey) || istype(item, /obj/item/storage/keyring))
-		if(locked)
-			to_chat(user, span_warning("It won't turn this way. Try turning to the left."))
-			door_rattle()
-			return
-		trykeylock(item, user)
-	else
+	
+	// Special handling for deadbolt and shutter doors - preserve their custom behavior
+	if(istype(src, /obj/structure/mineral_door/wood/deadbolt) || istype(src, /obj/structure/mineral_door/wood/deadbolt/shutter))
 		return ..()
+	
+	// Check if user has a key in hand or belt slots
+	var/obj/item/key_item = find_key_for_door(user)
+	if(key_item)
+		trykeylock(key_item, user)
+		return
+	
+	// If no key found, fall back to parent behavior
+	return ..()
+
+// Helper proc to find a matching key or keyring in hand or belt slots
+/obj/structure/mineral_door/proc/find_key_for_door(mob/user)
+	if(!user || !keylock)
+		return null
+	
+	// Check hand first
+	var/obj/item/W = user.get_active_held_item()
+	if(W && (istype(W, /obj/item/roguekey) || istype(W, /obj/item/storage/keyring)))
+		if(istype(W, /obj/item/roguekey))
+			var/obj/item/roguekey/K = W
+			if(K.lockhash == lockhash || istype(K, /obj/item/roguekey/lord))
+				return W
+		if(istype(W, /obj/item/storage/keyring))
+			if(keyring_has_matching_key(W))
+				return W
+	
+	// Check belt slots if human
+	if(ishuman(user))
+		var/mob/living/carbon/human/H = user
+		var/list/belt_slots = list(
+			H.get_item_by_slot(SLOT_BELT),
+			H.get_item_by_slot(SLOT_BELT_L), 
+			H.get_item_by_slot(SLOT_BELT_R)
+		)
+		
+		for(var/obj/item/I in belt_slots)
+			if(!I) continue
+			
+			// Check if the belt item itself is a key or keyring
+			if(istype(I, /obj/item/roguekey))
+				var/obj/item/roguekey/K = I
+				if(K.lockhash == lockhash || istype(K, /obj/item/roguekey/lord))
+					return I
+			if(istype(I, /obj/item/storage/keyring))
+				if(keyring_has_matching_key(I))
+					return I
+			
+			// Check inside the belt item if it has contents (storage belts, etc.)
+			if(I.contents && I.contents.len)
+				for(var/obj/item/contained_item in I.contents)
+					if(istype(contained_item, /obj/item/roguekey))
+						var/obj/item/roguekey/K = contained_item
+						if(K.lockhash == lockhash || istype(K, /obj/item/roguekey/lord))
+							return I // Return the belt item that contains the key
+					if(istype(contained_item, /obj/item/storage/keyring))
+						if(keyring_has_matching_key(contained_item))
+							return I // Return the belt item that contains the keyring
+	
+	return null
+
+// Helper proc to check if a keyring contains a matching key
+/obj/structure/mineral_door/proc/keyring_has_matching_key(obj/item/storage/keyring/keyring)
+	if(!keyring || !istype(keyring, /obj/item/storage/keyring))
+		return FALSE
+	
+	for(var/obj/item/I in keyring.contents)
+		if(istype(I, /obj/item/roguekey))
+			var/obj/item/roguekey/K = I
+			if(K.lockhash == lockhash)
+				return TRUE
+		if(istype(I, /obj/item/storage/keyring))
+			if(keyring_has_matching_key(I))
+				return TRUE
+	
+	return FALSE
 
 /obj/structure/mineral_door/proc/trykeylock(obj/item/I, mob/user, autobump = FALSE)
 	if(door_opened || isSwitchingStates)
@@ -462,6 +550,30 @@
 	if(lockbroken)
 		to_chat(user, span_warning("The lock to this door is broken."))
 	user.changeNext_move(CLICK_CD_INTENTCAP)
+	
+	// Handle belt items that contain keys
+	if(I.contents && I.contents.len && !istype(I, /obj/item/storage/keyring))
+		var/obj/item/found_key = null
+		for(var/obj/item/contained_item in I.contents)
+			if(istype(contained_item, /obj/item/roguekey))
+				var/obj/item/roguekey/K = contained_item
+				if(K.lockhash == lockhash || istype(K, /obj/item/roguekey/lord))
+					found_key = contained_item
+					break
+			if(istype(contained_item, /obj/item/storage/keyring))
+				if(keyring_has_matching_key(contained_item))
+					found_key = contained_item
+					break
+		
+		if(found_key)
+			// Use the found key instead of the belt
+			trykeylock(found_key, user, autobump)
+			return
+		else
+			to_chat(user, span_warning("No matching key found in [I]."))
+			door_rattle()
+			return
+	
 	if(istype(I,/obj/item/storage/keyring))
 		var/obj/item/storage/keyring/R = I
 		if(!R.contents.len)
@@ -531,10 +643,8 @@
 		pickchance *= P.picklvl
 		pickchance = clamp(pickchance, 1, 95)
 
-		if(ishuman(user))
-			var/mob/living/carbon/human/H = user
-			message_admins("[H.real_name]([key_name(user)]) is attempting to lockpick [src.name]. [ADMIN_JMP(src)]")
-			log_admin("[H.real_name]([key_name(user)]) is attempting to lockpick [src.name].")
+		var/picked = FALSE
+		user.log_message("attempting to lockpick door \"[src.name]\" (currently [locked ? "locked" : "unlocked"]).", LOG_ATTACK)
 
 		while(!QDELETED(I) &&(lockprogress < locktreshold))
 			if(!do_after(user, picktime, target = src))
@@ -546,15 +656,13 @@
 				if(L.mind)
 					add_sleep_experience(L, /datum/skill/misc/lockpicking, L.STAINT/2)
 				if(lockprogress >= locktreshold)
+					picked = TRUE
 					to_chat(user, "<span class='deadsay'>The locking mechanism gives.</span>")
-					if(ishuman(user))
-						var/mob/living/carbon/human/H = user
-						message_admins("[H.real_name]([key_name(user)]) successfully lockpicked [src.name] & [locked ? "unlocked" : "locked"] it. [ADMIN_JMP(src)]")
-						log_admin("[H.real_name]([key_name(user)]) successfully lockpicked [src.name].")
-						record_featured_stat(FEATURED_STATS_CRIMINALS, user)
-						GLOB.azure_round_stats[STATS_LOCKS_PICKED]++
-						var/obj/effect/track/structure/new_track = new(get_turf(src))
-						new_track.handle_creation(user)
+					record_featured_stat(FEATURED_STATS_CRIMINALS, user)
+					GLOB.azure_round_stats[STATS_LOCKS_PICKED]++
+					var/obj/effect/track/structure/new_track = new(get_turf(src))
+					new_track.handle_creation(user)
+					user.log_message("finished lockpicking door \"[src.name]\" (now [locked ? "unlocked" : "locked"]).", LOG_ATTACK)
 					lock_toggle(user)
 					break
 				else
@@ -565,7 +673,27 @@
 				to_chat(user, "<span class='warning'>Clack.</span>")
 				add_sleep_experience(L, /datum/skill/misc/lockpicking, L.STAINT/4)
 				continue
+		if(!picked)
+			user.log_message("stopped/failed lockpicking door \"[src.name]\" (remains [locked ? "locked" : "unlocked"]).", LOG_ATTACK)
 		return
+
+/obj/structure/mineral_door/proc/tryskeletonlock(mob/user)
+	if(door_opened || isSwitchingStates)
+		return
+	if(!keylock)
+		return
+	if(lockbroken)
+		to_chat(user, span_warning("The lock to this door is broken."))
+		return
+	if(ishuman(user))
+		var/mob/living/carbon/human/H = user
+		message_admins("[H.real_name]([key_name(user)]) successfully skeletonkey'd [src.name] & [locked ? "unlocked" : "locked"] it. [ADMIN_JMP(src)]")
+		log_admin("[H.real_name]([key_name(user)]) successfully used a skeleton key on [src.name].")
+	do_sparks(3, FALSE, src)
+	playsound(user, 'sound/items/skeleton_key.ogg', 100)
+	lock_toggle(user) //All That It Does.
+	user.changeNext_move(CLICK_CD_INTENTCAP)
+	return
 
 /obj/structure/mineral_door/proc/lock_toggle(mob/user)
 	if(isSwitchingStates || door_opened)
@@ -779,19 +907,70 @@
 	icon_state = base_state
 
 /obj/structure/mineral_door/wood/deadbolt/attack_right(mob/user)
-	..()
-	if(door_opened || isSwitchingStates)
+	user.changeNext_move(CLICK_CD_FAST)
+	
+	// If keylock is disabled, implement manual locking behavior
+	if(!keylock)
+		if(get_dir(src,user) == lockdir)
+			if(brokenstate)
+				to_chat(user, span_warning("It's broken, that would be foolish."))
+				return
+			lock_toggle(user)
+		else
+			to_chat(user, span_warning("The deadbolt doesn't toggle from this side."))
 		return
-	if(lockbroken)
-		to_chat(user, span_warning("The lock to this door is broken."))
-		return
-	if(brokenstate)
-		to_chat(user, span_warning("There isn't much left of this door."))
-		return
-	if(get_dir(src,user) == lockdir)
-		lock_toggle(user)
+	
+	var/obj/item = user.get_active_held_item()
+	var/obj/item/roguekey/found_key = null
+	var/obj/item/storage/keyring/found_keyring = null
+
+	// Check held item first
+	if(istype(item, /obj/item/roguekey))
+		found_key = item
+	else if(istype(item, /obj/item/storage/keyring))
+		found_keyring = item
+
+	// If no key in hand, check all storage items
+	if(!found_key && !found_keyring)
+		if(ishuman(user))
+			var/mob/living/carbon/human/H = user
+			var/list/checked_items = list()
+			var/list/to_check = H.get_all_slots()
+			
+			while(to_check.len)
+				var/obj/item/I = to_check[1]
+				to_check -= I
+				if(I in checked_items)
+					continue
+				checked_items += I
+				
+				if(istype(I, /obj/item/roguekey))
+					var/obj/item/roguekey/K = I
+					if(K.lockhash == lockhash || istype(K, /obj/item/roguekey/lord))
+						found_key = K
+						break
+				if(istype(I, /obj/item/storage/keyring))
+					var/obj/item/storage/keyring/R = I
+					for(var/obj/item/roguekey/K in R.contents)
+						if(K.lockhash == lockhash || istype(K, /obj/item/roguekey/lord))
+							found_keyring = R
+							break
+					if(found_keyring)
+						break
+				if(istype(I, /obj/item/storage))
+					var/obj/item/storage/S = I
+					to_check += S.contents
+
+	if(found_key || found_keyring)
+		if(door_opened || isSwitchingStates)
+			return ..()
+		if(lockbroken)
+			to_chat(user, span_warning("The lock to this door is broken."))
+			return
+		trykeylock(found_key || found_keyring, user)
 	else
-		to_chat(user, span_warning("The door doesn't lock from this side."))
+		to_chat(user, span_warning("I don't have the right key for this door."))
+		return
 
 /obj/structure/mineral_door/wood/donjon
 	desc = "A solid metal door with a slot to peek through."
@@ -823,21 +1002,42 @@
 	repair_skill = /datum/skill/craft/masonry
 
 /obj/structure/mineral_door/wood/donjon/stone/attack_right(mob/user)
+	// Check for keys first (inherited from parent)
+	var/obj/item/key_item = find_key_for_door(user)
+	if(key_item)
+		trykeylock(key_item, user)
+		return
+	
+	// If no key, fall back to parent behavior
 	if(user.get_active_held_item())
-		..()
+		return ..()
 
 /obj/structure/mineral_door/wood/donjon/stone/view_toggle(mob/user)
 	return
+
+/obj/structure/mineral_door/wood/donjon/stone/MiddleClick(mob/user, params)
+	if(user.get_active_held_item())
+		return ..()
+	if(door_opened || isSwitchingStates)
+		return
+	if(brokenstate)
+		to_chat(user, span_warning("There isn't much left of this door."))
+		return
+	if(get_dir(src,user) == viewportdir)
+		view_toggle(user)
+	else
+		to_chat(user, span_warning("The viewport doesn't toggle from this side."))
+		return
 
 /obj/structure/mineral_door/wood/donjon/Initialize()
 	viewportdir = dir
 	icon_state = base_state
 	..()
 
-/obj/structure/mineral_door/wood/donjon/attack_right(mob/user)
+/obj/structure/mineral_door/wood/donjon/MiddleClick(mob/user, params)
 	if(user.get_active_held_item())
-		..()
-		return
+		return ..()
+
 	if(door_opened || isSwitchingStates)
 		return
 	if(brokenstate)
@@ -915,7 +1115,10 @@
 
 
 /obj/structure/mineral_door/bars/onkick(mob/user)
-	user.visible_message(span_warning("[user] kicks [src]!"))
+	if(HAS_TRAIT(user, TRAIT_LAMIAN_TAIL))
+		user.visible_message(span_warning("[user] tailslams [src]!"))
+	else
+		user.visible_message(span_warning("[user] kicks [src]!"))
 	return
 
 

@@ -24,7 +24,7 @@
 		if("Disgraced")
 			to_chat(H, span_warning("You were once a venerated and revered knight - now, a traitor who abandoned your liege. You lyve the lyfe of an outlaw, shunned and looked down upon by society."))
 			ADD_TRAIT(H, TRAIT_HEAVYARMOR, TRAIT_GENERIC)
-			ADD_TRAIT(H, TRAIT_NOBLE, TRAIT_GENERIC)
+			ADD_TRAIT(H, TRAIT_DISGRACED_NOBLE, TRAIT_GENERIC)
 			H.adjust_skillrank(/datum/skill/combat/polearms, 4, TRUE)
 			H.adjust_skillrank(/datum/skill/combat/maces, 4, TRUE)
 			H.adjust_skillrank(/datum/skill/combat/axes, 4, TRUE)
@@ -370,10 +370,10 @@
 /datum/status_effect/buff/order/brotherhood/on_apply()
 	. = ..()
 	to_chat(owner, span_blue("My commander orders me to stand proud for the brotherhood!"))
-	ADD_TRAIT(owner, TRAIT_NOPAIN, TRAIT_GENERIC)
+	ADD_TRAIT(owner, TRAIT_NOPAIN, id)
 
 /datum/status_effect/buff/order/onfeet/on_remove()
-	REMOVE_TRAIT(owner, TRAIT_NOPAIN, TRAIT_GENERIC)
+	REMOVE_TRAIT(owner, TRAIT_NOPAIN, id)
 	. = ..()
 
 

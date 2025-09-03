@@ -487,10 +487,9 @@
 		if(!M.client)
 			to_chat(usr, span_warning("[M] doesn't seem to have an active client."))
 			return
-		var/datum/job/mob_job = SSjob.GetJob(M.mind.assigned_role)
 		var/target_job = SSrole_class_handler.get_advclass_by_name(M.advjob)
 		if(M.mind)
-			mob_job = SSjob.GetJob(M.mind.assigned_role)
+			var/datum/job/mob_job = SSjob.GetJob(M.mind.assigned_role)
 			if(mob_job)
 				mob_job.current_positions = max(0, mob_job.current_positions - 1)
 			if(target_job)

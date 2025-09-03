@@ -24,6 +24,9 @@
 	features = pref_species.get_random_features()
 	body_markings = pref_species.get_random_body_markings(features)
 	accessory = "Nothing"
+	bark_id = pick(GLOB.bark_random_list)
+	bark_pitch = BARK_PITCH_RAND(gender)
+	bark_variance = BARK_VARIANCE_RAND
 	reset_all_customizer_accessory_colors()
 	randomize_all_customizer_accessories()
 

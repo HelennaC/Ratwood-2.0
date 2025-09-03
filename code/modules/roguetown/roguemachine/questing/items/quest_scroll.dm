@@ -17,7 +17,7 @@
 /obj/item/paper/scroll/quest/Initialize()
 	. = ..()
 	if(assigned_quest)
-		assigned_quest.quest_scroll = src 
+		assigned_quest.quest_scroll = src
 	update_quest_text()
 	START_PROCESSING(SSprocessing, src)
 
@@ -27,7 +27,7 @@
 		if(!assigned_quest.complete)
 			var/refund = assigned_quest.quest_difficulty == "Easy" ? 5 : \
 						assigned_quest.quest_difficulty == "Medium" ? 10 : 20
-			
+
 			// First try to return to quest giver if available
 			var/mob/giver = assigned_quest.quest_giver_reference?.resolve()
 			if(giver && (giver in SStreasury.bank_accounts))
@@ -41,7 +41,7 @@
 					SStreasury.bank_accounts[receiver] += refund
 					SStreasury.treasury_value -= refund
 					SStreasury.log_entries += "-[refund] from treasury (contract scroll destroyed refund to receiver [receiver.real_name])"
-		
+
 		// Clean up the quest
 		qdel(assigned_quest)
 		assigned_quest = null
@@ -53,7 +53,7 @@
 		icon_state = info ? "[base_icon_state]_info" : "[base_icon_state]"
 	else
 		icon_state = "[base_icon_state]_closed"
-	
+
 
 /obj/item/paper/scroll/quest/process()
 	if(world.time > last_whisper + WHISPER_COOLDOWN)
@@ -163,10 +163,10 @@
 			scroll_text += "<b>Last Seen Location:</b> Reported sighting in [assigned_quest.target_spawn_area] region.<br>"
 		if(QUEST_KILL, QUEST_OUTLAW)
 			scroll_text += "<b>Objective:</b> Slay [assigned_quest.target_amount] [initial(assigned_quest.target_mob_type.name)].<br>"
-			scroll_text += "<b>Last Seen Location:</b> [assigned_quest.target_spawn_area ? "Reported sighting in [assigned_quest.target_spawn_area] region." : "Reported sighting in Azuria region."]<br>"
+			scroll_text += "<b>Last Seen Location:</b> [assigned_quest.target_spawn_area ? "Reported sighting in [assigned_quest.target_spawn_area] region." : "Reported sighting in Rotwood region."]<br>"
 		if(QUEST_CLEAR_OUT)
 			scroll_text += "<b>Objective:</b> Eliminate [assigned_quest.target_amount] [initial(assigned_quest.target_mob_type.name)].<br>"
-			scroll_text += "<b>Infestation Location:</b> [assigned_quest.target_spawn_area ? "Reported sighting in [assigned_quest.target_spawn_area] region." : "Reported infestations in Azuria region."]<br>"
+			scroll_text += "<b>Infestation Location:</b> [assigned_quest.target_spawn_area ? "Reported sighting in [assigned_quest.target_spawn_area] region." : "Reported infestations in Rotwood region."]<br>"
 		if(QUEST_COURIER)
 			scroll_text += "<b>Objective:</b> Deliver [initial(assigned_quest.target_delivery_item.name)] to [initial(assigned_quest.target_delivery_location.name)].<br>"
 			scroll_text += "<b>Delivery Instructions:</b> Package is hidden by a spell in the designated location. Spell will falter once this scroll is brought nearby. Package must remain intact and be delivered directly to the recipient.<br>"
@@ -174,29 +174,29 @@
 			scroll_text += "<b>Destination Description:</b> [initial(assigned_quest.target_delivery_location.name)].<br>" // TODO: brief_descriptor
 
 	scroll_text += "<br><b>Reward:</b> [assigned_quest.reward_amount] mammon upon completion<br>"
-	
+
 	if(assigned_quest.complete)
 		scroll_text += "<br><center><b>CONTRACT COMPLETE</b></center>"
 		scroll_text += "<br><b>Return this scroll to the Notice Board to claim your reward!</b>"
 		scroll_text += "<br><i>Place it on the marked area next to the book.</i>"
 	else
 		scroll_text += "<br><i>The magic in this scroll will update as you progress.</i>"
-	
+
 	info = scroll_text
 	update_icon()
 
 /obj/item/paper/scroll/quest/proc/refresh_compass(mob/user)
 	if(!assigned_quest || assigned_quest.complete)
 		return FALSE
-	
+
 	// Update compass with precise directions
 	update_compass(user)
-	
+
 	// Only update text if we have a valid direction
 	if(last_compass_direction)
 		update_quest_text()
 		return TRUE
-	
+
 	return FALSE
 
 /obj/item/paper/scroll/quest/proc/update_compass(mob/user)

@@ -3,6 +3,7 @@
 	desc = "A legwear made just for the pure aesthetics. Popular in courts and brothels alike."
 	icon = 'modular_hearthstone/icons/obj/items/clothes/stockings.dmi'
 	icon_state = "stockings"
+	slot_flags = ITEM_SLOT_MOUTH
 	resistance_flags = FLAMMABLE
 	obj_flags = CAN_BE_HIT
 	break_sound = 'sound/foley/cloth_rip.ogg'

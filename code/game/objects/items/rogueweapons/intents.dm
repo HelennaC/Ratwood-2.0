@@ -235,6 +235,9 @@
 		mastermob?.vis_contents -= mob_charge_effect
 
 
+/datum/intent/proc/on_mmb(atom/target, mob/living/user, params)
+	return
+
 /datum/intent/use
 	name = "use"
 	icon_state = "inuse"
@@ -247,48 +250,6 @@
 	releasedrain = 0
 	blade_class = BCLASS_PUNCH
 
-/datum/intent/kick
-	name = "kick"
-	candodge = TRUE
-	canparry = TRUE
-	chargetime = 0
-	chargedrain = 0
-	noaa = FALSE
-	swingdelay = 5
-	misscost = 20
-	unarmed = TRUE
-	animname = "kick"
-	pointer = 'icons/effects/mousemice/human_kick.dmi'
-
-/datum/intent/bite
-	name = "bite"
-	candodge = TRUE
-	canparry = TRUE
-	chargedrain = 0
-	chargetime = 0
-	swingdelay = 0
-	unarmed = TRUE
-	noaa = FALSE
-	animname = "bite"
-	attack_verb = list("bites")
-
-/datum/intent/jump
-	name = "jump"
-	candodge = FALSE
-	canparry = FALSE
-	chargedrain = 0
-	chargetime = 0
-	noaa = TRUE
-	pointer = 'icons/effects/mousemice/human_jump.dmi'
-
-/datum/intent/steal
-	name = "steal"
-	candodge = FALSE
-	canparry = FALSE
-	chargedrain = 0
-	chargetime = 0
-	noaa = TRUE
-
 /datum/intent/give
 	name = "give"
 	candodge = FALSE
@@ -297,16 +258,6 @@
 	chargetime = 0
 	noaa = TRUE
 	pointer = 'icons/effects/mousemice/human_give.dmi'
-
-/datum/intent/spell
-	name = "spell"
-	tranged = 1
-	chargedrain = 0
-	chargetime = 0
-	warnie = "aimwarn"
-	warnoffset = 0
-	charge_pointer = 'icons/effects/mousemice/charge/spell_charging.dmi'
-	charged_pointer = 'icons/effects/mousemice/charge/spell_charged.dmi'
 
 /datum/looping_sound/invokegen
 	mid_sounds = list('sound/magic/charging.ogg')
@@ -378,6 +329,7 @@
 	item_d_type = "stab"
 	blade_class = BCLASS_PICK
 	chargetime = 0
+	clickcd = 14 // Just like knife pick!
 	swingdelay = 12
 
 /datum/intent/pick/ranged
@@ -474,6 +426,8 @@
 	intent_intdamage_factor = 0.5
 
 /datum/intent/unarmed/punch/rmb_ranged(atom/target, mob/user)
+	if(user.stat >= UNCONSCIOUS)
+		return
 	if(ismob(target))
 		var/mob/M = target
 		var/list/targetl = list(target)
@@ -516,6 +470,8 @@
 	item_d_type = "blunt"
 
 /datum/intent/unarmed/shove/rmb_ranged(atom/target, mob/user)
+	if(user.stat >= UNCONSCIOUS)
+		return
 	if(ismob(target))
 		var/mob/M = target
 		var/list/targetl = list(target)
@@ -541,6 +497,8 @@
 	item_d_type = "blunt"
 
 /datum/intent/unarmed/grab/rmb_ranged(atom/target, mob/user)
+	if(user.stat >= UNCONSCIOUS)
+		return
 	if(ismob(target))
 		var/mob/M = target
 		var/list/targetl = list(target)
@@ -563,6 +521,8 @@
 	rmb_ranged = TRUE
 
 /datum/intent/unarmed/help/rmb_ranged(atom/target, mob/user)
+	if(user.stat >= UNCONSCIOUS)
+		return
 	if(ismob(target))
 		var/mob/M = target
 		var/list/targetl = list(target)

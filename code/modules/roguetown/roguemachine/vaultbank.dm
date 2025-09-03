@@ -1,6 +1,6 @@
 /obj/structure/roguemachine/vaultbank
 	name = "\improper JAWBANK"
-	desc = "Collects and secures the treasury of the Grand Duchy of Azuria."
+	desc = "Collects and secures the treasury of the Grand Duchy of the vale."
 	icon = 'icons/roguetown/misc/machines.dmi'
 	icon_state = "jawbank"
 	density = TRUE
@@ -11,7 +11,7 @@
 	var/drilling = FALSE
 	var/has_reported = FALSE
 	var/drilltime = 0
-	var/og_treasury 
+	var/og_treasury
 	var/total_extorted = 0
 	var/shaker = FALSE
 	var/whineline = 0
@@ -227,7 +227,7 @@
 			playsound(src, 'sound/misc/jawbankanguish.ogg', 100, FALSE, -1)
 			send_ooc_note("A parasite of the Freefolk is breaking [src]! Location: The Vault", job = list("Grand Duke", "Steward", "Clerk"))
 			has_reported = TRUE
-	
+
 	playsound(src, 'sound/misc/TheDrill.ogg', 50, TRUE)
 	spawn(100) // The time it takes to complete an interval. If you adjust this, please adjust the sound too. It's 'about' perfect at 100. Anything less It'll start overlapping.
 		var/taken = min(rand(5, 20), SStreasury.treasury_value)
@@ -264,10 +264,10 @@
 		qdel(I)
 		message_admins("[usr.key] has applied the Crustacean to [src].")
 		return
-		
+
 	if(istype(I, /obj/item/roguecoin/aalloy))
 		return
-	if(istype(I, /obj/item/roguecoin/inqcoin))	
+	if(istype(I, /obj/item/roguecoin/inqcoin))
 		return
 	if(istype(I, /obj/item/roguecoin))
 		var/value = I.get_real_price()
@@ -280,7 +280,7 @@
 		return
 
 	if (!istype(I, /obj/item/rogueweapon))
-		return	
+		return
 
 	if (I.d_type != BCLASS_BLUNT)
 		return

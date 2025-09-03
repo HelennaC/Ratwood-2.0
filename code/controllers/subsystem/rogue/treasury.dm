@@ -31,7 +31,7 @@ SUBSYSTEM_DEF(treasury)
 	var/treasury_value = 0
 	var/mint_multiplier = 0.8 // 1x is meant to leave a margin after standard 80% collectable. Less than Bathmatron.
 	var/minted = 0
-	var/autoexport_percentage = 0.6 // Percentage above which stockpiles will automatically export  
+	var/autoexport_percentage = 0.6 // Percentage above which stockpiles will automatically export
 	var/list/bank_accounts = list()
 	var/list/noble_incomes = list()
 	var/list/stockpile_datums = list()
@@ -230,12 +230,12 @@ SUBSYSTEM_DEF(treasury)
 	SStreasury.total_export += amt
 	SStreasury.log_to_steward("+[amt] exported [D.name]")
 	if(!silent && amt >= EXPORT_ANNOUNCE_THRESHOLD) //Only announce big spending.
-		scom_announce("Azure Peak exports [D.name] for [amt] mammon.")
+		scom_announce("Rotwood Vale exports [D.name] for [amt] mammon.")
 	D.lower_demand()
 	return amt
 
 /datum/controller/subsystem/treasury/proc/auto_export()
-	var/total_value_exported = 0 
+	var/total_value_exported = 0
 	for(var/datum/roguestock/D in stockpile_datums)
 		if(!D.importexport_amt)
 			continue
@@ -248,7 +248,7 @@ SUBSYSTEM_DEF(treasury)
 			var/exported = do_export(D, TRUE)
 			total_value_exported += exported
 	if(total_value_exported >= EXPORT_ANNOUNCE_THRESHOLD)
-		scom_announce("Azure Peak exports [total_value_exported] mammons of surplus goods.")
+		scom_announce("Rotwood Vale exports [total_value_exported] mammons of surplus goods.")
 
 /datum/controller/subsystem/treasury/proc/remove_person(mob/living/person)
 	noble_incomes -= person

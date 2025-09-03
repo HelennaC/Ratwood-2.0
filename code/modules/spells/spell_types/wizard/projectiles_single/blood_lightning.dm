@@ -22,7 +22,7 @@
 	charging_slowdown = 3
 	chargedloop = /datum/looping_sound/invokegen
 	associated_skill = /datum/skill/magic/blood
-	cost = 6
+	cost = 3
 
 /obj/projectile/magic/bloodlightning
 	name = "blood bolt"
@@ -31,7 +31,8 @@
 	impact_type = null
 	hitscan = TRUE
 	movement_type = UNSTOPPABLE
-	damage = 80
+	damage = 60
+	npc_damage_mult = 2
 	damage_type = BURN
 	nodamage = FALSE
 	speed = 0.3

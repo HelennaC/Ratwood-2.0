@@ -122,8 +122,8 @@ window "outputwindow"
 		background-color = #000000
 		is-default = true
 		border = sunken
-		saved-params = ""
-		command = "say"
+		saved-params = "command"
+		command=""
 
 window "output_legacy"
 	elem "output_legacy"
@@ -214,18 +214,19 @@ window "preferencess_window"
 	elem "preferencess_window"
 		type = MAIN
 		pos = 372,150
-		size = 700x630
+		size = 900x630
 		anchor1 = -1,-1
 		anchor2 = -1,-1
 		is-visible = false
 		statusbar = false
 		can-close = false
-		can-resize = false
+		can-resize = true
+		can_scroll = true
 		icon = 'icons\\tg_32.png'
 	elem "preferences_browser"
 		type = BROWSER
 		pos = 0,0
-		size = 700x630
+		size = 900x630
 		anchor1 = 0,0
 		anchor2 = 75,100
 		saved-params = ""

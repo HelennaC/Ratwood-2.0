@@ -10,7 +10,7 @@
 	mob_traits = list(TRAIT_UNDIVIDED)
 	miracles = list(/obj/effect/proc_holder/spell/targeted/touch/orison			= CLERIC_ORI, // ONLY Lower miracles of other lists. A much more varied utility miracle list, and a much wider selection. Also, our generic miracles(Lesser heal + Divine blast for acolytes) are better. But no specialization makes a lower level list. We're going to exclude Abyssor.
 					/obj/effect/proc_holder/spell/self/astrata_gaze				= CLERIC_T0,
-					/obj/effect/proc_holder/spell/targeted/touch/darkvision/miracle	= CLERIC_T1,
+					/obj/effect/proc_holder/spell/invoked/darkvision/miracle	= CLERIC_T1,
 					/obj/effect/proc_holder/spell/invoked/blood_heal			= CLERIC_T1,
 					/obj/effect/proc_holder/spell/invoked/lesser_heal 			= CLERIC_T1,
 					/obj/effect/proc_holder/spell/invoked/bless_food            = CLERIC_T1,
@@ -63,7 +63,7 @@
 	mob_traits = list(TRAIT_NIGHT_OWL)
 	miracles = list(/obj/effect/proc_holder/spell/targeted/touch/orison			= CLERIC_ORI,
 					/obj/effect/proc_holder/spell/invoked/noc_sight				= CLERIC_T0,
-					/obj/effect/proc_holder/spell/targeted/touch/darkvision/miracle	= CLERIC_T0,
+					/obj/effect/proc_holder/spell/invoked/darkvision/miracle	= CLERIC_T0,
 					/obj/effect/proc_holder/spell/invoked/lesser_heal 			= CLERIC_T1,
 					/obj/effect/proc_holder/spell/invoked/blood_heal			= CLERIC_T1,
 					/obj/effect/proc_holder/spell/invoked/invisibility/miracle	= CLERIC_T1,
@@ -92,8 +92,9 @@
 					/obj/effect/proc_holder/spell/invoked/lesser_heal 			= CLERIC_T1,
 					/obj/effect/proc_holder/spell/invoked/blood_heal			= CLERIC_T1,
 					/obj/effect/proc_holder/spell/targeted/wildshape			= CLERIC_T2,
-					/obj/effect/proc_holder/spell/targeted/conjure_glowshroom	= CLERIC_T3,
+					/obj/effect/proc_holder/spell/targeted/beasttame			= CLERIC_T2,
 					/obj/effect/proc_holder/spell/invoked/wound_heal			= CLERIC_T3,
+					/obj/effect/proc_holder/spell/targeted/conjure_glowshroom	= CLERIC_T3,
 					/obj/effect/proc_holder/spell/self/howl/call_of_the_moon	= CLERIC_T4,
 					/obj/effect/proc_holder/spell/invoked/resurrect/dendor		= CLERIC_T4,
 	)
@@ -164,6 +165,7 @@
 	mob_traits = list(TRAIT_SOUL_EXAMINE, TRAIT_NOSTINK)	//No stink is generic but they deal with dead bodies so.. makes sense, I suppose?
 	miracles = list(/obj/effect/proc_holder/spell/targeted/touch/orison			= CLERIC_ORI,
 					/obj/effect/proc_holder/spell/invoked/necras_sight			= CLERIC_T0,
+					/obj/effect/proc_holder/spell/targeted/burialrite			= CLERIC_T0,
 					/obj/effect/proc_holder/spell/invoked/lesser_heal 			= CLERIC_T1,
 					/obj/effect/proc_holder/spell/invoked/blood_heal			= CLERIC_T1,
 					/obj/effect/proc_holder/spell/invoked/avert					= CLERIC_T1,
@@ -171,6 +173,7 @@
 					/obj/effect/proc_holder/spell/targeted/abrogation			= CLERIC_T2,
 					/obj/effect/proc_holder/spell/invoked/raise_spirits_vengeance = CLERIC_T2,
 					/obj/effect/proc_holder/spell/invoked/wound_heal			= CLERIC_T3,
+					/obj/effect/proc_holder/spell/invoked/speakwithdead		= CLERIC_T3,
 	)
 	confess_lines = list(
 		"ALL SOULS FIND THEIR WAY TO NECRA!",
@@ -352,7 +355,7 @@
 	return FALSE
 
 
-// Dendor - In grove, bog, cross, or ritual chalk 
+// Dendor - In grove, bog, cross, or ritual chalk
 // Yes, he is NOT calling the master cus he's unique. Whole bog is his prayer zone. Druids exist for a reason instead of in the church.
 /datum/patron/divine/dendor/can_pray(mob/living/follower)
 	. = ..()

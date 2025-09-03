@@ -61,20 +61,25 @@
 #define SPAN_DWARF "dwarf"
 #define SPAN_ELF "elf"
 #define SPAN_SAND "sandspeak"
+#define SPAN_SANDWAUK "sandwauk"
 #define SPAN_DELF "delf"
 #define SPAN_HELL "hellspeak"
 #define SPAN_GRENZELHOFTIAN "grenzelhoftian"
 #define SPAN_OTAVAN "otavan"
 #define SPAN_ETRUSCAN "etruscan"
+#define SPAN_ABYSSAL "abyssal"
 #define SPAN_GRONNIC "gronnic"
 #define SPAN_BEAST "beast"
 #define SPAN_ORC "orc"
 #define SPAN_DRACONIC "reptile"
 #define SPAN_KAZENGUNESE "kazengunese"
+#define SPAN_KAZENACCENT "kazenaccent"
 #define SPAN_AAVNIC "aavnic"
 #define SPAN_UNDEAD "undead" //nyi but file found
 #define SPAN_CAT "cat"		 //nyi but file found
 #define SPAN_PULSEDEATH "pulsedeath"
+
+#define SPAN_PATREON_SAY "patreontalk"
 
 //bitflag #defines for return value of the radio() proc.
 #define ITALICS 1

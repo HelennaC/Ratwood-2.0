@@ -818,6 +818,16 @@
 	craftdiff = 5
 	sellprice = 25
 
+/datum/crafting_recipe/roguetown/sewing/winterdress_light
+	name = "cold dress (2 fibers, 2 cloth, 1 silk)"
+	result = list(/obj/item/clothing/suit/roguetown/shirt/dress/winterdress_light)
+	reqs = list(/obj/item/natural/cloth = 2,
+				/obj/item/natural/fibers = 2,
+				/obj/item/natural/silk = 1)
+	tools = list(/obj/item/needle)
+	craftdiff = 3
+	sellprice = 10
+
 /datum/crafting_recipe/roguetown/sewing/skirt
 	name = "skirt (2 fibers, 1 cloth)"
 	result = list(/obj/item/clothing/under/roguetown/skirt)
@@ -1149,6 +1159,18 @@
 	name = "free man's shroud (3 cloth)"
 	result = list(/obj/item/clothing/head/roguetown/menacing/bandit)
 	reqs = list(/obj/item/natural/cloth = 3)
+	
+/datum/crafting_recipe/roguetown/sewing/surgicalbag
+	name = "surgeon's bag (3 fibers, 1 cloth)"
+	result = list(/obj/item/storage/belt/rogue/surgery_bag/empty)
+	reqs = list(/obj/item/natural/cloth = 3,
+				/obj/item/natural/fibers = 1)
+	craftdiff = 4
+
+/datum/crafting_recipe/roguetown/sewing/surgcollar
+	name = "surgeon's collar (1 fibers, 1 cloth)"
+	result = list(/obj/item/clothing/neck/roguetown/collar/surgcollar)
+	reqs = list(/obj/item/natural/cloth = 1, /obj/item/natural/fibers = 1)
 	craftdiff = 1
 
 /datum/crafting_recipe/roguetown/sewing/battleskirt

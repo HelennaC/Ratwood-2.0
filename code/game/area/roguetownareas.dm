@@ -97,6 +97,12 @@ GLOBAL_LIST_INIT(roguetown_areas_typecache, typecacheof(/area/rogue/indoors/town
 	droning_sound_dusk = 'sound/music/area/banditcamp.ogg'
 	droning_sound_night = 'sound/music/area/banditcamp.ogg'
 
+/area/rogue/outdoors/banditcamp/exterior // Only use these around traveltiles - Constantine
+	name = "bandit camp outdoors"
+
+/area/rogue/outdoors/banditcamp/exterior/can_craft_here() //Made to prevent killboxes - Constantine
+	return FALSE
+
 /area/rogue/indoors/shelter
 	icon_state = "shelter"
 	droning_sound = 'sound/music/area/townstreets.ogg'
@@ -132,7 +138,7 @@ GLOBAL_LIST_INIT(roguetown_areas_typecache, typecacheof(/area/rogue/indoors/town
 
 
 /area/rogue/outdoors/rtfield
-	name = "Azure Basin"
+	name = "Rotwood Basin"
 	icon_state = "rtfield"
 	soundenv = 19
 	ambush_times = list("night")
@@ -141,13 +147,14 @@ GLOBAL_LIST_INIT(roguetown_areas_typecache, typecacheof(/area/rogue/indoors/town
 				/mob/living/simple_animal/hostile/retaliate/rogue/wolf = 30,
 				/mob/living/simple_animal/hostile/retaliate/rogue/fox = 30,
 				/mob/living/carbon/human/species/skeleton/npc/supereasy = 30)
-	first_time_text = "AZURE BASIN"
+	first_time_text = "ROTWOOD BASIN"
 	droning_sound = 'sound/music/area/field.ogg'
 	droning_sound_dusk = 'sound/music/area/septimus.ogg'
 	droning_sound_night = 'sound/music/area/sleeping.ogg'
 	converted_type = /area/rogue/indoors/shelter/rtfield
 	deathsight_message = "somewhere in the wilds, next to towering walls"
 	warden_area = TRUE
+	threat_region = THREAT_REGION_AZURE_BASIN
 
 /area/rogue/indoors/shelter/rtfield
 	icon_state = "rtfield"
@@ -288,7 +295,7 @@ GLOBAL_LIST_INIT(roguetown_areas_typecache, typecacheof(/area/rogue/indoors/town
 	droning_sound_dusk = null
 	droning_sound_night = null
 	converted_type = /area/rogue/outdoors/exposed/decap
-	
+
 /area/rogue/outdoors/exposed/decap
 	icon_state = "decap"
 	droning_sound = 'sound/music/area/decap.ogg'
@@ -395,6 +402,12 @@ GLOBAL_LIST_INIT(roguetown_areas_typecache, typecacheof(/area/rogue/indoors/town
 	droning_sound_night = 'sound/music/unholy.ogg'
 	converted_type = /area/rogue/outdoors/dungeon1
 
+/area/rogue/under/cave/inhumen/entrance // Only use these around traveltiles - Constantine
+	name = "inhumen"
+
+/area/rogue/under/cave/inhumen/entrance/can_craft_here() //Made to prevent killboxes - Constantine
+	return FALSE
+
 /area/rogue/under/cave/fishmandungeon //idk what the fish guys are called in lore
 	name = "fishmandungeon"
 	icon_state = "under"
@@ -422,7 +435,7 @@ GLOBAL_LIST_INIT(roguetown_areas_typecache, typecacheof(/area/rogue/indoors/town
 	droning_sound_night = 'sound/music/area/sleeping.ogg'
 	converted_type = /area/rogue/outdoors/exposed/town
 	town_area = TRUE
-	deathsight_message = "the city of Azure Peak and all its bustling souls"
+	deathsight_message = "the city of Rotwood Vale and all its bustling souls"
 
 /area/rogue/outdoors/exposed/town
 	icon_state = "town"
@@ -437,6 +450,12 @@ GLOBAL_LIST_INIT(roguetown_areas_typecache, typecacheof(/area/rogue/indoors/town
 	keep_area = TRUE
 	town_area = TRUE
 
+/area/rogue/outdoors/exposed/town/keep/unbuildable
+	name = "Keep unbuildable"
+
+/area/rogue/outdoors/exposed/town/keep/unbuildable/can_craft_here()
+	return FALSE
+
 /area/rogue/indoors/town/manor
 	name = "Manor"
 	icon_state = "manor"
@@ -444,7 +463,7 @@ GLOBAL_LIST_INIT(roguetown_areas_typecache, typecacheof(/area/rogue/indoors/town
 	droning_sound_dusk = null
 	droning_sound_night = null
 	converted_type = /area/rogue/outdoors/exposed/manorgarri
-	first_time_text = "THE KEEP OF AZURE PEAK"
+	first_time_text = "THE KEEP OF ROTWOOD VALE"
 	keep_area = TRUE
 
 /area/rogue/outdoors/exposed/manorgarri
@@ -584,6 +603,9 @@ GLOBAL_LIST_INIT(roguetown_areas_typecache, typecacheof(/area/rogue/indoors/town
 	name = "dock warehouse import"
 	icon_state = "warehouse"
 
+/area/rogue/indoors/town/warehouse/can_craft_here()
+	return FALSE
+
 /area/rogue/indoors/inq
 	name = "The Inquisition"
 	icon_state = "chapel"
@@ -595,7 +617,8 @@ GLOBAL_LIST_INIT(roguetown_areas_typecache, typecacheof(/area/rogue/indoors/town
 
 /area/rogue/indoors/inq/basement
 	name = "The Inquisition's Basement"
-	icon_state = "chapel"	
+	icon_state = "chapel"
+	ceiling_protected = TRUE
 
 /area/rogue/indoors/town/warehouse/can_craft_here()
 	return FALSE
@@ -603,6 +626,7 @@ GLOBAL_LIST_INIT(roguetown_areas_typecache, typecacheof(/area/rogue/indoors/town
 /area/rogue/indoors/inq/import
 	name = "foreign imports"
 	icon_state = "warehouse"
+	ceiling_protected = TRUE
 
 /area/rogue/indoors/inq/import/can_craft_here()
 	return FALSE
@@ -621,7 +645,7 @@ GLOBAL_LIST_INIT(roguetown_areas_typecache, typecacheof(/area/rogue/indoors/town
 	droning_sound = 'sound/music/area/dwarf.ogg'
 	droning_sound_dusk = null
 	droning_sound_night = null
-	first_time_text = "AZUREAN GUILD OF CRAFT"
+	first_time_text = "VALE GUILD OF CRAFT"
 	converted_type = /area/rogue/outdoors/exposed/dwarf
 
 /area/rogue/outdoors/exposed/dwarf
@@ -640,7 +664,7 @@ GLOBAL_LIST_INIT(roguetown_areas_typecache, typecacheof(/area/rogue/indoors/town
 	droning_sound_dusk = 'sound/music/area/septimus.ogg'
 	droning_sound_night = 'sound/music/area/sleeping.ogg'
 	converted_type = /area/rogue/indoors/shelter/town
-	first_time_text = "THE CITY OF AZURE PEAK"
+	first_time_text = "THE CITY OF ROTWOOD VALE"
 	town_area = TRUE
 
 /area/rogue/indoors/shelter/town
@@ -777,6 +801,7 @@ GLOBAL_LIST_INIT(roguetown_areas_typecache, typecacheof(/area/rogue/indoors/town
 	icon_state = "basement"
 	keep_area = TRUE
 	town_area = TRUE
+	ceiling_protected = TRUE
 
 /area/rogue/outdoors/exposed/under/basement
 	icon_state = "basement"

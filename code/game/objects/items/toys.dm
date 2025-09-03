@@ -443,7 +443,7 @@
 	icon_state = "deck_[deckstyle]_full"
 	for(var/suit in list("Pentacles", "Swords", "Wands", "Cups"))
 		cards += "Ace of [suit]"
-		for(var/i in 2 to 10)
+		for(var/i in 1 to 10)
 			cards += "[i] of [suit]"
 		for(var/person in list("Page", "Knight", "Queen", "King"))
 			cards += "[person] of [suit]"

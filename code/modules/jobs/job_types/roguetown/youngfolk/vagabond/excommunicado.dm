@@ -1,6 +1,6 @@
 /datum/advclass/vagabond_excommunicated
 	name = "Excommunicated"
-	tutorial = "The Church has found you bereft of mercy, and you walk the lands of Azure with nothing but the tattered shreds of the faith you cling to."
+	tutorial = "The Church has found you bereft of mercy, and you walk the lands of the vale with nothing but the tattered shreds of the faith you cling to."
 	allowed_sexes = list(MALE, FEMALE)
 	allowed_races = RACES_ALL_KINDS
 	outfit = /datum/outfit/job/roguetown/vagabond/excommunicated
@@ -21,7 +21,7 @@
 	if(prob(33))
 		cloak = /obj/item/clothing/cloak/half/brown
 		gloves = /obj/item/clothing/gloves/roguetown/fingerless
-	
+
 	r_hand = /obj/item/rogueweapon/woodstaff
 
 	if (H.mind)

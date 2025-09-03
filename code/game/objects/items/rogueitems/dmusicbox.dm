@@ -1,10 +1,10 @@
 
 /datum/looping_sound/dmusloop
 	mid_sounds = list()
-	mid_length = 2400
+	mid_length = 12000 // 20 minutes to force a loop. File size determines server load, not audio length. Low bitrate .ogg files can run long and have their uses as ambient sound.
 	volume = 100
 	falloff = 2
-	extra_range = 5
+	extra_range = 10	// Up from 5, fill a room.
 	var/stress2give = /datum/stressevent/music
 	persistent_loop = TRUE
 	channel = CHANNEL_CMUSIC

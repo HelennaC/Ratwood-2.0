@@ -26,4 +26,4 @@
 	nodismemsleeves = TRUE
 	flags_inv = HIDEBOOB|HIDECROTCH
 	grid_width = 64
-	grid_height = 96
+	grid_height = 64

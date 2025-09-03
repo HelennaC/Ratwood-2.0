@@ -51,7 +51,8 @@
 	H.change_stat("fortune", 2)
 	ADD_TRAIT(H, TRAIT_MEDIUMARMOR, TRAIT_GENERIC)
 	ADD_TRAIT(H, TRAIT_HEAVYARMOR, TRAIT_GENERIC)
-	ADD_TRAIT(H, TRAIT_NOBLE, TRAIT_GENERIC) //hey buddy you hear about roleplaying
+	ADD_TRAIT(H, TRAIT_DISGRACED_NOBLE, TRAIT_GENERIC) //hey buddy you hear about roleplaying
+	H.dna.species.soundpack_m = new /datum/voicepack/male/knight()	
 
 	if(!istype(H.patron, /datum/patron/inhumen/matthios))
 		var/inputty = input(H, "Would you like to change your patron to Matthios?", "The Transactor calls", "No") as anything in list("Yes", "No")

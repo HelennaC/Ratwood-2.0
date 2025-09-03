@@ -12,8 +12,8 @@
 
 	allowed_races = RACES_ALL_KINDS
 
-	tutorial = "You are the leader of the Azure Peak Guild of Crafts. You represents the interests of all of the craftsmen underneath you - including the Tailor\
-	the Blacksmiths, the Artificers and the Architects. Other townspeople may look to you for guidance, but they are not under your control. You are an experienced smith and artificer, and can do their work easily. Protect the craftsmen's interests."  
+	tutorial = "You are the leader of the Rotwood Vale Guild of Crafts. You represents the interests of all of the craftsmen underneath you - including the Tailor\
+	the Blacksmiths, the Artificers and the Architects. Other townspeople may look to you for guidance, but they are not under your control. You are an experienced smith and artificer, and can do their work easily. Protect the craftsmen's interests."
 
 	outfit = /datum/outfit/job/roguetown/guildmaster
 	selection_color = JCOLOR_YEOMAN
@@ -30,7 +30,7 @@
 	head = /obj/item/clothing/head/roguetown/chaperon/noble/guildmaster
 	gloves = /obj/item/clothing/gloves/roguetown/angle/grenzelgloves/blacksmith
 	if(H.mind)
-		// Skillset is a combo of Artificer + Blacksmith with Labor Skills. 
+		// Skillset is a combo of Artificer + Blacksmith with Labor Skills.
 		// And Tailor / Leathercrafting
 		H.verbs += /mob/living/carbon/human/proc/guild_announcement
 		H.adjust_skillrank(/datum/skill/combat/axes, 3, TRUE)
@@ -47,7 +47,7 @@
 		H.adjust_skillrank(/datum/skill/craft/weaponsmithing, 5, TRUE)
 		H.adjust_skillrank(/datum/skill/craft/smelting, 4, TRUE)
 		H.adjust_skillrank(/datum/skill/craft/engineering, 3, TRUE) // 2 Engineering, let them make more artificers stuffs
-		H.adjust_skillrank(/datum/skill/misc/sewing, 2, TRUE) // Worse than the real tailor, so can't steal their job right away 
+		H.adjust_skillrank(/datum/skill/misc/sewing, 2, TRUE) // Worse than the real tailor, so can't steal their job right away
 		H.adjust_skillrank(/datum/skill/craft/tanning, 2, TRUE)
 		H.adjust_skillrank(/datum/skill/misc/lockpicking, 4, TRUE)
 		H.adjust_skillrank(/datum/skill/misc/ceramics, 2, TRUE)
@@ -58,7 +58,7 @@
 			H.adjust_skillrank(/datum/skill/craft/armorsmithing, 1, TRUE)
 			H.adjust_skillrank(/datum/skill/craft/weaponsmithing, 1, TRUE)
 			H.adjust_skillrank(/datum/skill/craft/smelting, 1, TRUE)
-			H.adjust_skillrank(/datum/skill/misc/sewing, 1, TRUE) // Worse than the real tailor, so can't steal their job right away 
+			H.adjust_skillrank(/datum/skill/misc/sewing, 1, TRUE) // Worse than the real tailor, so can't steal their job right away
 			H.adjust_skillrank(/datum/skill/craft/tanning, 1, TRUE)
 		armor = /obj/item/clothing/suit/roguetown/armor/leather/jacket/artijacket
 		pants = /obj/item/clothing/under/roguetown/trou/artipants
@@ -84,7 +84,7 @@
 	set category = "GUILDMASTER"
 	if(stat)
 		return
-	var/announcementinput = input("Bellow to the Peaks", "Make an Announcement") as text|null
+	var/announcementinput = input("Bellow to the vale", "Make an Announcement") as text|null
 	if(announcementinput)
 		if(!src.can_speak_vocal())
 			to_chat(src,span_warning("I can't speak!"))

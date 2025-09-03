@@ -4,6 +4,7 @@
 	color = null
 	icon_state = "priesthead"
 	item_state = "priesthead"
+	resistance_flags = FIRE_PROOF | ACID_PROOF
 	flags_inv = HIDEEARS|HIDEFACE|HIDEHAIR|HIDEFACIALHAIR|HIDESNOUT
 	dynamic_hair_suffix = ""
 	sewrepair = TRUE

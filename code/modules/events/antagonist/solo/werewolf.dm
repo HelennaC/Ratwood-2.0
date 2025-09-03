@@ -9,7 +9,7 @@
 	antag_flag = ROLE_WEREWOLF
 	shared_occurence_type = SHARED_HIGH_THREAT
 
-	denominator = 80
+	denominator = 50
 
 	base_antags = 1
 	maximum_antags = 2
@@ -24,27 +24,25 @@
 	restricted_roles = list(
 		"Grand Duke",
 		"Grand Duchess",
+		"Knight Captain",
 		"Consort",
-		"Dungeoneer",
 		"Sergeant",
-		"Men-at-arms",
+		"Men-at-Arms",
+		"Woman-at-Arms",
 		"Marshal",
 		"Merchant",
 		"Bishop",
 		"Acolyte",
 		"Martyr",
 		"Templar",
-		"Councillor",
 		"Bandit",
 		"Prince",
 		"Princess",
 		"Hand",
-		"Steward",
-		"Court Physician",
-		"Town Elder",
 		"Captain",
 		"Archivist",
 		"Knight",
+		"Dame",
 		"Court Magician",
 		"Inquisitor",
 		"Orthodoxist",

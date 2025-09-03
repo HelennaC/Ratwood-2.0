@@ -56,6 +56,32 @@
 					legwear_socks.forceMove(get_turf(src))
 					src.put_in_hands(legwear_socks)
 					legwear_socks = null
+	else if(HAS_TRAIT(src, TRAIT_PONYGIRL_RIDEABLE))
+		var/mob/living/livinguser = user
+		user.visible_message(span_notice("[livinguser] is trying to mount [src]..."))
+		if(!do_after(livinguser, 15, target = src))
+			return
+		if(!istype(livinguser))
+			return
+		if(livinguser.incapacitated())
+			return
+		if(livinguser.restrained())
+			return
+		if(livinguser.mobility_flags & (MOBILITY_MOVE|MOBILITY_STAND) != (MOBILITY_MOVE|MOBILITY_STAND))
+			return
+		if(!can_buckle)
+			return
+		if(buckled_mobs?.len)
+			return
+		if(!buckle_mob(user, TRUE, FALSE))
+			return
+		var/datum/component/riding/human/riding_datum = LoadComponent(/datum/component/riding/human)
+		riding_datum.vehicle_move_delay = 4
+		if(user.mind)
+			var/riding_skill = user.get_skill_level(/datum/skill/misc/riding)
+			if(riding_skill)
+				riding_datum.vehicle_move_delay = max(1, 3 - (riding_skill * 0.2))
+		return TRUE
 #endif
 
 /mob/living/carbon/human/Initialize()
@@ -302,18 +328,6 @@
 /mob/living/carbon/human/proc/canUseHUD()
 	return (mobility_flags & MOBILITY_USE)
 
-///Checking if the unit can bite
-/mob/living/carbon/human/proc/can_bite()
-	//if(mouth?.muteinmouth && mouth?.type != /obj/item/grabbing/bite) //This one allows continued first biting rather than having to chew
-	if(mouth?.muteinmouth)
-		return FALSE
-	for(var/obj/item/grabbing/grab in grabbedby) //Grabbed by the mouth
-		if(grab.sublimb_grabbed == BODY_ZONE_PRECISE_MOUTH)
-			return FALSE
-			
-	return TRUE
-
-
 /mob/living/carbon/human/can_inject(mob/user, error_msg, target_zone, penetrate_thick = 0)
 	. = 1 // Default to returning true.
 	if(user && !target_zone)
@@ -337,7 +351,7 @@
 		// Might need re-wording.
 		to_chat(user, span_alert("There is no exposed flesh or thin material [above_neck(target_zone) ? "on [p_their()] head" : "on [p_their()] body"]."))
 
-//Used for new human mobs created by cloning/goleming/podding
+//Used for new human mobs created by cloning/constructing/podding
 /mob/living/carbon/human/proc/set_cloned_appearance()
 	if(gender == MALE)
 		facial_hairstyle = "Full Beard"
@@ -450,6 +464,18 @@
 			R.fields["name"] = newname
 
 /mob/living/carbon/human/get_total_tint()
+	if(isdullahan(src))
+		var/datum/species/dullahan/species = dna.species
+		var/obj/item/bodypart/head/dullahan/user_head = species.my_head
+		if(species.headless && user_head)
+			var/obj/item/organ/dullahan_vision/vision = getorganslot(ORGAN_SLOT_HUD)
+
+			if(vision && vision.viewing_head && user_head.eyes)
+				. = user_head.eyes.tint
+			else
+				. = INFINITY
+			return
+
 	. = ..()
 	if(glasses)
 		. += glasses.tint
@@ -719,22 +745,27 @@
 			admin_ticket_log("[key_name_admin(usr)] has modified the bodyparts of [src] to [result]")
 			set_species(newtype)
 
-/mob/living/carbon/human/MouseDrop_T(mob/living/target, mob/living/user)
-	if(pulling == target && stat == CONSCIOUS)
-		//If they dragged themselves and we're currently aggressively grabbing them try to piggyback (not on cmode)
-		if(user == target && can_piggyback(target))
-			if(cmode)
-				to_chat(target, span_warning("[src] won't let you on!"))
-				return FALSE
-			piggyback(target)
-			return TRUE
-		//If you dragged them to you and you're aggressively grabbing try to carry them
-		else if(user != target && can_be_firemanned(target))
-			var/obj/G = get_active_held_item()
-			if(G)
-				if(istype(G, /obj/item/grabbing))
-					fireman_carry(target)
-					return TRUE
+/mob/living/carbon/human/MouseDrop_T(atom/dragged, mob/living/user)
+	if(istype(dragged, /mob/living))
+		var/mob/living/target = dragged
+		if(pulling == target && stat == CONSCIOUS)
+			//If they dragged themselves and we're currently aggressively grabbing them try to piggyback (not on cmode)
+			if(user == target && can_piggyback(target))
+				if(cmode)
+					to_chat(target, span_warning("[src] won't let you on!"))
+					return FALSE
+				piggyback(target)
+				return TRUE
+			//If you dragged them to you and you're aggressively grabbing try to carry them
+			else if(user != target && can_be_firemanned(target))
+				var/obj/G = get_active_held_item()
+				if(G)
+					if(istype(G, /obj/item/grabbing))
+						fireman_carry(target)
+						return TRUE
+	else if(istype(dragged, /obj/item/bodypart/head/dullahan/))
+		var/obj/item/bodypart/head/dullahan/item_head = dragged
+		item_head.show_inv(user)
 	. = ..()
 
 //src is the user that will be carrying, target is the mob to be carried

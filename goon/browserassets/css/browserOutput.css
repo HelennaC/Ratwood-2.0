@@ -34,11 +34,68 @@ body {
 @font-face {
 	font-family: "Honoka Mincho";
 	src: url("HonokaMincho.ttf");
+
+@font-face { 
+  font-family: "Dauphin"; 
+  src: url('elf.ttf'); 
+}
+
+@font-face { 
+  font-family: "MasonAlternate"; 
+  src: url('dwarf.ttf'); 
+}
+
+@font-face { 
+  font-family: "Furqan"; 
+  src: url('sand.ttf'); 
+}
+
+@font-face {
+  font-family: "Persian";
+  src: url('algaib.otf');
+}
+
+@font-face { 
+  font-family: "Xaphan"; 
+  src: url('hell.ttf'); 
+}
+
+@font-face { 
+  font-family: "FriskyVampire"; 
+  src: url('undead.ttf'); 
+}
+
+@font-face { 
+  font-family: "Thief by The Riddler"; 
+  src: url('orc.ttf'); 
+}
+
+@font-face { 
+  font-family: "Kingthings Petrock"; 
+  src: url('draconic.ttf'); 
+}
+
+@font-face { 
+  font-family: "Emperialisme"; 
+  src: url('grenzelhoftian.ttf'); 
 }
 
 @font-face {
 	font-family: "Dauphin";
 	src: url("elf.ttf");
+
+  font-family: "Yuji Boku";
+  src: url('kazengunese.ttf');
+}
+
+@font-face {
+  font-family: "Geishta";
+  src: url('kazengunaccent.ttf');
+}
+ 
+@font-face { 
+  font-family: "Notredame"; 
+  src: url('otavan.ttf'); 
 }
 
 @font-face {
@@ -879,6 +936,29 @@ h2.alert {
 	color: #42ff20;
 }
 
+.orator					{font-family: "Project Sans", "Pterra"; font-size: 100%;}
+.sandwauk 				{font-family: "Persian", "Pterra"; font-size: 140%; letter-spacing: 2px;}
+.human 					{font-family: "Honoka Mincho", "Pterra";}
+.elf					{font-family: "Dauphin", cursive, "Pterra";}
+.dwarf 					{font-family: "MasonAlternate", "Pterra";} 
+.sandspeak 				{font-family: "Furqan", "Pterra";}
+.delf 					{font-family: "Dauphin", "Pterra";}
+.hellspeak				{font-family: "Xaphan", "Pterra"; font-size: 110%}
+.undead					{font-family: "FriskyVampire", "Pterra";}
+.orc					{font-family: "Thief by The Riddler", Pterra;}
+.beast					{font-family: "Thief by The Riddler", Pterra;}
+.reptile				{font-family: "Kingthings Petrock", Pterra; font-size: 120%;}
+.grenzelhoftian			{font-family: "Emperialisme", "Pterra"; font-size: 120%;}
+.kazengunese			{font-family: "Yuji Boku", Pterra;}
+.kazenaccent			{font-family: "Geishta", "Pterra"; font-size: 200%;}
+.orc					{font-family: "Thief by The Riddler", "Pterra";}
+.beast					{font-family: "Thief by The Riddler", "Pterra";}
+.reptile				{font-family: "Kingthings Petrock", "Pterra"; font-size: 120%;}
+.otavan					{font-family: "Notredame", "Pterra"; font-size: 200%;}
+.etruscan				{font-family: "Feronia", "Pterra"; font-size: 100%;}
+.gronnic				{font-family: "Jorvik Informal", "Pterra"; font-size: 100%;}
+.aavnic					{font-family: "Romeodn", "Pterra"; font-size: 100%;}
+
 .command_headset {
 	font-weight: bold;
 	font-size: 3;
@@ -1012,6 +1092,15 @@ h2.alert {
 	color: #d146f5;
 	font-size: 75%;
 }
+.aphrodisiac {
+	color: #d146f5;
+	font-size: 125%;
+}
+
+.patreontalk {
+	color: #ff7a05;
+} /* TODO - CHANGE THIS TO THE DESIRED COLOR!!!! */
+
 /*
 @keyframes hypnocolor {
 	0%		{color: #202020;}

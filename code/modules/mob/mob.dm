@@ -480,7 +480,7 @@ GLOBAL_VAR_INIT(mobids, 1)
 		to_chat(src, span_warning("Something is there but I can't see it!"))
 		return
 
-	if(isliving(src))
+	if(isliving(src) && src.m_intent != MOVE_INTENT_SNEAK && src.stat != DEAD)
 		var/message = "[src] looks at"
 		var/target = "\the [A]"
 		if(!isturf(A))
@@ -834,6 +834,7 @@ GLOBAL_VAR_INIT(mobids, 1)
 			stat(null, "TIME DILATION: [round(SStime_track.time_dilation_current,1)]% AVG:([round(SStime_track.time_dilation_avg_fast,1)]%, [round(SStime_track.time_dilation_avg,1)]%, [round(SStime_track.time_dilation_avg_slow,1)]%)")
 			if(check_rights(R_ADMIN,0))
 				stat(null, SSmigrants.get_status_line())
+				stat(null, "Player count: [GLOB.clients.len]")
 
 	if(client)
 		if(statpanel("RoundInfo"))

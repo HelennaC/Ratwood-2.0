@@ -2,18 +2,25 @@
 	name = "Sacred Flame"
 	desc = "Deals damage and ignites target, Deals extra damage to undead."
 	overlay_state = "sacredflame"
+	sound = 'sound/magic/bless.ogg'
 	req_items = list(/obj/item/clothing/neck/roguetown/psicross)
 	associated_skill = /datum/skill/magic/holy
 	antimagic_allowed = TRUE
-	recharge_time = 25 SECONDS
+	recharge_time = 15 SECONDS
 	miracle = TRUE
-	devotion_cost = 40
-	projectile_type = /obj/projectile/magic/lightning/astratablast
+	devotion_cost = 100
+	projectile_type = /obj/projectile/magic/astratablast
 
-/obj/projectile/magic/lightning/astratablast
-	damage = 10 
+
+/obj/projectile/magic/astratablast
+	damage = 10
 	name = "ray of holy fire"
+	nodamage = FALSE
 	damage_type = BURN
+	speed = 0.3
+	muzzle_type = null
+	impact_type = null
+	hitscan = TRUE
 	flag = "magic"
 	light_color = "#a98107"
 	light_outer_range = 7
@@ -21,21 +28,25 @@
 	var/fuck_that_guy_multiplier = 2.5
 	var/biotype_we_look_for = MOB_UNDEAD
 
-/obj/projectile/magic/lightning/astratablast/on_hit(target)
-	if(!ismob(target))
-		return FALSE
-	var/mob/living/M = target
-	if(M.anti_magic_check())
-		visible_message(span_warning("[src] fizzles on contact with [target]!"))
-		playsound(get_turf(target), 'sound/magic/magic_nulled.ogg', 100)
-		qdel(src)
-		return BULLET_ACT_BLOCK
-	if(M.mob_biotypes & biotype_we_look_for || istype(M, /mob/living/simple_animal/hostile/rogue/skeleton))
-		damage *= fuck_that_guy_multiplier
-	M.adjust_fire_stacks(4)
-	M.IgniteMob()
-	visible_message(span_warning("[src] ignites [target] in holy flame!"))
-	return TRUE
+/obj/projectile/magic/astratablast/on_hit(target)
+	. = ..()
+	if(ismob(target))
+		var/mob/living/M = target
+		if(M.anti_magic_check())
+			visible_message(span_warning("[src] fizzles on contact with [target]!"))
+			playsound(get_turf(target), 'sound/magic/magic_nulled.ogg', 100)
+			qdel(src)
+			return BULLET_ACT_BLOCK
+		if(M.mob_biotypes & biotype_we_look_for || istype(M, /mob/living/simple_animal/hostile/rogue/skeleton))
+			damage *= fuck_that_guy_multiplier
+			M.adjust_fire_stacks(10) //4 pats to put it out
+			visible_message(span_warning("[target] erupts in flame upon being struck by [src]!"))
+			M.IgniteMob()
+		else
+			M.adjust_fire_stacks(4) //2 pats to put it out
+			visible_message(span_warning("[src] ignites [target]!"))
+			M.IgniteMob()
+	return FALSE
 
 /obj/effect/proc_holder/spell/invoked/ignition
 	name = "Ignition"
@@ -56,7 +67,7 @@
 	devotion_cost = 10
 
 /obj/effect/proc_holder/spell/invoked/ignition/cast(list/targets, mob/user = usr)
-	..()
+	. = ..()
 	// Spell interaction with ignitable objects (burn wooden things, light torches up)
 	if(isobj(targets[1]))
 		var/obj/O = targets[1]

@@ -119,6 +119,8 @@
 	var/is_legacy = FALSE
 	var/received_resident_key = FALSE
 
+	var/nsfw_headshot_link = null
+
 	possible_rmb_intents = list(/datum/rmb_intent/feint,\
 	/datum/rmb_intent/aimed,\
 	/datum/rmb_intent/strong,\
@@ -138,3 +140,8 @@
 
 	/// Whether our job title is adaptive to our skills.
 	var/adaptive_name
+	
+	// adds a flag that if we were skeletonized not because we are super dead and rotted, our face can be shown
+	var/ritual_skeletonization = FALSE // ritualcircles.dm path of rituos, prevents the ritual target's name always being unknown ingame. used in human_helpers.dm if( !O || (HAS_TRAIT(src, TRAIT_DISFIGURED)) || !real_name || (O.skeletonized && !ritual_skeletonization && !mind?.has_antag_datum(/datum/antagonist/lich)))
+
+	var/already_converted_once = FALSE // ritualcircles.dm , used to make it so players can't switch around between inhumen gods to stack buffs with conversion rites

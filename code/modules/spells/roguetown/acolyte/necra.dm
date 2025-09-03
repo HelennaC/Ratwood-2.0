@@ -99,7 +99,7 @@
 	charging_slowdown = 1
 	releasedrain = 20
 	chargedrain = 0
-	overlay_state = "speakwithdead"
+	overlay_state = "deathdoor"
 	chargetime = 2 SECONDS
 	chargedloop = null
 	sound = 'sound/misc/deadbell.ogg'
@@ -134,7 +134,7 @@
 	name = "underworld portal"
 	desc = null // see examine
 	icon = 'icons/roguetown/misc/structure.dmi'
-	icon_state = "shitportal" //get a better sprite for this
+	icon_state = "underworldportal"
 	max_integrity = 50
 	move_resist = MOVE_FORCE_EXTREMELY_STRONG
 	anchored = TRUE
@@ -299,12 +299,126 @@
 		return
 	spitout_mob(user)
 
+// Speak with dead
+
+/obj/effect/proc_holder/spell/invoked/speakwithdead
+    name = "Speak with Dead"
+    range = 5
+    overlay_state = "speakwithdead"
+    releasedrain = 30
+    recharge_time = 30 SECONDS
+    req_items = list(/obj/item/clothing/neck/roguetown/psicross)
+    sound = 'sound/magic/churn.ogg'
+    associated_skill = /datum/skill/magic/holy
+    invocations = list("The echoes of the departed stir, speak, O fallen one.")
+    invocation_type = "whisper"
+    miracle = TRUE
+    devotion_cost = 30
+
+/obj/effect/proc_holder/spell/invoked/speakwithdead/cast(list/targets, mob/user = usr)
+    if(!targets || !length(targets))
+        to_chat(user, "<font color='red'>To perform a miracle, you are supposed to stay next to their fallen body. If there no soul in the body, there will be no responce.</font>")
+        return FALSE
+
+    var/mob/living/target = targets[1]
+
+    if(isliving(target) && target.stat == DEAD)
+        return speakwithdead(user, target)
+    else
+        to_chat(user, "<font color='red'>They are not dead. Yet.</font>")
+        return FALSE
+
+/proc/speakwithdead(mob/user, mob/living/target)
+    if(target.stat == DEAD && target.mind)
+        var/message = input(user, "You speak to the spirit of [target.real_name]. What will you say?", "Speak with the Dead") as text|null
+
+        if(message)
+            if(target.mind.current)
+                to_chat(target.mind.current, "<span style='color:gold'><b>[user.real_name]</b> says: \"[message]\"</span>")
+
+            var/mob/dead/observer/ghost = null
+
+            for (var/mob/dead/observer/G in world)
+                if (G.mind == target.mind)
+                    ghost = G
+                    break
+
+            if (!ghost && target.mind && target.mind.key)
+                var/expected_ckey = ckey(target.mind.key)
+                for (var/mob/dead/observer/G2 in world)
+                    if (G2.client && ckey(G2.key) == expected_ckey)
+                        ghost = G2
+                        break
+
+            if (ghost && ghost != target.mind.current)
+                to_chat(ghost, "<span style='color:gold'><b>[user.real_name]</b> says: \"[message]\"</span>")
+
+            to_chat(user, "<span style='color:gold'>You say to the spirit: \"[message]\"</span>")
+
+            var/mob/replier = null
+            if (ghost && ghost.client)
+                replier = ghost
+            else if (target.mind.current && target.mind.current.client)
+                replier = target.mind.current
+
+            if(replier)
+                var/spirit_message = input(replier, "An acolyte of Necra named [user.real_name] seeks your attention. What is your reply?", "Spirit's Response") as text|null
+                if(spirit_message)
+                    to_chat(user, "<span style='color:silver'><i>The spirit whispers:</i> \"[spirit_message]\"</span>")
+                else
+                    to_chat(user, "<span style='color:#aaaaaa'><i>The spirit chooses to remain silent...</i></span>")
+            else
+                to_chat(user, "<span style='color:#aaaaaa'><i>The spirit cannot answer right now...</i></span>")
+        else
+            to_chat(user, "<span style='color:#aaaaaa'><i>You choose not to speak.</i></span>")
+    else
+        to_chat(user, "<span style='color:#aaaaaa'><i>No spirit answers your call.</i></span>")
+
+// BODY INTO COIN
+
+/obj/effect/proc_holder/spell/invoked/fieldburials
+	name = "Collect Coins"
+	overlay_state = "consecrateburial"
+	antimagic_allowed = TRUE
+	devotion_cost = 10
+	miracle = TRUE
+	invocation_type = "whisper"
+
+/obj/effect/proc_holder/spell/invoked/fieldburials/cast(list/targets, mob/living/user)
+    . = ..()
+
+    if(!isliving(targets[1]))
+        revert_cast()
+        return FALSE
+
+    var/mob/living/target = targets[1]
+    if(target.stat < DEAD)
+        to_chat(user, span_warning("They're still alive!"))
+        revert_cast()
+        return FALSE
+
+    if(world.time <= target.mob_timers["lastdied"] + 15 MINUTES)
+        to_chat(user, span_warning("The body is too fresh for the rite."))
+        revert_cast()
+        return FALSE
+
+    var/obj/item/roguecoin/silver/C = new(get_turf(target))
+    C.pixel_x = rand(-6, 6)
+    C.pixel_y = rand(-6, 6)
+
+    to_chat(user, span_notice("You gather coins from [target.real_name]'s remains."))
+    to_chat(target, span_danger("Your worldly wealth slips away with the rite..."))
+
+    qdel(target)
+
+    return TRUE
 
 /*
-	SOUL SPEAK
+	SOUL SPEAK OLD LEGACY
+	Not used anymore, but kept for reference.
 */
 
-
+/*
 /obj/effect/proc_holder/spell/targeted/soulspeak
 	name = "Speak with Soul"
 	range = 5
@@ -382,4 +496,4 @@
 	soul.fully_heal(FALSE)
 	soul.invisibility = initial(soul.invisibility)
 	soul.status_flags &= ~GODMODE
-	soul.density = initial(soul.density)
+	soul.density = initial(soul.density) */

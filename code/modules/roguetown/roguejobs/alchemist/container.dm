@@ -1,4 +1,3 @@
-
 /obj/item/reagent_containers/glass/bottle/rogue/healthpot
 	list_reagents = list(/datum/reagent/medicine/healthpot = 48)
 
@@ -265,3 +264,7 @@
 /obj/item/reagent_containers/glass/bottle/claybottle/whitewine
 	list_reagents = list(/datum/reagent/consumable/ethanol/whitewine = 65)
 	desc = "A bottle with the Otavan Merchant Guild cork-seal. This one appears to be labelled as a sweet wine from the colder northern regions."
+
+/obj/item/reagent_containers/glass/bottle/rogue/emberwine
+	list_reagents = list(/datum/reagent/consumable/ethanol/beer/emberwine = 24)
+	desc = "A bottle with an unmarked, tannin-tinted cork-seal. Zybantu red or another such cheap wine, in all likelihood."

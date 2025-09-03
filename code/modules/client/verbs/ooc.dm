@@ -6,7 +6,7 @@ GLOBAL_VAR_INIT(normal_ooc_colour, "#002eb8")
 /client/verb/ooc(msg as text)
 	set name = "OOC" //Gave this shit a shorter name so you only have to time out "ooc" rather than "ooc message" to use it --NeoFite
 	set category = "OOC"
-	set hidden = 1
+
 	if(GLOB.say_disabled)	//This is here to try to identify lag problems
 		to_chat(usr, span_danger("Speech is currently admin-disabled."))
 		return
@@ -48,7 +48,7 @@ GLOBAL_VAR_INIT(normal_ooc_colour, "#002eb8")
 	if(!msg)
 		return
 
-	//msg = emoji_parse(msg)
+	msg = emoji_parse(msg)
 
 
 	if(!holder)
@@ -67,8 +67,8 @@ GLOBAL_VAR_INIT(normal_ooc_colour, "#002eb8")
 	mob.log_talk(raw_msg, LOG_OOC)
 
 	var/keyname = key
-	/*if(ckey in GLOB.anonymize)
-		keyname = get_fake_key(ckey)*/
+	if(ckey in GLOB.anonymize)
+		keyname = get_fake_key(ckey)
 //	if(prefs.unlock_content)
 //		if(prefs.toggles & MEMBER_PUBLIC)
 //			keyname = "<font color='[prefs.ooccolor ? prefs.ooccolor : GLOB.normal_ooc_colour]'>[icon2html('icons/member_content.dmi', world, "blag")][keyname]</font>"
@@ -82,10 +82,11 @@ GLOBAL_VAR_INIT(normal_ooc_colour, "#002eb8")
 	var/msg_to_send = ""
 
 	for(var/client/C in GLOB.clients)
+		var/real_key = C.holder ? "([key])" : ""
 		if(C.prefs.chat_toggles & CHAT_OOC)
-			msg_to_send = "<font color='[color2use]'><EM>[keyname]:</EM></font> <font color='[chat_color]'><span class='message linkify'>[msg]</span></font>"
+			msg_to_send = "<font color='[color2use]'><EM>[keyname][real_key]:</EM></font> <font color='[chat_color]'><span class='message linkify'>[msg]</span></font>"
 			if(holder)
-				msg_to_send = "<font color='[color2use]'><EM>[keyname]:</EM></font> <font color='#4972bc'><span class='message linkify'>[msg]</span></font>"
+				msg_to_send = "<font color='[color2use]'><EM>[keyname][real_key]:</EM></font> <font color='#4972bc'><span class='message linkify'>[msg]</span></font>"
 			to_chat(C, msg_to_send)
 
 //				if(!holder.fakekey || C.holder)
@@ -150,7 +151,7 @@ GLOBAL_VAR_INIT(normal_ooc_colour, "#002eb8")
 	if(!msg)
 		return
 
-	//msg = emoji_parse(msg)
+	msg = emoji_parse(msg)
 
 
 	if(!holder)
@@ -169,8 +170,8 @@ GLOBAL_VAR_INIT(normal_ooc_colour, "#002eb8")
 	mob.log_talk(raw_msg, LOG_OOC)
 
 	var/keyname = key
-	/*if(ckey in GLOB.anonymize)
-		keyname = get_fake_key(ckey)*/
+	if(ckey in GLOB.anonymize)
+		keyname = get_fake_key(ckey)
 //	if(prefs.unlock_content)
 //		if(prefs.toggles & MEMBER_PUBLIC)
 //			keyname = "<font color='[prefs.ooccolor ? prefs.ooccolor : GLOB.normal_ooc_colour]'>[icon2html('icons/member_content.dmi', world, "blag")][keyname]</font>"
@@ -184,13 +185,14 @@ GLOBAL_VAR_INIT(normal_ooc_colour, "#002eb8")
 	var/msg_to_send = ""
 
 	for(var/client/C in GLOB.clients)
+		var/real_key = C.holder ? "([key])" : ""
 		if(C.prefs.chat_toggles & CHAT_OOC)
 			if(SSticker.current_state != GAME_STATE_FINISHED && !istype(C.mob, /mob/dead/new_player) && !C.holder)
 				continue
 
-			msg_to_send = "<font color='[color2use]'><EM>[keyname]:</EM></font> <font color='[chat_color]'><span class='message linkify'>[msg]</span></font>"
+			msg_to_send = "<font color='[color2use]'><EM>[keyname][real_key]:</EM></font> <font color='[chat_color]'><span class='message linkify'>[msg]</span></font>"
 			if(holder)
-				msg_to_send = "<font color='[color2use]'><EM>[keyname]:</EM></font> <font color='#4972bc'><span class='message linkify'>[msg]</span></font>"
+				msg_to_send = "<font color='[color2use]'><EM>[keyname][real_key]:</EM></font> <font color='#4972bc'><span class='message linkify'>[msg]</span></font>"
 
 			to_chat(C, msg_to_send)
 

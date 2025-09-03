@@ -18,7 +18,7 @@ GLOBAL_LIST_INIT(freqtospan, list(
 	"[FREQ_CTF_BLUE]" = "blueteamradio"
 	))
 
-/atom/movable/proc/say(message, bubble_type, list/spans = list(), sanitize = TRUE, datum/language/language = null, ignore_spam = FALSE, forced = null)
+/atom/movable/proc/say(message, bubble_type, list/spans = list(), sanitize = TRUE, datum/language/language = null, ignore_spam = FALSE, forced = null, message_range = 7, message_mode = null)
 	if(!can_speak())
 		return
 	if(message == "" || !message)
@@ -26,7 +26,7 @@ GLOBAL_LIST_INIT(freqtospan, list(
 	spans |= speech_span
 	if(!language)
 		language = get_default_language()
-	send_speech(message, 7, src, , spans, message_language=language)
+	send_speech(message, message_range, src, , spans, message_language=language, message_mode = message_mode)
 
 /atom/movable/proc/Hear(message, atom/movable/speaker, message_language, raw_message, radio_freq, list/spans, message_mode)
 	SEND_SIGNAL(src, COMSIG_MOVABLE_HEAR, args)
@@ -35,13 +35,29 @@ GLOBAL_LIST_INIT(freqtospan, list(
 	return TRUE
 
 /atom/movable/proc/send_speech(message, range = 7, obj/source = src, bubble_type, list/spans, datum/language/message_language = null, message_mode)
+	var/list/hearers = get_hearers_in_view(range, source)
 	var/rendered = compose_message(src, message_language, message, , spans, message_mode)
-	for(var/atom/movable/hearing_movable as anything in get_hearers_in_view(range, source))
+	for(var/atom/movable/hearing_movable as anything in hearers)
 		if(!hearing_movable) // Should not get nulls, but just in case.
 			stack_trace("somehow theres a null returned from get_hearers_in_view() in send_speech!")
 			continue
 
 		hearing_movable.Hear(rendered, src, message_language, message, , spans, message_mode)
+
+	if(SEND_SIGNAL(src, COMSIG_MOVABLE_QUEUE_BARK, hearers, args) || vocal_bark || vocal_bark_id)
+		for(var/mob/M in hearers)
+			if(!M.client)
+				continue
+			if(!(M.client.prefs.hear_barks))
+				hearers -= M
+		var/barks = min(round((LAZYLEN(message) / vocal_speed)) + 1, BARK_MAX_BARKS)
+		var/total_delay
+		vocal_current_bark = world.time //this is juuuuust random enough to reliably be unique every time send_speech() is called, in most scenarios
+		for(var/i in 1 to barks)
+			if(total_delay > BARK_MAX_TIME)
+				break
+			addtimer(CALLBACK(src, PROC_REF(bark), hearers, range, vocal_volume, BARK_DO_VARY(vocal_pitch, vocal_pitch_range), vocal_current_bark), total_delay)
+			total_delay += rand(DS2TICKS(vocal_speed / BARK_SPEED_BASELINE), DS2TICKS(vocal_speed / BARK_SPEED_BASELINE) + DS2TICKS(vocal_speed / BARK_SPEED_BASELINE)) TICKS
 
 /atom/movable/proc/compose_message(atom/movable/speaker, datum/language/message_language, raw_message, radio_freq, list/spans, message_mode, face_name = FALSE)
 	//This proc uses text() because it is faster than appending strings. Thanks BYOND.
@@ -62,6 +78,8 @@ GLOBAL_LIST_INIT(freqtospan, list(
 			namepart = "[H.get_face_name()]" //So "fake" speaking like in hallucinations does not give the speaker away if disguised
 		if(H.voice_color)
 			colorpart = "<span style='color:#[H.voice_color];text-shadow:-1px -1px 0 #000,1px -1px 0 #000,-1px 1px 0 #000,1px 1px 0 #000;'>"
+		if(H.client && H.client.patreonlevel() >= GLOB.patreonsaylevel)
+			spans |= SPAN_PATREON_SAY
 	if(speaker.voicecolor_override)
 		colorpart = "<span style='color:#[speaker.voicecolor_override];text-shadow:-1px -1px 0 #000,1px -1px 0 #000,-1px 1px 0 #000,1px 1px 0 #000;'>"
 	//End name span.
@@ -73,10 +91,18 @@ GLOBAL_LIST_INIT(freqtospan, list(
 	var/arrowpart = ""
 
 	if(istype(src,/mob/living))
+		var/atom/movable/tocheck = src
+		// Check relay instead.
+		if(isdullahan(src))
+			var/mob/living/carbon/human = src
+			var/datum/species/dullahan/dullahan = human.dna.species
+			if(dullahan.headless)
+				tocheck = dullahan.my_head
+
 		var/turf/speakturf = get_turf(speaker)
-		var/turf/sourceturf = get_turf(src)
+		var/turf/sourceturf = get_turf(tocheck)
 		if(istype(speakturf) && istype(sourceturf) && !(speakturf in get_hear(7, sourceturf)))
-			switch(get_dir(src,speaker))
+			switch(angle2dir(Get_Angle(src, speaker)))
 				if(NORTH)
 					arrowpart = " ⇑"
 				if(SOUTH)

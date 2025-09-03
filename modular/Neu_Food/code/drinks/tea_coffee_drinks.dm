@@ -36,7 +36,7 @@
 
 /obj/item/reagent_containers/food/snacks/grown/coffeebeansroasted
 	name = "roasted coffee beans"
-	desc = "Roasted coffee beans, with a much deeper flavor. Can be used to brew coffee. The variant grown in Azuria can be brewed without being ground."
+	desc = "Roasted coffee beans, with a much deeper flavor. Can be used to brew coffee. The variant grown in the vale can be brewed without being ground."
 	icon = 'modular/Neu_Food/icons/drinks.dmi'
 	icon_state = "coffeebeans_roasted"
 	tastes = list("rich caramel smoothness" = 1)
@@ -47,7 +47,7 @@
 
 /obj/item/reagent_containers/food/snacks/grown/rogue/tealeaves_dry
 	name = "dried tea leaves"
-	desc = "Dried tea leaves. Edible. Seeds can be extracted from them. Needs to be processed in a millstone." 
+	desc = "Dried tea leaves. Edible. Seeds can be extracted from them. Needs to be processed in a millstone."
 	icon = 'modular/Neu_Food/icons/drinks.dmi'
 	icon_state = "teadry"
 	tastes = list("bitterness" = 1)

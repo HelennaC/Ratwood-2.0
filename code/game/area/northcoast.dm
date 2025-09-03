@@ -1,6 +1,6 @@
-// Azure Coast - the northern part of the map - may not be actually coast 
+// Rotwood Coast - the northern part of the map - may not be actually coast
 /area/rogue/outdoors/beach/forest
-	name = "Azure Coast"
+	name = "Rotwood Coast"
 	icon_state = "beach"
 	icon_state = "woods"
 	ambientsounds = AMB_FORESTDAY
@@ -19,24 +19,28 @@
 				/mob/living/simple_animal/hostile/retaliate/rogue/direbear = 15,
 				/mob/living/carbon/human/species/human/northern/searaider/ambush = 10,
 				/mob/living/carbon/human/species/human/northern/highwayman/ambush = 30,
-				/mob/living/carbon/human/species/orc/npc/footsoldier = 10, 
+				/mob/living/carbon/human/species/orc/npc/footsoldier = 10,
 				/mob/living/carbon/human/species/orc/npc/berserker = 10,
 				/mob/living/carbon/human/species/orc/npc/marauder = 10,
 				/mob/living/carbon/human/species/goblin/npc/ambush/sea = 40)
-	first_time_text = "THE AZURE COAST"
+	first_time_text = "THE ROTWOOD COAST"
 	converted_type = /area/rogue/indoors/shelter/woods
 	deathsight_message = "somewhere betwixt Abyssor's realm and Dendor's bounty"
+	threat_region = THREAT_REGION_NORTH_AZUREAN_COAST
 
 /area/rogue/outdoors/beach/forest/hamlet
-	name = "The Azure Coast - Hamlet"
+	name = "The Rotwood Coast - Hamlet"
 	first_time_text = "THE HAMLET"
 	ambush_mobs = null // We don't want actual ambushes in Hamlet but we also don't want to misuse outdoors/beach lol
+	threat_region = THREAT_REGION_NORTH_AZUREAN_COAST
 
 /area/rogue/outdoors/beach/forest/north
-	name = "The Azure Coast - North"
+	name = "The Rotwood Coast - North"
+	threat_region = THREAT_REGION_NORTH_AZUREAN_COAST
 
 /area/rogue/outdoors/beach/forest/south
-	name = "The Azure Coast - South"
+	name = "The Rotwood Coast - South"
+	threat_region = THREAT_REGION_SOUTH_AZUREAN_COAST
 
 /area/rogue/under/cave/dukecourt
 	name = "dukedungeon"
@@ -47,3 +51,4 @@
 	droning_sound_night = null
 	converted_type = /area/rogue/outdoors/dungeon1
 	deathsight_message = "somewhere betwixt Abyssor's realm and Dendor's bounty"
+	threat_region = THREAT_REGION_NORTH_AZUREAN_COAST

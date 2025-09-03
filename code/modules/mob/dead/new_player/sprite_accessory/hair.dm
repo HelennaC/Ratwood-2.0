@@ -45,6 +45,10 @@
 	name = "Balding Hair"
 	icon_state = "balding"
 
+/datum/sprite_accessory/hair/head/bangsdiagonal
+	name = "Bangs (Diagonal)"
+	icon_state = "diagonalbangs"
+
 /datum/sprite_accessory/hair/head/bedhead
 	name = "Bedhead"
 	icon_state = "bedhead"
@@ -60,6 +64,10 @@
 /datum/sprite_accessory/hair/head/bedheadlong
 	name = "Bedhead (Long)"
 	icon_state = "bedhead-long"
+
+/datum/sprite_accessory/hair/head/bedheadlongest
+	name = "Bedhead (Longest)"
+	icon_state = "bedhead-longest"
 
 /datum/sprite_accessory/hair/head/badlycut
 	name = "Shorter Long Bedhead"
@@ -562,6 +570,10 @@
 	name = "Ponytail (Country Alt)"
 	icon_state = "countryalt"
 
+/datum/sprite_accessory/hair/head/ponytailyeager
+	name = "Ponytail (Yeager)"
+	icon_state = "ponytail_yeager"
+
 /datum/sprite_accessory/hair/head/ponytailwitcher
 	name = "Ponytail (Witcher)"
 	icon_state = "ponytail_witcher"
@@ -642,6 +654,18 @@
 	name = "Sidecut"
 	icon_state = "sidecut"
 
+/datum/sprite_accessory/hair/head/simple
+	name = "Simple"
+	icon_state = "simple"
+
+/datum/sprite_accessory/hair/head/simpleshort
+	name = "Simple (Short)"
+	icon_state = "simple_short"
+
+/datum/sprite_accessory/hair/head/simplelong
+	name = "Simple (Long)"
+	icon_state = "simple_long"
+
 /datum/sprite_accessory/hair/head/skinhead
 	name = "Skinhead"
 	icon_state = "skinhead"
@@ -669,6 +693,22 @@
 /datum/sprite_accessory/hair/head/stacy
 	name = "Stacy"
 	icon_state = "stacy"
+
+/datum/sprite_accessory/hair/head/stacybun
+	name = "Stacy (Bun)"
+	icon_state = "stacy_bun"
+
+/datum/sprite_accessory/hair/head/strict
+	name = "Strict"
+	icon_state = "strict"
+
+/datum/sprite_accessory/hair/head/strictshort
+	name = "Strict (Short)"
+	icon_state = "strict_short"
+
+/datum/sprite_accessory/hair/head/strictlong
+	name = "Strict (Long)"
+	icon_state = "strict_long"
 
 /datum/sprite_accessory/hair/head/stacybun
 	name = "Stacy (Bun)"
@@ -713,6 +753,10 @@
 /datum/sprite_accessory/hair/head/twintails
 	name = "Twintails"
 	icon_state = "twintail"
+
+/datum/sprite_accessory/hair/head/uncaring
+	name = "Uncaring"
+	icon_state = "makoto"
 
 /datum/sprite_accessory/hair/head/undercut
 	name = "Undercut"

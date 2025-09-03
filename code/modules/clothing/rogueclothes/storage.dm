@@ -46,6 +46,12 @@
 	icon_state = "shalal"
 	sellprice = 5
 
+/obj/item/storage/belt/rogue/leather/shalal/purple
+	name = "purple shalal belt"
+	icon_state = "shalal"
+	color = CLOTHING_PURPLE
+	sellprice = 5
+
 /obj/item/storage/belt/rogue/leather/black
 	name = "black belt"
 	icon_state = "blackbelt"
@@ -73,6 +79,9 @@
 		if(get_detail_color())
 			pic.color = get_detail_color()
 		add_overlay(pic)
+
+/obj/item/storage/belt/rogue/leather/battleskirt/black
+	color = CLOTHING_BLACK
 
 /obj/item/storage/belt/rogue/leather/battleskirt/faulds
 	name = "belt with faulds"
@@ -172,15 +181,20 @@
 	if(istype(H))
 		if(!SEND_SIGNAL(src, COMSIG_TRY_STORAGE_INSERT, H, null, TRUE, TRUE))
 			qdel(H)
-	H = new(loc)
-	if(istype(H))
-		if(!SEND_SIGNAL(src, COMSIG_TRY_STORAGE_INSERT, H, null, TRUE, TRUE))
-			qdel(H)
 	if(prob(50))
 		H = new(loc)
 		if(istype(H))
 			if(!SEND_SIGNAL(src, COMSIG_TRY_STORAGE_INSERT, H, null, TRUE, TRUE))
 				qdel(H)
+	var/obj/item/roguecoin/gold/pile/G = new(loc)
+	if(istype(G))
+		if(!SEND_SIGNAL(src, COMSIG_TRY_STORAGE_INSERT, G, null, TRUE, TRUE))
+			qdel(G)
+	if(prob(50))
+		G = new(loc)
+		if(istype(G))
+			if(!SEND_SIGNAL(src, COMSIG_TRY_STORAGE_INSERT, G, null, TRUE, TRUE))
+				qdel(G)
 
 /obj/item/storage/belt/rogue/pouch/coins/virtuepouch/Initialize()
 	. = ..()

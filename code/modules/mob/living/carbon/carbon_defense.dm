@@ -169,6 +169,20 @@
 				if(G.limb_grabbed == BP)
 					return TRUE
 
+/mob/proc/check_handholding()
+	return
+
+/mob/living/carbon/human/check_handholding()
+	if(pulledby && pulledby != src)
+		var/obj/item/bodypart/LH
+		var/obj/item/bodypart/RH
+		LH = get_bodypart(BODY_ZONE_PRECISE_L_HAND)
+		RH = get_bodypart(BODY_ZONE_PRECISE_R_HAND)
+		if(LH || RH)
+			for(var/obj/item/grabbing/G in src.grabbedby)
+				if(G.limb_grabbed == LH || G.limb_grabbed == RH)
+					return TRUE
+
 /mob/proc/check_leg_grabbed()
 	return
 
@@ -231,7 +245,7 @@
 		send_item_attack_message(I, user, affecting.name)
 
 	if(statforce)
-		var/probability = I.get_dismemberment_chance(affecting, user)
+		var/probability = I.get_dismemberment_chance(affecting, user, useder)
 		if(prob(probability) && affecting.dismember(I.damtype, user.used_intent?.blade_class, user, user.zone_selected))
 			I.add_mob_blood(src)
 			playsound(get_turf(src), I.get_dismember_sound(), 80, TRUE)
@@ -482,5 +496,12 @@
 /mob/living/carbon/can_hear()
 	. = FALSE
 	var/obj/item/organ/ears/ears = getorganslot(ORGAN_SLOT_EARS)
+	
+	if(isdullahan(src))
+		var/mob/living/carbon/human/user = src
+		var/datum/species/dullahan/dullahan = user.dna.species
+		var/obj/item/bodypart/head/dullahan/head = dullahan.my_head
+		if(dullahan.headless && head.ears)
+			ears = head.ears
 	if((istype(ears) && !ears.deaf) || (src.stat == DEAD)) // 2nd check so you can hear messages when beheaded
 		. = TRUE

@@ -57,7 +57,7 @@
 
 	var/image/working = image(tail_s)
 	// because these can overlap other organs, we need to layer slightly higher
-	working.layer = -FRONT_MUTATIONS_LAYER
+	working.layer = -BODYPARTS_LAYER // -FRONT_MUTATIONS_LAYER = tail renders over tits, -BODYPARTS_LAYER = tail renders underneath the tits, as it should
 	working.pixel_x = offset_x
 
 	. += working

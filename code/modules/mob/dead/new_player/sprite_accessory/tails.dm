@@ -352,6 +352,26 @@
 	color_key_defaults = list(KEY_SKIN_COLOR)
 	can_wag = TRUE
 
+/datum/sprite_accessory/tail/tiefling/spade
+	name = "Spade"
+	icon = 'icons/mob/sprite_accessory/tails/tiefling.dmi'
+	icon_state = "spade"
+	color_key_defaults = list(KEY_SKIN_COLOR)
+
+/datum/sprite_accessory/tail/dullahan
+	name = "Dullahan"
+	icon = 'icons/mob/sprite_accessory/tails/tiefling.dmi'
+	icon_state = "tiebtail"
+	color_key_defaults = list(KEY_SKIN_COLOR)
+	can_wag = TRUE
+
+/datum/sprite_accessory/tail/dullahan/heart
+	name = "Succubus"
+	icon = 'icons/mob/sprite_accessory/tails/tiefling.dmi'
+	icon_state = "hearttail"
+	color_key_defaults = list(KEY_SKIN_COLOR)
+	can_wag = TRUE
+
 /datum/sprite_accessory/tail/rattlesnake
 	name = "Rattlesnake"
 	icon_state = "rattlesnake"
@@ -368,3 +388,21 @@
 /datum/sprite_accessory/tail/owl
 	name = "Owl"
 	icon_state = "owl"
+	
+/datum/sprite_accessory/tail/pinecone
+	name = "Pinecone"
+	icon_state = "expi"
+	color_keys = 2
+	color_key_names = list("Upper", "Tip")
+
+/datum/sprite_accessory/tail/forked_long
+	name = "Forked Long"
+	icon_state = "forked_long"
+
+/datum/sprite_accessory/tail/haven
+	name = "Haven"
+	icon_state = "haven"
+
+/datum/sprite_accessory/tail/swallow
+	name = "Swallow"
+	icon_state = "swallow"

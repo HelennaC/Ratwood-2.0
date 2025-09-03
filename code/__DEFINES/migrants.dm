@@ -12,3 +12,11 @@
 #define MIGRANT_LORDS \
 	/datum/migrant_role/heartfelt/lord,\
 	/datum/migrant_role/heartfelt/lady
+
+#define MIGRANT_SLAVERS \
+	/datum/migrant_role/slaver/master,\
+	/datum/migrant_role/slaver/slavemercsword, \
+	/datum/migrant_role/slaver/slavemercwhip, \
+	/datum/migrant_role/slaver/slavemercbow, \
+	/datum/migrant_role/slaver/slavez
+

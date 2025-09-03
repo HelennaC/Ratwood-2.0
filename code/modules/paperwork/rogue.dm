@@ -121,7 +121,7 @@
 //Fake reskin of a scroll for the dwarf mercs -- just a fluffy toy
 /obj/item/paper/scroll/grudge
 	name = "Book of Grudges"
-	desc = "A copy you've taken with you. Unfortunately the dampness of Azuria made it unreadable. You can still add new entries, however. It looks bulky enough to act as a mild blunt weapon."
+	desc = "A copy you've taken with you. Unfortunately the dampness of the vale made it unreadable. You can still add new entries, however. It looks bulky enough to act as a mild blunt weapon."
 	icon_state ="grudge_closed"
 	drop_sound = 'sound/foley/dropsound/book_drop.ogg'
 	grid_width = 32
@@ -220,12 +220,12 @@
 
 	if(signedname)
 		info += "SIGNED,<br/>"
-		info += "<font face=\"[FOUNTAIN_PEN_FONT]\" color=#27293f>[signedname] the [signedjob] of Azure Peak</font>"
+		info += "<font face=\"[FOUNTAIN_PEN_FONT]\" color=#27293f>[signedname] the [signedjob] of Rotwood Vale</font>"
 
 /obj/item/paper/inqslip
 	name = "inquisition slip"
 	var/base_icon_state = "slip"
-	dropshrink = 0.75		
+	dropshrink = 0.75
 	icon_state = "slip"
 	obj_flags = CAN_BE_HIT
 	var/signed
@@ -252,7 +252,7 @@
 			to_chat(user, span_notice("This writ is intended to be signed by [signee.real_name]."))
 		else
 			to_chat(user, span_notice("This writ has not yet been signed."))
-		
+
 /obj/item/paper/inqslip/accusation
 	name = "accusation"
 	desc = "A writ of religious suspicion, printed on Otavan parchment: one signed not in ink, but blood. Press the accusation against your own bleeding wound in order to obtain a signature. Then pair it with an INDEXER full of the accused's blood. Once done, it is ready to be mailed back to Otava. Fold and seal it, it's only proper."
@@ -267,7 +267,7 @@
 	sliptype = 2
 
 /obj/item/paper/inqslip/arrival
-	name = "arrival slip"	
+	name = "arrival slip"
 	desc = "A writ of arrival, printed on Otavan parchment: one signed not in ink, but blood. Intended for one person and one person only. Press the slip against one's own weeping wounds in order to obtain a fitting signature. Once done, it is ready to be mailed back to Otava."
 
 /obj/item/paper/inqslip/arrival/ortho
@@ -302,13 +302,13 @@
 	else
 		return
 
-/obj/item/paper/inqslip/attack(mob/living/carbon/human/M, mob/user)	
+/obj/item/paper/inqslip/attack(mob/living/carbon/human/M, mob/user)
 	if(sealed)
 		return
 	if(signed)
 		to_chat(user, span_warning("It's already been signed."))
 		return
-	if(paired && !paired.full)	
+	if(paired && !paired.full)
 		to_chat(user, span_warning("I should seperate [paired] from [src] before signing it."))
 		return
 	if(sliptype != 2)
@@ -321,13 +321,13 @@
 	if(sliptype == 1)
 		if(signee == M)
 			attemptsign(user)
-		else	
+		else
 			to_chat(user, span_warning("This slip isn't meant for me."))
 	else if(!sliptype)
 		attemptsign(user)
 	else
 		attemptsign(M, user)
-	
+
 /obj/item/paper/inqslip/attack_self(mob/user)
 	if(!signed)
 		to_chat(user, span_warning("It hasn't been signed yet. Why would I seal it?"))
@@ -336,18 +336,18 @@
 		to_chat(user, span_notice("It's been sealed. It's ready to send back to Otava."))
 		return
 	else if(!sealed)
-		sealed = TRUE	
+		sealed = TRUE
 		update_icon()
-	else		
+	else
 		sealed = FALSE
 		update_icon()
-		
+
 /obj/item/paper/inqslip/attack_right(mob/user)
 	. = ..()
-	if(paired)	
+	if(paired)
 		if(!user.get_active_held_item())
 			user.put_in_active_hand(paired, user.active_hand_index)
-			paired = null	
+			paired = null
 			update_icon()
 		return TRUE
 
@@ -368,15 +368,15 @@
 		if(!waxed)
 			icon_state = "[base_icon_state]_unsealed"
 		else
-			icon_state = "[base_icon_state]_sealed"	
-	return		
+			icon_state = "[base_icon_state]_sealed"
+	return
 
 /obj/item/paper/inqslip/arrival/equipped(mob/user, slot, initial)
 	. = ..()
 	if(!signee)
 		signee = user
 
-/obj/item/paper/inqslip/attacked_by(obj/item/I, mob/living/user)	
+/obj/item/paper/inqslip/attacked_by(obj/item/I, mob/living/user)
 	if(istype(I, /obj/item/clothing/ring/signet))
 		var/obj/item/clothing/ring/signet/S = I
 		if(S.tallowed && sealed)
@@ -421,7 +421,7 @@
 					user.transferItemToLoc(Q, src, TRUE)
 					update_icon()
 			else
-				to_chat(user,  span_warning("[Q] isn't completely full."))		
+				to_chat(user,  span_warning("[Q] isn't completely full."))
 
 /obj/item/paper/inqslip/attack_right(mob/user)
 	. = ..()

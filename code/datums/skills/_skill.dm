@@ -17,6 +17,7 @@
 	//Example:
 	//list(TRAIT_EXAMPLE = SKILL_LEVEL_MAXIMUM_WITHOUT_THE_TRAIT)
 	//Feel free to refactor it to work more sanely, it was concepted for a specific case. - F
+	var/max_skillbook_level = 6
 
 /datum/skill/proc/get_skill_speed_modifier(level)
 	return

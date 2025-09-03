@@ -1,7 +1,7 @@
 #define GARRISON_CROWN_COLOR "#C2A245"
 
 /obj/item/clothing/head/roguetown/crown/serpcrown
-	name = "Crown of Azuria"
+	name = "Crown of Rotwood Vale"
 	article = "the"
 	desc = "Heavy is the head that wears this."
 	icon_state = "serpcrown"
@@ -27,7 +27,7 @@
 	become_hearing_sensitive()
 
 /obj/item/clothing/head/roguetown/crown/serpcrown/proc/anti_stall()
-	src.visible_message(span_warning("The Crown of Azure Peak crumbles to dust, the ashes spiriting away in the direction of the Keep."))
+	src.visible_message(span_warning("The Crown of the vale crumbles to dust, the ashes spiriting away in the direction of the Keep."))
 	SSroguemachine.scomm_machines -= src
 	SSroguemachine.crown = null //Do not harddel.
 	qdel(src) //Anti-stall
@@ -41,24 +41,27 @@
 		if(user.voicecolor_override)
 			usedcolor = user.voicecolor_override
 		user.whisper(input_text)
+		var/list/tspans = list()
+		if(user.client.patreonlevel() >= GLOB.patreonsaylevel)
+			tspans |= SPAN_PATREON_SAY
 		if(length(input_text) > 100)
 			input_text = "<small>[input_text]</small>"
 		if(!garrisonline)
 			for(var/obj/structure/roguemachine/scomm/S in SSroguemachine.scomm_machines)
-				S.repeat_message(input_text, src, usedcolor)
+				S.repeat_message(input_text, src, usedcolor, tspans = tspans)
 			for(var/obj/item/scomstone/S in SSroguemachine.scomm_machines)
-				S.repeat_message(input_text, src, usedcolor)
+				S.repeat_message(input_text, src, usedcolor, tspans = tspans)
 			for(var/obj/item/listenstone/S in SSroguemachine.scomm_machines)
-				S.repeat_message(input_text, src, usedcolor)
+				S.repeat_message(input_text, src, usedcolor, tspans = tspans)
 		if(garrisonline)
 			input_text = "<big><span style='color: [GARRISON_CROWN_COLOR]'>[input_text]</span></big>" // Prettying up for Garrison line
 			for(var/obj/item/scomstone/bad/garrison/S in SSroguemachine.scomm_machines)
-				S.repeat_message(input_text, src, usedcolor)
+				S.repeat_message(input_text, src, usedcolor, tspans = tspans)
 			for(var/obj/item/scomstone/garrison/S in SSroguemachine.scomm_machines)
-				S.repeat_message(input_text, src, usedcolor)
+				S.repeat_message(input_text, src, usedcolor, tspans = tspans)
 			for(var/obj/structure/roguemachine/scomm/S in SSroguemachine.scomm_machines)
 				if(S.garrisonline)
-					S.repeat_message(input_text, src, usedcolor)
+					S.repeat_message(input_text, src, usedcolor, tspans = tspans)
 
 /obj/item/clothing/head/roguetown/crown/serpcrown/attack_self(mob/living/user)
 	if(.)
@@ -78,7 +81,7 @@
 	to_chat(user, span_info("I [speaking ? "unmute" : "mute"] the crown's SCOM capabilities."))
 	update_icon()
 
-/obj/item/clothing/head/roguetown/crown/serpcrown/proc/repeat_message(message, atom/A, tcolor, message_language)
+/obj/item/clothing/head/roguetown/crown/serpcrown/proc/repeat_message(message, atom/A, tcolor, message_language, list/tspans = list())
 	if(A == src)
 		return
 	if(!ismob(loc))
@@ -87,7 +90,7 @@
 		voicecolor_override = tcolor
 	if(speaking && message)
 		playsound(loc, messagereceivedsound, 100, TRUE, -1)
-		say(message, language = message_language)
+		say(message, spans = tspans, language = message_language)
 	voicecolor_override = null
 
 /obj/item/clothing/head/roguetown/crown/serpcrown/say(message, bubble_type, list/spans = list(), sanitize = TRUE, datum/language/language = null, ignore_spam = FALSE, forced = null)

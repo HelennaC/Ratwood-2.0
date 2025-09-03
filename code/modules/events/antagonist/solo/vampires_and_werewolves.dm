@@ -8,7 +8,7 @@
 	roundstart = TRUE
 	antag_flag = ROLE_NBEAST
 	shared_occurence_type = SHARED_HIGH_THREAT
-	denominator = 80
+	denominator = 40 // this is the lower chance higher threat version
 
 	base_antags = 2
 	maximum_antags = 4
@@ -23,10 +23,12 @@
 	restricted_roles = list(
 		"Grand Duke",
 		"Grand Duchess",
+		"Knight Captain",
 		"Consort",
 		"Dungeoneer",
 		"Sergeant",
-		"Men-at-arms",
+		"Men-at-Arms",
+		"Woman-at-Arms",
 		"Marshal",
 		"Merchant",
 		"Bishop",
@@ -39,11 +41,17 @@
 		"Princess",
 		"Hand",
 		"Steward",
+		"Clerk",
+		"Magos Thrall",
+		"Jester",
+		"Servant",
+		"Seneschal",
 		"Court Physician",
 		"Town Elder",
 		"Captain",
 		"Archivist",
 		"Knight",
+		"Dame",
 		"Court Magician",
 		"Inquisitor",
 		"Orthodoxist",
@@ -74,7 +82,7 @@
 		var/datum/job/J = SSjob.GetJob(antag_mind.current?.job)
 		J?.current_positions = max(J?.current_positions-1, 0)
 		antag_mind.current.unequip_everything()
-		antag_mind.add_antag_datum(antag_datum)
+		antag_mind.add_antag_datum(/datum/antagonist/vampirelord/lesser)
 		leader = TRUE
 		return
 	else

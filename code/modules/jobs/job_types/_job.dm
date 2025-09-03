@@ -69,6 +69,7 @@
 	//allowed sex/race for picking
 	var/list/allowed_sexes = list(MALE, FEMALE)
 	var/list/allowed_races = RACES_ALL_KINDS
+	var/list/disallowed_races = null
 	var/list/allowed_patrons
 	var/list/allowed_ages = ALL_AGES_LIST
 
@@ -154,6 +155,7 @@
 
 	//The job's stat UPPER ceilings, clamped after statpacks and job stats are applied.
 	var/list/stat_ceilings
+	var/carebox_table = null
 
 
 /datum/job/proc/special_job_check(mob/dead/new_player/player)
@@ -203,16 +205,20 @@
 
 	for(var/X in peopleknowme)
 		for(var/datum/mind/MF in get_minds(X))
+			if(isnull(H.mind?.special_role) && (MF?.special_role in list(ROLE_VAMPIRE, ROLE_NBEAST, ROLE_BANDIT, ROLE_LICH, ROLE_WRETCH, ROLE_UNBOUND_DEATHKNIGHT)))
+				continue
 			H.mind.person_knows_me(MF)
 	for(var/X in peopleiknow)
 		for(var/datum/mind/MF in get_minds(X))
+			if(isnull(H.mind?.special_role) && (MF?.special_role in list(ROLE_VAMPIRE, ROLE_NBEAST, ROLE_BANDIT, ROLE_LICH, ROLE_WRETCH, ROLE_UNBOUND_DEATHKNIGHT)))
+				continue
 			H.mind.i_know_person(MF)
 
 	if(H.islatejoin && announce_latejoin)
 		var/used_title = title
 		if((H.pronouns == SHE_HER || H.pronouns == THEY_THEM_F) && f_title)
 			used_title = f_title
-		scom_announce("[H.real_name] the [used_title] arrives to Azure Peak.")
+		scom_announce("[H.real_name] the [used_title] arrives to Rotwood Vale.")
 
 	if(give_bank_account)
 		if(give_bank_account > 1)
@@ -230,10 +236,17 @@
 		H.cmode_music = cmode_music
 
 	if (!hidden_job)
-		if (obsfuscated_job)
-			GLOB.actors_list[H.mobid] = "[H.real_name] as Adventurer<BR>"
+		var/mob/living/carbon/human/Hu = H
+		if (istype(H, /mob/living/carbon/human))
+			if (obsfuscated_job)
+				GLOB.actors_list[H.mobid] = "[H.real_name] as the [Hu.dna.species.name] Adventurer<BR>"
+			else
+				GLOB.actors_list[H.mobid] = "[H.real_name] as the [Hu.dna.species.name] [H.mind.assigned_role]<BR>"
 		else
-			GLOB.actors_list[H.mobid] = "[H.real_name] as [H.mind.assigned_role]<BR>"
+			if (obsfuscated_job)
+				GLOB.actors_list[H.mobid] = "[H.real_name] as Adventurer<BR>"
+			else
+				GLOB.actors_list[H.mobid] = "[H.real_name] as [H.mind.assigned_role]<BR>"
 
 /client/verb/set_mugshot()
 	set category = "OOC"
@@ -409,13 +422,19 @@
 		return list(ACCESS_MAINT_TUNNELS)
 	return list()
 
-/datum/job/proc/clamp_stats(var/mob/living/carbon/human/H)
+/datum/job/proc/clamp_stats(mob/living/carbon/human/H)
+	var/list/statcl
 	if(length(stat_ceilings))
-		for(var/stat in stat_ceilings)
-			if(stat_ceilings[stat] < H.get_stat(stat))
-				H.change_stat(stat, (stat_ceilings[stat] - H.get_stat(stat)))
-				to_chat(H, "Your [stat] was reduced to \Roman[stat_ceilings[stat]].")
+		statcl = stat_ceilings
+	var/datum/advclass/advclass = SSrole_class_handler.get_advclass_by_name(H.advjob)
+	if(advclass && length(advclass.adv_stat_ceiling))
+		statcl = advclass.adv_stat_ceiling
 
+	if(length(statcl))
+		for(var/stat in statcl)
+			if(statcl[stat] < H.get_stat(stat))
+				H.change_stat(stat, (statcl[stat] - H.get_stat(stat)))
+				to_chat(H, "Your [stat] was reduced to \Roman[statcl[stat]] due to class limits.")
 
 // LETHALSTONE EDIT: Helper functions for pronoun-based clothing selection
 /proc/should_wear_masc_clothes(mob/living/carbon/human/H)

@@ -129,12 +129,12 @@
 	if(!.)
 		return
 	var/mob/living/carbon/human/H = user
-	if(!istype(H) || !H.dna || !H.dna.species || !H.dna.species.can_wag_tail(H))
-		return
 	if(!H.dna.species.is_wagging_tail(H))
 		H.dna.species.start_wagging_tail(H)
+		message = "stops wagging [H.p_their()] tail"
 	else
 		H.dna.species.stop_wagging_tail(H)
+		message = "wags [H.p_their()] tail."
 
 /datum/emote/living/carbon/human/wag/can_run_emote(mob/user, status_check = TRUE , intentional)
 	if(!..())
@@ -145,8 +145,6 @@
 /datum/emote/living/carbon/human/wag/select_message_type(mob/user, intentional)
 	. = ..()
 	var/mob/living/carbon/human/H = user
-	if(!H.dna || !H.dna.species)
-		return
 	if(H.dna.species.is_wagging_tail(H))
 		. = null
 
@@ -160,3 +158,40 @@
 
 /mob/living/carbon/human/proc/CloseWings()
 	return
+
+// FEEL EMOTE VERB
+/mob/living/carbon/human/verb/emote_feel()
+	set name = "Feel (Desire/Dread)"
+	set category = "Emotes"
+
+	var/list/options = list("Desire", "Dread")
+	var/choice = input(src, "What feeling do you want to express?", "Feel") as null|anything in options
+	if(!choice) return
+
+	var/list/degrees = list("mild", "moderate", "strong")
+	var/degree = input(src, "Select degree:", "Degree") as null|anything in degrees
+	if(!degree) return
+
+	if(choice == "Desire")
+		var/desire = input(src, "What is the desire?", "Desire") as null|text
+		if(isnull(desire)) return
+		var/message = "You [degree == "mild" ? "slightly" : degree == "moderate" ? "moderately" : "strongly"] want to help [src.real_name] fulfil their wish to [desire]"
+		if(!length(message) || copytext(message, length(message)) != ".")
+			message += "."
+		for(var/mob/living/carbon/human/H in viewers(src, null))
+			if(HAS_TRAIT(H, TRAIT_EMPATH))
+				to_chat(H, "<span style='color: white; font-style: italic; text-shadow: 0 0 6px #fff, 0 0 12px #fff;'>[message]</span>")
+		to_chat(src, "You desire [desire].")
+		return
+
+	if(choice == "Dread")
+		var/dread = input(src, "What are you dreading?", "Dread") as null|text
+		if(isnull(dread)) return
+		var/message = "You feel [degree]ly negatively preoccupied with the prospect of [dread]."
+		if(!length(message) || copytext(message, length(message)) != ".")
+			message += "."
+		for(var/mob/living/carbon/human/H in viewers(src, null))
+			if(HAS_TRAIT(H, TRAIT_EMPATH))
+				to_chat(H, "<span style='color: #ff4444; font-weight: bold;'>[message]</span>")
+		to_chat(src, "You become preoccupied with [dread].")
+		return

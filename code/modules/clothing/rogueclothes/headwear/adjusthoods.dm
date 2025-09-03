@@ -60,7 +60,7 @@
 	color = "#b8252c"
 	icon_state = "shalal"
 	item_state = "shalal"
-	flags_inv = HIDEHAIR|HIDEFACIALHAIR|HIDEFACE|HIDEEARS
+	flags_inv = HIDEHAIR|HIDEFACIALHAIR
 	sleevetype = null
 	sleeved = null
 	icon = 'icons/roguetown/clothing/head.dmi'
@@ -73,15 +73,32 @@
 	edelay_type = 1
 	adjustable = CAN_CADJUST
 	toggle_icon_state = TRUE
-	hidesnoutADJ = TRUE
 	blocksound = SOFTHIT
 	max_integrity = 100
 	sewrepair = TRUE
 	mask_override = TRUE
 	overarmor = FALSE
 
+/obj/item/clothing/head/roguetown/roguehood/shalal/AdjustClothes(mob/user)
+	if(loc == user)
+		if(adjustable == CAN_CADJUST)
+			adjustable = CADJUSTED
+			icon_state = "shalal_t"
+			body_parts_covered = HEAD|EARS|HAIR|NECK|NOSE|MOUTH
+			flags_inv = HIDEEARS|HIDEFACE|HIDEHAIR|HIDEFACIALHAIR
+			flags_cover = null
+			if(ishuman(user))
+				var/mob/living/carbon/H = user
+				H.update_inv_head()
+			block2add = null
+		else if(adjustable == CADJUSTED)
+			ResetAdjust(user)
+
 /obj/item/clothing/head/roguetown/roguehood/shalal/black
 	color = CLOTHING_BLACK
+
+/obj/item/clothing/head/roguetown/roguehood/shalal/purple
+	color = CLOTHING_PURPLE
 
 /obj/item/clothing/head/roguetown/roguehood/shalal/hijab
 	name = "hijab"

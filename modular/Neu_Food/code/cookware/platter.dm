@@ -10,6 +10,7 @@
 	experimental_inhand = FALSE
 	grid_width = 64
 	grid_height = 32
+	sellprice = 0
 
 /*
 NEW SYSTEM
@@ -101,7 +102,7 @@ What it does:
 	desc = "Wrought bronze, flattened to serve. The edge remains wet with red; spilled merlot, meaty juices, or blood?"
 	icon_state = "aplatter"
 	color = "#bb9696"
-	sellprice = 15
+	sellprice = 0
 
 /obj/item/cooking/platter/copper
 	name = "copper platter"
@@ -109,22 +110,21 @@ What it does:
 	icon_state = "platter_copper"
 	resistance_flags = FIRE_PROOF
 	drop_sound = 'sound/foley/dropsound/armor_drop.ogg'
-	sellprice = 5
+	sellprice = 8
 
 /obj/item/cooking/platter/pewter
-	name = "pewter platter"
-	desc = "A tin plate that contains just a tinge of lead."
+	name = "tin platter"
+	desc = "A tin plate that could almost be mistaken for silver."
 	icon_state = "platter_tin"
 	resistance_flags = FIRE_PROOF
 	drop_sound = 'sound/foley/dropsound/armor_drop.ogg'
-	sellprice = 10
+	sellprice = 11
 
 /obj/item/cooking/platter/silver
 	name = "silver platter"
 	desc = "A fancy silver plate often used by the nobility as a symbol of class."
 	icon_state = "platter_silver"
-	sellprice = 30
-	smeltresult = /obj/item/ingot/silver
+	sellprice = 48
 
 /obj/item/cooking/platter/gold
 	name = "gold platter"
@@ -132,5 +132,4 @@ What it does:
 	icon_state = "platter_gold"
 	resistance_flags = FIRE_PROOF
 	drop_sound = 'sound/foley/dropsound/armor_drop.ogg'
-	sellprice = 25
-	smeltresult = /obj/item/ingot/gold
+	sellprice = 60

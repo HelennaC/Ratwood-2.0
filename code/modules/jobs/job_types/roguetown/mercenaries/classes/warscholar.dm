@@ -17,24 +17,10 @@
 
 /datum/outfit/job/roguetown/mercenary/warscholar/pre_equip(mob/living/carbon/human/H)
 	..()
-	var/list/naledicolors = sortList(list(
-		"GOLD" = "#C8BE6D",
-		"PALE PURPLE" = "#9E93FF",
-		"BLUE" = "#A7B4F6",
-		"BRICK BROWN" = "#773626",
-		"PURPLE" = "#B542AC",
-		"GREEN" = "#62a85f",
-		"BLUE" = "#A9BFE0",
-		"RED" = "#ED6762",
-		"ORANGE" = "#EDAF6D",
-		"PINK" = "#EDC1D5",
-		"MAROON" = "#5F1F34",
-		"BLACK" = "#242526"
-	))
 	// CLASS ARCHETYPES
 	H.adjust_blindness(-3)
-	detailcolor = input("Choose a color.", "NALEDIAN COLORPLEX") as anything in naledicolors
-	detailcolor = naledicolors[detailcolor]
+	detailcolor = input("Choose a color.", "NALEDIAN COLORPLEX") as anything in colorlist
+	detailcolor = colorlist[detailcolor]
 	var/classes = list("Hierophant","Pontifex","Vizier")
 	var/classchoice = input("Choose your archetypes", "Available archetypes") as anything in classes
 
@@ -86,10 +72,11 @@
 				H.mind.AddSpell(new /obj/effect/proc_holder/spell/invoked/fortitude)
 				H.mind.AddSpell(new /obj/effect/proc_holder/spell/invoked/forcewall/greater)
 				H.mind.adjust_spellpoints(15)
-			r_hand = /obj/item/rogueweapon/woodstaff/naledi
+			backl = /obj/item/rogueweapon/woodstaff/naledi
 
 
 			head = /obj/item/clothing/head/roguetown/roguehood/hierophant
+			neck = /obj/item/clothing/neck/roguetown/leather
 			cloak = /obj/item/clothing/cloak/hierophant
 			armor = /obj/item/clothing/suit/roguetown/armor/gambeson/heavy/hierophant
 			shirt = /obj/item/clothing/suit/roguetown/shirt/robe/hierophant
@@ -116,7 +103,7 @@
 			H.adjust_skillrank(/datum/skill/misc/stealing, 3, TRUE)
 			H.adjust_skillrank(/datum/skill/misc/lockpicking, 3, TRUE)
 			H.change_stat("strength", 3)
-			H.change_stat("constitution", -1)
+			H.change_stat("constitution", 2) //doesn't seem clear the idea of reduce some cqc focused role constitution compared to the atgervi
 			H.change_stat("endurance", 1)
 			H.change_stat("perception", -1)
 			H.change_stat("speed", 2)
@@ -133,7 +120,7 @@
 			ADD_TRAIT(H, TRAIT_CIVILIZEDBARBARIAN, TRAIT_GENERIC)
 			ADD_TRAIT(H, TRAIT_ARCYNE_T1, TRAIT_GENERIC)
 
-			head = /obj/item/clothing/head/roguetown/roguehood/pontifex
+			neck = /obj/item/clothing/neck/roguetown/leather //minimal armor
 			gloves = /obj/item/clothing/gloves/roguetown/angle/pontifex
 			head = /obj/item/clothing/head/roguetown/roguehood/pontifex
 			armor = /obj/item/clothing/suit/roguetown/armor/gambeson/heavy/pontifex
@@ -165,7 +152,7 @@
 			H.change_stat("endurance", 2)
 			H.change_stat("intelligence", 3)
 			H.change_stat("speed", 2)
-			r_hand = /obj/item/rogueweapon/woodstaff/naledi
+			backl = /obj/item/rogueweapon/woodstaff/naledi
 			armor = /obj/item/clothing/suit/roguetown/shirt/robe/magered
 
 			mask = /obj/item/clothing/mask/rogue/lordmask/tarnished
@@ -176,6 +163,7 @@
 			gloves = /obj/item/clothing/gloves/roguetown/angle
 			backr = /obj/item/storage/backpack/rogue/satchel/black
 			head = /obj/item/clothing/head/roguetown/roguehood/shalal/black
+			neck = /obj/item/clothing/neck/roguetown/leather
 			cloak = /obj/item/clothing/cloak/half
 			H.grant_language(/datum/language/celestial)
 			shirt = /obj/item/clothing/suit/roguetown/armor/gambeson/lord
