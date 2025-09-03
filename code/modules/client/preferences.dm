@@ -154,7 +154,7 @@ GLOBAL_LIST_EMPTY(chosen_names)
 	var/static/default_cmusic_type = /datum/combat_music/default
 	var/datum/combat_music/combat_music
 	var/combat_music_helptext_shown = FALSE
-	
+
 	var/family = FAMILY_NONE
 
 	var/crt = FALSE
@@ -183,7 +183,7 @@ GLOBAL_LIST_EMPTY(chosen_names)
 	var/hear_barks = TRUE
 
 	// PATREON
-	// Vrell - I fucking hate how inconsistent the variable style is for this shit. underscores? all lowercase? camelcase? 
+	// Vrell - I fucking hate how inconsistent the variable style is for this shit. underscores? all lowercase? camelcase?
 	var/patreon_say_color = "ff7a05"
 	var/patreon_say_color_enabled = FALSE
 	// END PATREON
@@ -194,7 +194,7 @@ GLOBAL_LIST_EMPTY(chosen_names)
 
 	var/flavortext
 	var/flavortext_display
-	
+
 	var/is_legacy = FALSE
 
 	var/ooc_notes
@@ -225,11 +225,11 @@ GLOBAL_LIST_EMPTY(chosen_names)
 			return
 	//Set the race to properly run race setter logic
 	set_new_race(pref_species, null)
-	
 
-	
 
-	
+
+
+
 	if(!charflaw)
 		charflaw = pick(GLOB.character_flaws)
 		charflaw = GLOB.character_flaws[charflaw]
@@ -253,6 +253,8 @@ GLOBAL_LIST_EMPTY(chosen_names)
 	if(user)
 		if(pref_species.desc)
 			to_chat(user, "[pref_species.desc]")
+		if(pref_species.expanded_desc)
+			to_chat(user, "<a href='?src=[REF(user)];view_species_info=[pref_species.expanded_desc]'>Read More</a>")
 		to_chat(user, "<font color='red'>Classes reset.</font>")
 	random_character(gender, FALSE, FALSE)
 	accessory = "Nothing"
@@ -291,7 +293,7 @@ GLOBAL_LIST_EMPTY(chosen_names)
 	dat += "</center>"
 	// Fuck me - need to figure out why it's scaling like that
 	// dat += "<div class='charpreview-border'></div>"
-	
+
 	var/used_title
 	switch(current_tab)
 		if (0) // Character Settings#
@@ -395,7 +397,7 @@ GLOBAL_LIST_EMPTY(chosen_names)
 				if(randomise[RANDOM_BODY] || randomise[RANDOM_BODY_ANTAG]) //doesn't work unless random body
 					dat += "<a href='?_src_=prefs;preference=toggle_random;random_type=[RANDOM_GENDER]'>Always Random Bodytype: [(randomise[RANDOM_GENDER]) ? "Yes" : "No"]</A>"
 					dat += "<a href='?_src_=prefs;preference=toggle_random;random_type=[RANDOM_GENDER_ANTAG]'>When Antagonist: [(randomise[RANDOM_GENDER_ANTAG]) ? "Yes" : "No"]</A>"
-			
+
 			if(LAZYLEN(pref_species.allowed_taur_types))
 				var/obj/item/bodypart/taur/T = taur_type
 				var/name = ispath(T) ? T::name : "None"
@@ -1568,10 +1570,10 @@ Slots: [job.spawn_positions] [job.round_contrib_points ? "RCP: +[job.round_contr
 						taur_selection = list()
 					else
 						taur_selection = list("None")
-						
+
 					for(var/obj/item/bodypart/taur/tt as anything in pref_species.get_taur_list())
 						taur_selection[tt::name] = tt
-					
+
 					var/new_taur_type = input(user, "Choose your character's taur body", "Taur Body") as null|anything in taur_selection
 					if(!new_taur_type)
 						return
@@ -1644,12 +1646,12 @@ Slots: [job.spawn_positions] [job.round_contrib_points ? "RCP: +[job.round_contr
 							to_chat(user, "<font color='red'>This voice color is too dark for mortals.</font>")
 							return
 						voice_color = sanitize_hexcolor(new_voice)
-				
+
 				if("extra_language")
 					var/static/list/selectable_languages = list(
 						/datum/language/elvish,
 						/datum/language/dwarvish,
-						/datum/language/orcish, 
+						/datum/language/orcish,
 						/datum/language/hellspeak,
 						/datum/language/draconic,
 						/datum/language/celestial,
@@ -1666,7 +1668,7 @@ Slots: [job.spawn_positions] [job.round_contrib_points ? "RCP: +[job.round_contr
 							continue
 						var/datum/language/a_language = new language()
 						choices[a_language.name] = language
-					
+
 					var/chosen_language = input(user, "Choose your character's extra language:", "Character Preference") as null|anything in choices
 					if(chosen_language)
 						if(chosen_language == "None")
@@ -1792,7 +1794,7 @@ Slots: [job.spawn_positions] [job.round_contrib_points ? "RCP: +[job.round_contr
 					var/list/dat = list()
 					dat +="Skin color codes reference list<br>"
 					dat += "<br>"
-					for(var/tone in pref_species.get_skin_list_tooltip()) 
+					for(var/tone in pref_species.get_skin_list_tooltip())
 						dat += "[tone]<br>"
 					var/datum/browser/popup = new(user, "Formatting Help", nwidth = 400, nheight = 450)
 					popup.set_content(dat.Join())
@@ -1922,7 +1924,7 @@ Slots: [job.spawn_positions] [job.round_contrib_points ? "RCP: +[job.round_contr
 							ooc_extra += "<br>"
 							ooc_extra += "<img src='[ooc_extra_link]'/>"
 							info = "an embedded image."
-						else 
+						else
 							switch(extension)
 								if("mp4")
 									ooc_extra = "<br>"
@@ -2620,7 +2622,7 @@ Slots: [job.spawn_positions] [job.round_contrib_points ? "RCP: +[job.round_contr
 	character.flavortext = flavortext
 
 	character.flavortext_display = flavortext_display
-	
+
 	character.ooc_notes = ooc_notes
 
 	character.ooc_notes_display = ooc_notes_display
@@ -2656,7 +2658,7 @@ Slots: [job.spawn_positions] [job.round_contrib_points ? "RCP: +[job.round_contr
 
 	if(icon_updates)
 		character.update_body()
-		character.update_hair() 
+		character.update_hair()
 		character.update_body_parts(redraw = TRUE)
 
 	character.char_accent = char_accent
