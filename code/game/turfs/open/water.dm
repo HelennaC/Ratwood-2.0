@@ -96,14 +96,14 @@
 	if(swimmer.buckled)
 		return 0
 	var/abyssor_swim_bonus = HAS_TRAIT(swimmer, TRAIT_ABYSSOR_SWIM) ? 5 : 0
-	var/swimming_skill_level = swimmer.get_skill_level(/datum/skill/misc/swimming) 
+	var/swimming_skill_level = swimmer.get_skill_level(/datum/skill/misc/swimming)
 	. = max(BASE_STAM_DRAIN - (swimming_skill_level * STAM_PER_LEVEL) - abyssor_swim_bonus, MIN_STAM_DRAIN)
 	if(swimmer.mind)
 		swimmer.mind.add_sleep_experience(/datum/skill/misc/swimming, swimmer.STAINT * 0.5)
 //	. += (swimmer.checkwornweight()*2)
 	if(!swimmer.check_armor_skill())
 		. += UNSKILLED_ARMOR_PENALTY
-	if(.) // this check is expensive so we only run it if we do expect to use stamina	
+	if(.) // this check is expensive so we only run it if we do expect to use stamina
 		for(var/obj/structure/S in src)
 			if(S.obj_flags & BLOCK_Z_OUT_DOWN)
 				return 0
@@ -529,3 +529,40 @@
 	swim_skill = TRUE
 	wash_in = TRUE
 	water_reagent = /datum/reagent/water
+
+//Healing springs.
+//Intended for deep dungeon / hidden areas.
+/turf/open/water/ocean/deep/thermalwater
+	name = "healing hot spring"
+	desc = "A warm spring with gentle ripples. Standing here soothes your body."
+	icon = 'icons/turf/roguefloor.dmi'
+	icon_state = "together"
+	water_color = "#23b9df"
+	water_reagent = /datum/reagent/water
+	var/heal_interval = 5 SECONDS
+	var/heal_amount = 20
+	var/last_heal = 0
+
+/turf/open/water/ocean/deep/thermalwater/Initialize()
+	. = ..()
+	START_PROCESSING(SSobj, src)
+
+/turf/open/water/ocean/deep/thermalwater/process()
+	if(world.time < last_heal + heal_interval)
+		return
+
+	for(var/mob/living/carbon/M in src)
+		if(M.stat == DEAD) continue
+
+		if(M.getBruteLoss())
+			M.adjustBruteLoss(-heal_amount)
+		if(M.getFireLoss())
+			M.adjustFireLoss(-heal_amount)
+		if(M.getToxLoss())
+			M.adjustToxLoss(-heal_amount)
+		if(M.getOxyLoss())
+			M.adjustOxyLoss(-heal_amount*2)
+
+		M.visible_message(span_notice("[M] looks a bit better after soaking in the spring."))
+
+	last_heal = world.time

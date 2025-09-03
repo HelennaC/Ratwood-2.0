@@ -39,7 +39,7 @@
 		spelltarget.apply_status_effect(/datum/status_effect/buff/haste, 1 MINUTES)
 
 	return TRUE
-	
+
 /atom/movable/screen/alert/status_effect/buff/haste
 	name = "Haste"
 	desc = "I am magically hastened."
@@ -52,10 +52,10 @@
 	id = "haste"
 	alert_type = /atom/movable/screen/alert/status_effect/buff/haste
 	effectedstats = list("speed" = 5)
-	duration = 1 MINUTES
+	duration = 1.5 MINUTES
 
 /datum/status_effect/buff/haste/other
-	duration = 2 MINUTES
+	duration = 3 MINUTES
 
 /datum/status_effect/buff/haste/on_creation(mob/living/new_owner, var/new_duration = null)
 	if(new_duration)

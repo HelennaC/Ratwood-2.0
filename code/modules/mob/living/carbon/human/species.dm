@@ -161,6 +161,8 @@ GLOBAL_LIST_EMPTY(roundstart_races)
 	var/stress_examine = FALSE
 	var/stress_desc = null
 
+//Used for expanded lore blurbs on species.
+	var/expanded_desc
 ///////////
 // PROCS //
 ///////////
@@ -1404,7 +1406,7 @@ GLOBAL_LIST_EMPTY(roundstart_races)
 		return FALSE
 	if(user == target)
 		return FALSE
-	if(!HAS_TRAIT(user, TRAIT_GARROTED))	
+	if(!HAS_TRAIT(user, TRAIT_GARROTED))
 		if(user.check_leg_grabbed(1) || user.check_leg_grabbed(2))
 			to_chat(user, span_notice("I can't move my leg!"))
 			return
@@ -1662,7 +1664,7 @@ GLOBAL_LIST_EMPTY(roundstart_races)
 	var/bladec = user.used_intent.blade_class
 	if(H == user && bladec == BCLASS_PEEL)
 		bladec = BCLASS_BLUNT
-	
+
 	var/higher_intfactor = max(user.used_intent.masteritem?.intdamage_factor, user.used_intent.intent_intdamage_factor)
 	var/lowest_intfactor = min(user.used_intent.masteritem?.intdamage_factor, user.used_intent.intent_intdamage_factor)
 	var/used_intfactor = 1
@@ -1670,7 +1672,7 @@ GLOBAL_LIST_EMPTY(roundstart_races)
 		used_intfactor = lowest_intfactor
 	if(higher_intfactor > 1)	//Make sure to keep your weapon and intent intfactors consistent to avoid problems here!
 		used_intfactor = higher_intfactor
-	
+
 	var/armor_block = H.run_armor_check(selzone, I.d_type, "", "",pen, damage = Iforce, blade_dulling=user.used_intent.blade_class, peeldivisor = user.used_intent.peel_divisor, intdamfactor = used_intfactor)
 
 	var/nodmg = FALSE
@@ -1856,7 +1858,7 @@ GLOBAL_LIST_EMPTY(roundstart_races)
 				H.flash_fullscreen("redflash3")
 			if(BP)
 				if(zone_sel)
-					zone_sel.flash_limb(BP.body_zone, "#FF0000") 
+					zone_sel.flash_limb(BP.body_zone, "#FF0000")
 				if(BP.receive_damage(0, damage_amount))
 					H.update_damage_overlays()
 			else
@@ -1986,7 +1988,7 @@ GLOBAL_LIST_EMPTY(roundstart_races)
 		SEND_SIGNAL(H, COMSIG_CLEAR_MOOD_EVENT, "cold")
 		SEND_SIGNAL(H, COMSIG_CLEAR_MOOD_EVENT, "hot")
 
-// A general-purpose proc used to centralise checks to skip turf, movement, step, etc. 
+// A general-purpose proc used to centralise checks to skip turf, movement, step, etc.
 // For if a mob is floating, flying, intangible, etc.
 /datum/species/proc/is_floor_hazard_immune(mob/living/carbon/human/owner)
 	return FALSE
@@ -2275,3 +2277,8 @@ GLOBAL_LIST_EMPTY(roundstart_races)
 	var/modifier = -distance
 	if(!prob(STASPD+skill_modifier+modifier))
 		Paralyze(15)
+
+/client/proc/view_species_info(species_info)
+	var/datum/browser/popup = new(src.mob, "species_info", "<center>BESTIARY</center>", 460, 550)
+	popup.set_content(species_info)
+	popup.open()
