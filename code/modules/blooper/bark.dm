@@ -1,10 +1,14 @@
-GLOBAL_LIST_EMPTY(bark_list)
-GLOBAL_LIST_EMPTY(bark_random_list)
+GLOBAL_LIST_INIT(bark_list, init_bark_list())
+GLOBAL_LIST_INIT(bark_random_list, init_random_bark_list())
 
-/datum/controller/global_vars/proc/init_bark_lists()
+/datum/controller/global_vars/proc/init_bark_list()
 	for(var/path in subtypesof(/datum/bark))
 		var/datum/bark/B = new path()
 		GLOB.bark_list[B.id] = path
+
+/datum/controller/global_vars/proc/init_random_bark_list()
+	for(var/id in GLOB.bark_list)
+		var/datum/bark/B = GLOB.bark_list[id]
 		if(B.allow_random)
 			GLOB.bark_random_list[B.id] = path
 
