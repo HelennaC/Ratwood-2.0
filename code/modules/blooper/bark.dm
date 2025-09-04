@@ -10,7 +10,7 @@ GLOBAL_LIST_INIT(bark_random_list, init_random_bark_list())
 	for(var/id in GLOB.bark_list)
 		var/datum/bark/B = GLOB.bark_list[id]
 		if(B.allow_random)
-			GLOB.bark_random_list[B.id] = path
+			GLOB.bark_random_list[B.id] = B
 
 //Datums for barks and bark accessories
 /datum/bark
