@@ -141,7 +141,7 @@
 	H.update_transform()
 	return TRUE
 
-/mob/living/carbon/human/species/goblin/update_body()
+/mob/living/carbon/human/species/goblin/update_body(redraw = FALSE)
 	remove_overlay(BODY_LAYER)
 	if(!dna || !dna.species)
 		return

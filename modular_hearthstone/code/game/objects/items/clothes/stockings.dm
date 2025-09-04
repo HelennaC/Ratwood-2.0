@@ -3,7 +3,7 @@
 	desc = "A legwear made just for the pure aesthetics. Popular in courts and brothels alike."
 	icon = 'modular_hearthstone/icons/obj/items/clothes/stockings.dmi'
 	icon_state = "stockings"
-	slot_flags = ITEM_SLOT_MOUTH|ITEM_SLOT_PANTS|ITEM_SLOT_SHOES
+	slot_flags = ITEM_SLOT_MOUTH
 	resistance_flags = FLAMMABLE
 	obj_flags = CAN_BE_HIT
 	break_sound = 'sound/foley/cloth_rip.ogg'
@@ -34,11 +34,11 @@
 			user.visible_message(span_notice("[user] tries to put [src] on [H]..."))
 			if(do_after(user, 50, needhand = 1, target = H))
 				var/obj/item/bodypart/chest = H.get_bodypart(BODY_ZONE_CHEST)
-				chest.add_bodypart_feature(legwears_feature)
 				user.dropItemToGround(src)
 				forceMove(H)
 				H.legwear_socks = src
 				legwears_feature.accessory_colors = color
+				chest.add_bodypart_feature(legwears_feature)
 
 /obj/item/legwears/Destroy()
 	legwears_feature = null
