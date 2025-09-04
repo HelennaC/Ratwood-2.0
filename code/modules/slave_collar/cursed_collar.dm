@@ -78,7 +78,18 @@
 
 	if(!collar_master)
 		return
-		
+	
+	CALLBACK(src, PROC_REF(handle_equip), user)
+
+/obj/item/clothing/neck/roguetown/cursed_collar/proc/handle_equip(mob/living/carbon/human/user)
+	if(istype(user, /mob/living/carbon/human/dummy))
+		return
+
+	if(!user.mind)
+		user.visible_message(span_warning("\The [src] fails to lock around [user]'s neck."))
+		user.dropItemToGround(src, force = TRUE)
+		return
+
 	if(alert(user, "Submit to the collar's control?", "Cursed Collar", "Yes!", "No") != "Yes!")
 		user.visible_message(span_warning("[user] resists the collar's control."))
 		to_chat(user, span_warning("Your defiant will prevents the collar from binding to you!"))
