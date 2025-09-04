@@ -1,16 +1,20 @@
 GLOBAL_LIST_INIT(bark_list, init_bark_list())
 GLOBAL_LIST_INIT(bark_random_list, init_random_bark_list())
 
-/datum/controller/global_vars/proc/init_bark_list()
+/proc/init_bark_list()
+	. = list()
 	for(var/path in subtypesof(/datum/bark))
 		var/datum/bark/B = new path()
-		GLOB.bark_list[B.id] = path
+		.[B.id] = path
+		qdel(B)
 
-/datum/controller/global_vars/proc/init_random_bark_list()
-	for(var/id in GLOB.bark_list)
-		var/datum/bark/B = GLOB.bark_list[id]
+/proc/init_random_bark_list()
+	. = list()
+	for(var/path in subtypesof(/datum/bark))
+		var/datum/bark/B = new path()
 		if(B.allow_random)
-			GLOB.bark_random_list[B.id] = B
+			.[B.id] = path
+		qdel(B)
 
 //Datums for barks and bark accessories
 /datum/bark
