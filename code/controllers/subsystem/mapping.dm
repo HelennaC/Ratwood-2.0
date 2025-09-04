@@ -148,7 +148,7 @@ SUBSYSTEM_DEF(mapping)
 	z_list = SSmapping.z_list
 
 #define INIT_ANNOUNCE(X) to_chat(world, "<span class='boldannounce'>[X]</span>"); log_world(X)
-/datum/controller/subsystem/mapping/proc/LoadGroup(list/errorList, name, path, files, list/traits, list/default_traits, silent = FALSE)
+/datum/controller/subsystem/mapping/proc/LoadGroup(list/errorList, name, path, files, map_folder, list/traits, list/default_traits, silent = FALSE)
 	. = list()
 	var/start_time = REALTIMEOFDAY
 
@@ -159,7 +159,7 @@ SUBSYSTEM_DEF(mapping)
 	var/total_z = 0
 	var/list/parsed_maps = list()
 	for (var/file in files)
-		var/full_path = "_maps/[path]/[file]"
+		var/full_path = "[map_folder]/[path]/[file]"
 		if(path == "custom")
 			full_path = "data/custom_maps/[file]"
 		var/datum/parsed_map/pm = new(file(full_path))
@@ -210,7 +210,7 @@ SUBSYSTEM_DEF(mapping)
 	INIT_ANNOUNCE("Loading [config.map_name]...")
 	#endif
 
-	LoadGroup(FailedZs, "Station", config.map_path, config.map_file, config.traits, ZTRAITS_STATION)
+	LoadGroup(FailedZs, "Station", config.map_path, config.map_file, config.map_folder, config.traits, ZTRAITS_STATION)
 
 	var/list/otherZ = list()
 
@@ -219,7 +219,7 @@ SUBSYSTEM_DEF(mapping)
 	#endif
 	if(otherZ.len)
 		for(var/datum/map_config/OtherZ in otherZ)
-			LoadGroup(FailedZs, OtherZ.map_name, OtherZ.map_path, OtherZ.map_file, OtherZ.traits, ZTRAITS_STATION)
+			LoadGroup(FailedZs, OtherZ.map_name, OtherZ.map_path, OtherZ.map_file, OtherZ.map_folder, OtherZ.traits, ZTRAITS_STATION)
 
 	if(SSdbcore.Connect())
 		var/datum/DBQuery/query_round_map_name = SSdbcore.NewQuery({"
@@ -236,7 +236,7 @@ SUBSYSTEM_DEF(mapping)
 
 	// load mining
 	if(config.minetype == "lavaland")
-		LoadGroup(FailedZs, "Lavaland", "map_files/Mining", "Lavaland.dmm", default_traits = ZTRAITS_LAVALAND)
+		LoadGroup(FailedZs, "Lavaland", "map_files/Mining", "Lavaland.dmm", "_maps", default_traits = ZTRAITS_LAVALAND)
 	else if (!isnull(config.minetype))
 		INIT_ANNOUNCE("WARNING: An unknown minetype '[config.minetype]' was set! This is being ignored! Update the maploader code!")
 	#endif

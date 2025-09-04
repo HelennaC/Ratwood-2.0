@@ -285,7 +285,9 @@ Example config:
 
 		switch (command)
 			if ("map")
-				currentmap = load_map_config("_maps/[data].json")
+				currentmap = load_map_config("_maps/[data].json", error_if_missing = FALSE)
+				if(currentmap.defaulted)
+					currentmap = load_map_config("secrets/_maps/[data].json", error_if_missing = FALSE)
 				if(currentmap.defaulted)
 					log_config("Failed to load map config for [data]!")
 					currentmap = null
