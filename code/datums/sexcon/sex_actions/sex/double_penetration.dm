@@ -47,9 +47,9 @@
 		target.virginity = FALSE
 
 	if(user.sexcon.considered_limp())
-		user.sexcon.perform_sex_action(target, 1.4, 4, FALSE)
+		user.sexcon.perform_sex_action(target, 3.7, 7, FALSE)
 	else
-		user.sexcon.perform_sex_action(target, 2.7, 9, FALSE)
+		user.sexcon.perform_sex_action(target, 2.4, 7, FALSE)
 	target.sexcon.handle_passive_ejaculation()
 
 /datum/sex_action/double_penetration_sex/on_finish(mob/living/carbon/human/user, mob/living/carbon/human/target)
