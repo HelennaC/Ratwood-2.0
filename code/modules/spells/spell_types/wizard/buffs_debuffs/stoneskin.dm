@@ -54,10 +54,10 @@
 	alert_type = /atom/movable/screen/alert/status_effect/buff/stoneskin
 	effectedstats = list("constitution" = 5)
 	var/hadcritres = FALSE
-	duration = 1 MINUTES
+	duration = 1.5 MINUTES
 
 /datum/status_effect/buff/stoneskin/other
-	duration = 2 MINUTES
+	duration = 3 MINUTES
 
 /datum/status_effect/buff/stoneskin/on_apply()
 	. = ..()
