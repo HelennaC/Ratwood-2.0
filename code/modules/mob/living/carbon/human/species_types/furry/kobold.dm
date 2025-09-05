@@ -5,9 +5,24 @@
 	name = "Kobold"
 	id = "kobold"
 	desc = "<b>Kobold</b><br>\
-	Short in stature and typically scrawny, these little lizards make up for it in their natural agility. \
-	People typically stereotype them as thieves, though...<br>\
+	Kobolds are a nomadic tribal people known for their small stature and swift speed. \
+	They prefer mountainous terrain or underground cave systems, but they are adaptable \
+	to new environments. They are often found in the service of dragons or Drakian rulers.<br>\
 	(+1 Fortune, Eating Rocks and Gems Trait)"
+
+	expanded_desc =	"Kobolds are a nomadic tribal people known for their small stature and swift speed. \
+	They prefer mountainous terrain or underground cave systems, but they are adaptable \
+	to new environments. They are often found in the service of dragons or Drakian rulers. \
+	<br><br> \
+	It is said that Kobolds were created by Matthios, who upon achieving godhood assumed a new form, \
+	that of the first dragon. Kobolds were the last race Matthios created before his defeat and ultimate \
+	banishment to the hells. It is believed they were made to be subservient to dragons and Drakians \
+	due to their servile nature. \
+	<br><br> \
+	However, Kobolds suffered from fleeting loyalty and faith in Matthios \
+	and the task they were created for. Consequently, many Kobolds sought new purposes and beliefs. Many \
+	even sought refuge in civilized societies. Yet, they remain bound by their nature and often take to \
+	thievery and pickpocketing, further cementing hatred and distrust toward them by civilized folk."
 	species_traits = list(EYECOLOR,LIPS,STUBBLE,MUTCOLORS)
 	possible_ages = ALL_AGES_LIST
 	changesource_flags = MIRROR_BADMIN | WABBAJACK | MIRROR_MAGIC | MIRROR_PRIDE | RACE_SWAP | SLIME_EXTRACT

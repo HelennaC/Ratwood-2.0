@@ -5,12 +5,25 @@
 	name = "Lupian"
 	id = "lupian"
 	desc = "<b>Lupian</b><br>\
-	As written by an Archivist from times before yours: Lupians, known by many as Volfmen, are a very prominent type of Beastkin that is easily found all across Psydonia. \
-	They are oft tall and slim, carrying with them a coat of discoloured short or medium length fur. \
-	Their bodies are naturally resilient and their minds as sharp as a Humen's own. \
-	A Lupian will usually display loyalty to a fault, as they are quite factional beings. \
-	Tales of old claim that they came to be when Noc stole Dendor’s curse to create lyfe of his own in an attempt to replicate Psydon’s, instead giving birth to a flawed beast-people.<br>\
+	Lupians are the sons and daughters of Noc. They are a volf-like people hailing from the Northern Regions of the world. \
+	They are resilient, cunning and fight ready creachures capable of surviving the north thanks to their rugged pelts, \
+	sharp teeth and deep-rooted spirit of community. They are very dutiful individuals and make fantastic and fearsome \
+	warriors to those who earn their loyalty. Thanks to their pack minded nature they are slow to trust the other races \
+	but form deep connections with those they do. In recent years they have been driven from the forests by unrest and the \
+	inevitable spread of the rot and pressed into cohabitation with races they'd deem lesser.<br>\
 	(+1 Constitution, +1 Intelligence, Sleuth Trait)"
+	expanded_desc = "Lupians live under elective monarchies, forms of feudalism where the king of a pack is chosen from, and by, the military council. \
+	The leader of the pack is a philosopher king, a paragon of virtue and one who should inspire awe and loyalty among the population \
+	while the real power is held by the military leadership. Should a king fail his people it is not uncommon for the entire kingdom \
+	to fall into disarray as law and order begin to break down, for many Lupians see it a disgrace to themselves to follow a king who \
+	appears weak. Similarly, most Lupians uphold an image of pride and toughness, it is only in the presence of someone who appears \
+	stronger do they bend the knee. To become a leader is a constant challenge to maintain. \
+	<br><br> \
+	Vakran was once the largest of the pack-nations, the capital of Lupian civilization. After the King sequestered himself away under \
+	insurmountable stress and went into hiding, it was revealed weeks later that he was poisoned by one of his sons. This plunged the \
+	nation states under the Vakran name into chaos. Vassals left, either becoming free or aligning themselves with the neighboring \
+	Frostfell or Felsaad, while others faced internal strife, civils wars between those who believed the Vakran name still held strong, \
+	and those who saw the crown tainted, even the military council decimated itself between duels and the pitting of coups."
 	skin_tone_wording = "Ascendance"
 	species_traits = list(
 		MUTCOLORS,

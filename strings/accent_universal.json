@@ -1,15 +1,11 @@
 {
     "universal": {
 		"life": "lyfe",
+		"lifestyle": "lyfestyle",
+		"sir": "ser",
 		"lantern": "lamptern",
-		"lucifer": "zizo",
-		"Beelzebub": "zizo",
-		"Abaddon": "eora",
-		"Belphegor": "eora",
-		"Asmodeus": "eora",
-		"satan": "zizo",
 		"ERP": "bush whacking",
-	    "day": "dae",
+		"day": "dae",
 		"monday": "moonsdae",
 		"tuesday": "tiwsdae",
 		"wednesday": "weddingsdae",
@@ -43,7 +39,7 @@
 		"rizzard": "charmer",
 		"rizzler": "charmer",
 		"gyatt": "buttocks",
-		"baka": "nimrod",
+		"baka": "fool",
 		"ligma": "leprosy",
 		"griddy": "charm",
 		"banban": "demon",
@@ -92,6 +88,7 @@
 		"wolfpit": "volfpit",
 		"PQ": "reputation",
 		"sergant":  "sargent",
-		"zaelorian": "zizo"
+		"retard": "dimwit",
+		"retarded": "dimwitted"
     }
 }

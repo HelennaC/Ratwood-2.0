@@ -64,7 +64,7 @@ There are several things that need to be remembered:
 	update_body_parts(TRUE)
 	return
 
-/mob/living/carbon/human/update_body()
+/mob/living/carbon/human/update_body(redraw = FALSE)
 	dna.species.handle_body(src)
 	..()
 

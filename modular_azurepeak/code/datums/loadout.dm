@@ -455,7 +455,7 @@ GLOBAL_LIST_EMPTY(loadout_items)
 
 /datum/loadout_item/cursed_collar
 	name = "Cursed Collar"
-	path = /obj/item/clothing/neck/roguetown/gorget/cursed_collar
+	path = /obj/item/clothing/neck/roguetown/cursed_collar
 
 /datum/loadout_item/cloth_blindfold
 	name = "Cloth Blindfold"

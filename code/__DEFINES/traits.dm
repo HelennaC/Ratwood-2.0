@@ -656,8 +656,8 @@ Remember to update _globalvars/traits.dm if you're adding/removing/renaming trai
 #define TIMESTOP_TRAIT "timestop"
 #define HUGBOX_TRAIT "hugbox"
 #define ADVENTURER_TRAIT "adventurer"
-
 #define TRAIT_I_AM_INVISIBLE_ON_A_BOAT "invisible_on_tram"
+#define TRAIT_LOVESTRUCK "lovestruck"
 
 //for ai
 #define TRAIT_SUBTREE_REQUIRED_OPERATIONAL_DATUM "element-required"

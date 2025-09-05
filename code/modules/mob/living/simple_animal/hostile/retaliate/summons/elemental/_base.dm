@@ -1,3 +1,6 @@
+/mob/living/simple_animal/hostile/retaliate/rogue/elemental
+	obj_damage = 75
+
 /mob/living/simple_animal/hostile/retaliate/rogue/elemental/Initialize()
 	. = ..()
 	ADD_TRAIT(src, TRAIT_NOBREATH, TRAIT_GENERIC)
@@ -53,3 +56,10 @@
 
 /mob/living/simple_animal/hostile/retaliate/rogue/elemental/simple_add_wound(datum/wound/wound, silent = FALSE, crit_message = FALSE)	//no wounding the elementals
 	return
+
+/mob/living/simple_animal/hostile/retaliate/rogue/elemental/attackby(obj/item/P, mob/living/carbon/human/user, params)
+	if(istype(P, /obj/item/magic/elementalmote))
+		src.health += 100
+	if(istype(P, /obj/item/magic/melded))
+		src.health = src.maxHealth
+	..()

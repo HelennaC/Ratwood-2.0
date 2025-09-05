@@ -4,11 +4,26 @@
 /datum/species/demihuman
 	name = "Half-Kin"
 	id = "demihuman"
-	desc = "<b>Half-Kin</b><br>\
-	The inevitable union between wildkin and some form of humanity or another. \
-	While they also experience animalistic tendencies akin to their full-blooded ancestors, their intermingling with others has stemmed the severity of such primordial impulses. \
-	(Half-kin are not a template race to play your own custom race. If you play a half-kin, you are expected to roleplay to the setting and the race's lore.)<br>\
+	desc = "<b>Half-kin</b><br>\
+	Half-kins are a highly diversified people. Half-kins are primarily \
+	a consequence of Beastling races mixing with a Humens and Elves, although some have \
+	acquired their Beastling traits due to magical curses or blessings from a god, typically \
+	Dendor. Half-kins can reproduce with one another, and their children will inherit features \
+	from both parents. Half-kin genes are dominant when mixing with Humens or Elves.<br>\
 	(+1 Endurance, +1 Perception)"
+
+	expanded_desc = "Half-kins are a highly diversified people. Half-kins are primarily \
+	a consequence of Beastling races mixing with a Humens and Elves, although some have \
+	acquired their Beastling traits due to magical curses or blessings from a god, typically \
+	Dendor. Half-kins can reproduce with one another, and their children will inherit features \
+	from both parents. Half-kin genes are dominant when mixing with Humens or Elves. \
+	<br><br> \
+	Half-kins have an easier time being accepted into societies depending on what Beastling features \
+	they have, but it is highly dependent on both their appearance and attitude. However, due to both \
+	historic and ongoing discrimination of mixed bloods they are usually not fully accepted by either \
+	of their parent races. Hence, Half-kins tend to share a strong sense of kinship with similar Half-kins. \
+	Yet, their shared traits with respectable races do mean that Half-kins are more widely accepted into \
+	societies that they share blood ties with than other Beastling races."
 	skin_tone_wording = "Ancestry"
 	default_color = "FFFFFF"
 	species_traits = list(EYECOLOR,HAIR,FACEHAIR,LIPS,STUBBLE,OLDGREY,MUTCOLORS_PARTSONLY)
@@ -107,7 +122,7 @@
 		/datum/descriptor_choice/prominent_three_wild,
 		/datum/descriptor_choice/prominent_four_wild,
 	)
-	
+
 /datum/species/demihuman/check_roundstart_eligible()
 	return TRUE
 
