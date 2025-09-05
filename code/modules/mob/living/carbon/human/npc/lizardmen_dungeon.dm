@@ -73,8 +73,8 @@
 	ears = new /obj/item/organ/ears/psy_vault_guard
 	ears.Insert(src)
 	//This Stuff handles their parts
-	job = "Zardman Jailer"
-	real_name = "Zardman Jailer"
+	job = "Sissean Jailer"
+	real_name = "Sissean Jailer"
 	ADD_TRAIT(src, TRAIT_NOMOOD, TRAIT_GENERIC)
 	ADD_TRAIT(src, TRAIT_NOHUNGER, TRAIT_GENERIC)
 	ADD_TRAIT(src, TRAIT_LEECHIMMUNE, INNATE_TRAIT)

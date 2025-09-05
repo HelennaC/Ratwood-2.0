@@ -247,7 +247,7 @@
 	default_disabled = TRUE
 
 /datum/customizer_choice/organ/ears/lizard
-	name = "Zardman Hood"
+	name = "Sissean Hood"
 	organ_type = /obj/item/organ/ears/anthro
 	generic_random_pick = TRUE
 	sprite_accessories = list(

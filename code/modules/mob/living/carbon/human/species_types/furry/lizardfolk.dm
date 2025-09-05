@@ -2,22 +2,22 @@
 	race = /datum/species/lizardfolk
 
 /datum/species/lizardfolk
-	name = "Zardman"
+	name = "Sissean"
 	id = "lizardfolk"
-	desc = "<b>Zardman</b><br>\
-	Zardman are hardy, reptilian people that share a unique bond among their kind due to being the target \
+	desc = "<b>Sissean</b><br>\
+	Sissean are hardy, reptilian people that share a unique bond among their kind due to being the target \
 	of oppression and enslavement by other races, particularly by Humans and Drakians. They take pride in \
 	their resilience and adaptability, and they can be found all over the world for one reason or another.<br>\
 	(+1 Constitution, +1 Endurance)"
-	expanded_desc = "Zardman are hardy, reptilian people that share a unique bond among their kind due to being the target of oppression \
+	expanded_desc = "Sissean are hardy, reptilian people that share a unique bond among their kind due to being the target of oppression \
 	and enslavement by other races, particularly by Humans and Drakians. They take pride in their resilience and adaptability,\
-	and they can be found all over the world for one reason or another. Once a nomadic, tribal people, Zardman are often forced \
+	and they can be found all over the world for one reason or another. Once a nomadic, tribal people, Sissean are often forced \
 	to hide and settle in deserts, swamps, bogs, and other typically inhospitable lands. Their appearance changes based on the lands \
 	they adapt to, allowing for crocodilian appearance if from the swamp to lizard-like appearances if from the desert. \
 	<br><br> \
 	They can also be found in large, bustling cities, particularly slave cities where their strength, toughness, and endurance \
-	makes them particularly valuable. Zardman often despise weakness and instead find solace in suffering. They tend to be \
-	highly religious, although of course, no race is monolithic. In fact, some Zardman have become successful with some rising to \
+	makes them particularly valuable. Sissean often despise weakness and instead find solace in suffering. They tend to be \
+	highly religious, although of course, no race is monolithic. In fact, some Sissean have become successful with some rising to \
 	the rank of nobility in many different kingdoms despite all adversity, but this often makes them targets of their jealous peers."
 	skin_tone_wording = "Skin Colors"
 	species_traits = list(EYECOLOR,LIPS,STUBBLE,MUTCOLORS)
@@ -79,7 +79,7 @@
 		/datum/customizer/organ/snout/lizard,
 		/datum/customizer/organ/ears/lizard,
 		/datum/customizer/organ/frills/lizard,
-		/datum/customizer/organ/horns/humanoid/zardman,
+		/datum/customizer/organ/horns/humanoid/sissean,
 		/datum/customizer/organ/testicles/anthro,
 		/datum/customizer/organ/penis/anthro,
 		/datum/customizer/organ/breasts/animal,
