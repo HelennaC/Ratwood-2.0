@@ -23,6 +23,7 @@
 /obj/item/rogueweapon/hammer/steel,
 /obj/item/rogueweapon/hammer/steel,
 /obj/item/rogueweapon/hammer/steel,
+/obj/machinery/light/rogue/torchholder/l,
 /turf/open/floor/rogue/dirt/road,
 /area/rogue)
 "af" = (
@@ -63,6 +64,7 @@
 /area/rogue)
 "ai" = (
 /obj/structure/closet/crate/chest,
+/obj/machinery/light/rogue/torchholder/l,
 /turf/open/floor/rogue/dirt/road,
 /area/rogue)
 "aj" = (
@@ -825,9 +827,17 @@
 	icon_state = "rockwd"
 	},
 /area/rogue/outdoors/woods)
+"gn" = (
+/obj/machinery/light/rogue/torchholder/l,
+/turf/open/floor/rogue/cobble,
+/area/rogue/outdoors)
 "gp" = (
 /turf/open/floor/rogue/metal/barograte/open,
 /area/rogue/indoors/eventarea)
+"gr" = (
+/obj/machinery/light/rogue/firebowl/standing,
+/turf/open/floor/rogue/wood,
+/area/rogue)
 "gs" = (
 /obj/structure/closet/crate/chest,
 /turf/open/floor/rogue/blocks,
@@ -1048,6 +1058,17 @@
 "jz" = (
 /turf/open/floor/rogue/rooftop/green/corner1,
 /area/rogue/indoors/eventarea)
+"jL" = (
+/obj/structure/mannequin/male,
+/obj/item/clothing/head/roguetown/roguehood/shalal/purple,
+/obj/item/clothing/under/roguetown/chainlegs,
+/obj/item/clothing/suit/roguetown/shirt/undershirt/purple,
+/turf/open/floor/carpet/purple,
+/area/rogue)
+"jS" = (
+/obj/machinery/light/rogue/torchholder/r,
+/turf/open/floor/rogue/cobble,
+/area/rogue/outdoors)
 "jU" = (
 /obj/structure/chair/stool/rogue,
 /turf/open/floor/rogue/dirt/road,
@@ -1245,6 +1266,7 @@
 /obj/item/rogueweapon/greatsword,
 /obj/item/rogueweapon/greatsword,
 /obj/item/rogueweapon/greatsword,
+/obj/machinery/light/rogue/torchholder/l,
 /turf/open/floor/rogue/cobble,
 /area/rogue)
 "ms" = (
@@ -1443,6 +1465,15 @@
 /obj/item/reagent_containers/glass/cup/skull,
 /turf/open/floor/rogue/hexstone,
 /area/rogue/indoors/banditcamp)
+"oz" = (
+/obj/structure/roguemachine/mail/r{
+	mailtag = "Zybantine Empire"
+	},
+/turf/open/floor/carpet/purple,
+/area/rogue)
+"oA" = (
+/turf/open/floor/carpet/red,
+/area/rogue)
 "oB" = (
 /obj/structure/fluff/walldeco/stone{
 	pixel_y = 32
@@ -1590,6 +1621,12 @@
 "qb" = (
 /turf/open/floor/rogue/blocks/newstone/alt,
 /area/rogue/indoors/eventarea)
+"qd" = (
+/obj/structure/roguemachine/mail/r{
+	mailtag = "Court of Kingsfield"
+	},
+/turf/open/floor/carpet/royalblack,
+/area/rogue)
 "qj" = (
 /obj/structure/vampire/necromanticbook{
 	pixel_x = -16;
@@ -1638,6 +1675,9 @@
 /obj/machinery/light/rogue/wallfire/candle/blue/r,
 /turf/open/floor/rogue/blocks,
 /area/rogue/indoors)
+"qK" = (
+/turf/open/floor/carpet/royalblack,
+/area/rogue)
 "qO" = (
 /turf/open/floor/rogue/cobble,
 /area/rogue/under/cave/inhumen)
@@ -1695,6 +1735,10 @@
 /obj/item/rogueweapon/sword/iron,
 /turf/open/floor/rogue/cobble,
 /area/rogue)
+"ru" = (
+/obj/machinery/light/rogue/torchholder/l,
+/turf/open/floor/rogue/dirt/road,
+/area/rogue/outdoors)
 "rz" = (
 /obj/effect/landmark/start/banditlate,
 /obj/structure/fluff/railing/border{
@@ -1718,6 +1762,10 @@
 	},
 /turf/open/floor/rogue/blocks,
 /area/rogue/under/cave/inhumen)
+"rG" = (
+/obj/machinery/light/rogue/torchholder/c,
+/turf/open/floor/rogue/grass,
+/area/rogue/outdoors)
 "rN" = (
 /obj/machinery/light/rogue/oven/south,
 /turf/open/floor/rogue/tile{
@@ -1733,6 +1781,13 @@
 /area/rogue/indoors/banditcamp)
 "rQ" = (
 /turf/closed,
+/area/rogue)
+"sb" = (
+/obj/structure/mannequin/male,
+/obj/item/clothing/head/roguetown/grenzelhofthat,
+/obj/item/clothing/suit/roguetown/armor/gambeson/heavy/grenzelhoft,
+/obj/item/clothing/under/roguetown/heavy_leather_pants/grenzelpants,
+/turf/open/floor/carpet/stellar,
 /area/rogue)
 "sc" = (
 /mob/living/simple_animal/pet/cat/rogue/black,
@@ -1919,6 +1974,10 @@
 	icon_state = "chess"
 	},
 /area/rogue/indoors)
+"ut" = (
+/obj/machinery/gear_painter,
+/turf/open/floor/rogue/carpet,
+/area/rogue)
 "ux" = (
 /obj/item/chair/rogue,
 /obj/effect/landmark/start/bandit{
@@ -1955,10 +2014,23 @@
 /obj/structure/fluff/statue/knight/r,
 /turf/open/water/pond,
 /area/rogue/indoors/ravoxarena)
+"va" = (
+/turf/open/floor/carpet/purple,
+/area/rogue)
 "vb" = (
 /obj/machinery/light/rogue/firebowl/standing,
 /turf/open/floor/rogue/hexstone,
 /area/rogue/indoors/banditcamp)
+"vd" = (
+/obj/structure/table/wood{
+	dir = 6;
+	icon_state = "largetable"
+	},
+/obj/item/roguecoin/copper/pile,
+/obj/item/roguecoin/copper/pile,
+/obj/item/roguecoin/copper/pile,
+/turf/open/floor/rogue/wood,
+/area/rogue)
 "vp" = (
 /turf/closed/wall/mineral/rogue/craftstone,
 /area/rogue/indoors/banditcamp)
@@ -2482,6 +2554,23 @@
 "Bi" = (
 /turf/open/floor/rogue/blocks,
 /area/rogue/under/cave/inhumen)
+"Bq" = (
+/obj/item/paper/scroll,
+/obj/item/paper/scroll,
+/obj/item/paper/scroll,
+/obj/item/paper/scroll,
+/obj/item/paper/scroll,
+/obj/item/paper/scroll,
+/obj/item/paper/scroll,
+/obj/item/paper/scroll,
+/obj/structure/table/wood{
+	dir = 10;
+	icon_state = "largetable"
+	},
+/obj/item/natural/feather,
+/obj/item/natural/feather,
+/turf/open/floor/rogue/wood,
+/area/rogue)
 "Bw" = (
 /obj/structure/table/wood{
 	dir = 10;
@@ -2666,6 +2755,9 @@
 /obj/effect/landmark/start/wretch,
 /turf/open/floor/rogue/naturalstone,
 /area/rogue/under/cave/inhumen)
+"DJ" = (
+/turf/open/floor/rogue/wood,
+/area/rogue)
 "DK" = (
 /turf/open/floor/rogue/greenstone/glyph6,
 /area/rogue/indoors/eventarea)
@@ -2787,6 +2879,10 @@
 /obj/machinery/light/rogue/wallfire/candle/l,
 /turf/open/floor/rogue/tile,
 /area/rogue/indoors)
+"Fs" = (
+/obj/machinery/light/rogue/firebowl/standing,
+/turf/open/floor/rogue/dirt/road,
+/area/rogue/outdoors)
 "Fu" = (
 /obj/machinery/light/rogue/wallfire/candle,
 /turf/open/floor/rogue/dirt/road,
@@ -2826,6 +2922,7 @@
 /obj/item/clothing/shoes/roguetown/boots/armor,
 /obj/item/clothing/shoes/roguetown/boots/armor,
 /obj/item/clothing/shoes/roguetown/boots/armor,
+/obj/machinery/light/rogue/torchholder/r,
 /turf/open/floor/rogue/carpet,
 /area/rogue)
 "Go" = (
@@ -2899,6 +2996,10 @@
 /obj/item/natural/bundle/stick,
 /turf/open/floor/rogue/cobble,
 /area/rogue/under/cave/inhumen)
+"GQ" = (
+/obj/machinery/light/rogue/torchholder/c,
+/turf/open/floor/rogue/dirt,
+/area/rogue/outdoors)
 "GR" = (
 /obj/structure/fluff/railing/border{
 	dir = 8;
@@ -2923,6 +3024,10 @@
 	},
 /turf/open/floor/rogue/dirt,
 /area/rogue/outdoors/banditcamp)
+"Hs" = (
+/obj/machinery/light/rogue/torchholder/r,
+/turf/open/floor/rogue/carpet,
+/area/rogue)
 "HA" = (
 /obj/effect/landmark/start/wretch,
 /turf/open/floor/rogue/concrete,
@@ -2973,6 +3078,7 @@
 /obj/item/rogueweapon/mace/goden,
 /obj/item/rogueweapon/mace/goden,
 /obj/item/rogueweapon/mace/goden,
+/obj/machinery/light/rogue/torchholder/r,
 /turf/open/floor/rogue/cobble,
 /area/rogue)
 "If" = (
@@ -2991,7 +3097,7 @@
 /turf/open/floor/rogue/blocks,
 /area/rogue/under/cave/inhumen)
 "Is" = (
-/obj/machinery/gear_painter,
+/obj/machinery/light/rogue/firebowl/standing,
 /turf/open/floor/rogue/cobble,
 /area/rogue)
 "It" = (
@@ -3020,9 +3126,9 @@
 /turf/open/floor/rogue/churchbrick,
 /area/rogue/indoors/eventarea)
 "IV" = (
-/obj/structure/fluff/statue/tdummy,
-/turf/open/floor/rogue/grass,
-/area/rogue/outdoors)
+/obj/machinery/light/rogue/torchholder/r,
+/turf/open/floor/rogue/dirt/road,
+/area/rogue)
 "IY" = (
 /obj/effect/landmark/events/testportal{
 	aportalloc = "spidercave"
@@ -3061,6 +3167,12 @@
 "Jd" = (
 /turf/open/floor/rogue/ruinedwood/chevron,
 /area/rogue/indoors/eventarea)
+"Jj" = (
+/obj/structure/roguemachine/mail/r{
+	mailtag = "Sovereignty of Otava"
+	},
+/turf/open/floor/carpet/red,
+/area/rogue)
 "Jn" = (
 /obj/structure/table/wood{
 	dir = 10;
@@ -3102,6 +3214,7 @@
 	},
 /obj/item/clothing/head/roguetown/helmet/heavy/crusader,
 /obj/item/clothing/head/roguetown/helmet/heavy/crusader/t,
+/obj/machinery/light/rogue/torchholder/l,
 /turf/open/floor/rogue/carpet,
 /area/rogue)
 "Kd" = (
@@ -3200,6 +3313,10 @@
 /obj/structure/closet/crate/drawer,
 /turf/open/floor/rogue/hexstone,
 /area/rogue/under/cave/inhumen)
+"LF" = (
+/obj/machinery/light/rogue/torchholder/l,
+/turf/open/floor/rogue/cobble,
+/area/rogue)
 "LI" = (
 /turf/open/floor/rogue/blocks/paving,
 /area/rogue/indoors/eventarea)
@@ -3311,6 +3428,11 @@
 "Nk" = (
 /turf/open/floor/rogue/cobblerock,
 /area/rogue/indoors/eventarea)
+"Nn" = (
+/obj/structure/fermentation_keg/water,
+/obj/machinery/light/rogue/torchholder/c,
+/turf/open/floor/rogue/dirt/road,
+/area/rogue)
 "Nt" = (
 /obj/machinery/light/rogue/wallfire/candle/r,
 /obj/structure/table/wood{
@@ -3442,6 +3564,7 @@
 /obj/item/clothing/neck/roguetown/leather,
 /obj/item/clothing/neck/roguetown/leather,
 /obj/item/clothing/neck/roguetown/leather,
+/obj/machinery/light/rogue/torchholder/l,
 /turf/open/floor/rogue/carpet,
 /area/rogue)
 "OV" = (
@@ -3851,6 +3974,7 @@
 /obj/item/rogueweapon/sword/long,
 /obj/item/rogueweapon/sword/long,
 /obj/item/rogueweapon/sword/long,
+/obj/machinery/light/rogue/torchholder/c,
 /turf/open/floor/rogue/cobble,
 /area/rogue)
 "UZ" = (
@@ -3880,6 +4004,12 @@
 	},
 /turf/open/floor/rogue/cobblerock,
 /area/rogue/outdoors/woods)
+"Vk" = (
+/obj/structure/roguemachine/mail/r{
+	mailtag = "Grenzelhoft Emperiate"
+	},
+/turf/open/floor/carpet/stellar,
+/area/rogue)
 "Vu" = (
 /obj/machinery/light/rogue/forge,
 /turf/open/floor/rogue/ruinedwood{
@@ -3927,6 +4057,10 @@
 "VS" = (
 /turf/open/water/swamp,
 /area/rogue/outdoors)
+"Wa" = (
+/obj/structure/fluff/psycross/psycrucifix/silver,
+/turf/open/floor/carpet/red,
+/area/rogue)
 "Wf" = (
 /turf/open/floor/rogue/cobblerock,
 /area/rogue/indoors/banditcamp)
@@ -4002,6 +4136,12 @@
 /obj/item/coveter,
 /turf/open/floor/rogue/herringbone,
 /area/rogue/indoors/banditcamp)
+"Xb" = (
+/obj/structure/mannequin/male,
+/obj/item/clothing/head/roguetown/crown/fakecrown,
+/obj/item/clothing/suit/roguetown/shirt/dress/royal/princess,
+/turf/open/floor/carpet/royalblack,
+/area/rogue)
 "Xi" = (
 /obj/structure/fluff/statue/gargoyle,
 /turf/open/floor/rogue/blocks,
@@ -4029,6 +4169,10 @@
 "Xw" = (
 /turf/open/floor/rogue/rooftop/green/west,
 /area/rogue/indoors/eventarea)
+"XD" = (
+/obj/machinery/light/rogue/torchholder/r,
+/turf/open/floor/rogue/dirt/road,
+/area/rogue/outdoors)
 "XE" = (
 /obj/structure/table/wood{
 	dir = 10;
@@ -4282,6 +4426,7 @@
 /obj/item/rogueweapon/mace/steel,
 /obj/item/rogueweapon/mace/steel,
 /obj/item/rogueweapon/mace/steel,
+/obj/machinery/light/rogue/torchholder/r,
 /turf/open/floor/rogue/cobble,
 /area/rogue)
 "ZH" = (
@@ -4318,6 +4463,9 @@
 /obj/effect/decal/cleanable/dirt/cobweb/cobweb2,
 /turf/open/floor/rogue/blocks,
 /area/rogue/under/cave/inhumen)
+"ZU" = (
+/turf/open/floor/carpet/stellar,
+/area/rogue)
 
 (1,1,1) = {"
 rQ
@@ -5014,7 +5162,7 @@ nF
 av
 av
 ay
-av
+ut
 yM
 nf
 nI
@@ -5403,7 +5551,7 @@ vP
 iL
 av
 av
-av
+Hs
 Sq
 qX
 Fd
@@ -5657,10 +5805,10 @@ rQ
 rQ
 bX
 bX
-pr
-pr
-pr
-pr
+RH
+RH
+Ph
+gn
 Ph
 Ph
 vP
@@ -5787,10 +5935,10 @@ rQ
 rQ
 bX
 bX
-pr
-pr
-pr
-pr
+RH
+RH
+RH
+RH
 Ph
 Ph
 vP
@@ -5802,7 +5950,7 @@ Dw
 Dw
 vP
 AD
-lw
+LF
 lw
 lw
 mm
@@ -6184,7 +6332,7 @@ RH
 RH
 Ph
 vP
-ac
+Nn
 Dw
 Dw
 Dw
@@ -6307,7 +6455,7 @@ rQ
 rQ
 bX
 bX
-Do
+rG
 Do
 RH
 RH
@@ -6440,7 +6588,7 @@ bX
 Do
 Do
 RH
-RH
+Fs
 Ph
 Ph
 vP
@@ -6705,10 +6853,10 @@ Ph
 Ph
 vP
 Dw
+IV
 Dw
 Dw
-Dw
-Dw
+IV
 CB
 vP
 rt
@@ -6965,10 +7113,10 @@ Ph
 Ph
 RH
 RH
-RH
+ru
 Ph
 Ph
-RH
+ru
 RH
 vP
 kY
@@ -7351,7 +7499,7 @@ pr
 pr
 RH
 RH
-RH
+Fs
 RH
 RH
 RH
@@ -7477,8 +7625,8 @@ rQ
 rQ
 bX
 bX
-pr
-pr
+GQ
+ij
 pr
 pr
 Do
@@ -7616,7 +7764,7 @@ Do
 Do
 pr
 RH
-RH
+Fs
 Ph
 Ph
 gE
@@ -7742,7 +7890,7 @@ RH
 pr
 Do
 Do
-IV
+Do
 pr
 pr
 RH
@@ -7998,7 +8146,7 @@ rQ
 bX
 bX
 pr
-RH
+VF
 RH
 RH
 RH
@@ -8129,13 +8277,13 @@ bX
 bX
 pr
 pr
+XD
 RH
 RH
 RH
 RH
 RH
-RH
-RH
+XD
 RH
 Ph
 Ph
@@ -8256,17 +8404,17 @@ rQ
 rQ
 rQ
 bX
-bX
-RH
-pr
-pr
-ij
-RH
-RH
-RH
-VF
-pr
-pr
+vP
+vP
+vP
+vP
+vP
+vP
+vP
+vP
+vP
+vP
+vP
 Ph
 Ph
 Do
@@ -8386,18 +8534,18 @@ rQ
 rQ
 rQ
 bX
-bX
-RH
-pr
-pr
-pr
-RH
-RH
-RH
-pr
-pr
-pr
-pr
+vP
+gr
+sb
+DJ
+jL
+gr
+Xb
+DJ
+Wa
+gr
+vP
+Ph
 Ph
 Do
 bX
@@ -8516,17 +8664,17 @@ rQ
 rQ
 rQ
 bX
-bX
-RH
-RH
-RH
-pr
-pr
-Do
-Do
-Do
-pr
-pr
+vP
+Bq
+ZU
+DJ
+va
+DJ
+qK
+DJ
+oA
+DJ
+DJ
 Ph
 Ph
 Do
@@ -8646,19 +8794,19 @@ rQ
 rQ
 rQ
 bX
-bX
-RH
-RH
-RH
-RH
-Do
-Do
-Do
-Do
-Do
-pr
+vP
+vd
+Vk
+DJ
+oz
+DJ
+qd
+DJ
+Jj
+DJ
+DJ
 Ph
-Ph
+jS
 RH
 bX
 bX
@@ -8776,17 +8924,17 @@ rQ
 rQ
 rQ
 bX
-bX
-bX
-bX
-bX
-bX
-bX
-bX
-bX
-bX
-bX
-bX
+vP
+vP
+vP
+vP
+vP
+vP
+vP
+vP
+vP
+vP
+vP
 bX
 bX
 bX

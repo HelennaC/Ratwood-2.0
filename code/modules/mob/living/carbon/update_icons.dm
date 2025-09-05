@@ -399,10 +399,10 @@
 	. = list()
 
 
-/mob/living/carbon/update_body()
-	update_body_parts()
+/mob/living/carbon/update_body(redraw = FALSE)
+	update_body_parts(redraw)
 
-/mob/living/carbon/proc/update_body_parts()
+/mob/living/carbon/proc/update_body_parts(redraw)
 	//CHECK FOR UPDATE
 	var/oldkey = icon_render_key
 	icon_render_key = generate_icon_render_key()

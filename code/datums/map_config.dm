@@ -17,6 +17,7 @@
 	var/map_name = "Dun Manor"
 	var/map_path = "map_files/dun_manor"
 	var/map_file = "dun_manor.dmm"
+	var/map_folder = "_maps"
 
 	var/traits = null
 	var/space_ruin_levels = 7
@@ -75,16 +76,22 @@
 	map_path = json["map_path"]
 
 	map_file = json["map_file"]
+	if(istext(json["map_folder"]))
+		map_folder = json["map_folder"]
+
 	// "map_file": "dun_manor.dmm"
-	if (istext(map_file))
-		if (!fexists("_maps/[map_path]/[map_file]"))
-			log_world("Map file ([map_path]/[map_file]) does not exist!")
+	if (map_path == "custom")
+		if(!fexists("data/custom_maps/[map_file]"))
+			log_world("Map file (data/custom_maps/[map_file]) does not exist!")
+	else if (istext(map_file))
+		if (!fexists("[map_folder]/[map_path]/[map_file]"))
+			log_world("Map file ([map_folder]/[map_path]/[map_file]) does not exist!")
 			return
 	// "map_file": ["Lower.dmm", "Upper.dmm"]
 	else if (islist(map_file))
 		for (var/file in map_file)
-			if (!fexists("_maps/[map_path]/[file]"))
-				log_world("Map file ([map_path]/[file]) does not exist!")
+			if (!fexists("[map_folder]/[map_path]/[file]"))
+				log_world("Map file ([map_folder]/[map_path]/[file]) does not exist!")
 				return
 	else
 		log_world("map_file missing from json!")
@@ -136,11 +143,13 @@
 #undef CHECK_EXISTS
 
 /datum/map_config/proc/GetFullMapPaths()
-	if (istext(map_file))
-		return list("_maps/[map_path]/[map_file]")
+	if (map_path == "custom")
+		return list("data/custom_maps/[map_file]")
+	else if (istext(map_file))
+		return list("[map_folder]/[map_path]/[map_file]")
 	. = list()
 	for (var/file in map_file)
-		. += "_maps/[map_path]/[file]"
+		. += "[map_folder]/[map_path]/[file]"
 
 /datum/map_config/proc/MakeNextMap()
 	return config_filename == "data/next_map.json" || fcopy(config_filename, "data/next_map.json")
