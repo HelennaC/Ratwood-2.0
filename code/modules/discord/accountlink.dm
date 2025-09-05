@@ -3,7 +3,7 @@
 	set category = "OOC"
 	set name = "Link Discord Account"
 	set desc = ""
-	set hidden = TRUE // Set FALSE to return option
+	set hidden = FALSE // Set TRUE to hide option
 	// Safety checks
 	if(!CONFIG_GET(flag/sql_enabled))
 		to_chat(src, span_warning("This feature requires the SQL backend to be running."))
@@ -26,7 +26,7 @@
 			return
 		var/entered_id = input("Please enter your Discord ID (18-ish digits)", "Enter Discord ID", null, null) as text|null
 		SSdiscord.account_link_cache[replacetext(lowertext(usr.ckey), " ", "")] = "[entered_id]" // Prepares for TGS-side verification, also fuck spaces
-		alert(usr, "Account link started. Please ping the bot of the server you\'re currently on, followed by \"verify [usr.ckey]\" in Discord to successfully verify your account (Example: @Mr_Terry verify [usr.ckey])")
+		alert(usr, "Account link started. Please ping the bot of the server you\'re currently on, followed by \"verify [usr.ckey]\" in Discord to successfully verify your account (Example: @The Herald verify [usr.ckey])")
 
 	else // Account is already linked
 		var/choice = alert("You already have the Discord Account [stored_id] linked to [usr.ckey]. Would you like to link a different account?","Already Linked","Yes","No")
