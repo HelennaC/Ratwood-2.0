@@ -49,7 +49,7 @@
 /datum/crafting_recipe/roguetown/alchemy/salt
 	name = "salt pile (1 ash, 10oz water, 1 fat)"
 	category = "Table"
-	result = list(/)
+	result = list(/obj/item/reagent_containers/powder/salt)
 	reqs = list(/obj/item/ash = 1, /datum/reagent/water = 10, /obj/item/reagent_containers/food/snacks/fat = 1)
 	craftdiff = 0
 
