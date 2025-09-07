@@ -50,14 +50,14 @@
 /datum/anvil_recipe/tools/aalloy/hoe
 	name = "Hoe, Decrepit (+2 Sticks)"
 	req_bar = /obj/item/ingot/aalloy
-	additional_items = list(/obj/item/grown/log/tree/stick,/obj/item/grown/log/tree/stick)
+	additional_items = list(/obj/item/grown/log/tree/stick, /obj/item/grown/log/tree/stick)
 	created_item = /obj/item/rogueweapon/hoe/aalloy
 	i_type = "Tools"
 
 /datum/anvil_recipe/tools/aalloy/pitchfork
 	name = "Pitchfork, Decrepit (+2 Sticks)"
 	req_bar = /obj/item/ingot/aalloy
-	additional_items = list(/obj/item/grown/log/tree/stick,/obj/item/grown/log/tree/stick)
+	additional_items = list(/obj/item/grown/log/tree/stick, /obj/item/grown/log/tree/stick)
 	created_item = /obj/item/rogueweapon/pitchfork/aalloy
 	i_type = "Tools"
 
@@ -92,7 +92,7 @@
 /datum/anvil_recipe/tools/aalloy/shovel
 	name = "Shovel, Decrepit (+2 Sticks)"
 	req_bar = /obj/item/ingot/aalloy
-	additional_items = list(/obj/item/grown/log/tree/stick,/obj/item/grown/log/tree/stick)
+	additional_items = list(/obj/item/grown/log/tree/stick, /obj/item/grown/log/tree/stick)
 	created_item = /obj/item/rogueweapon/shovel/aalloy
 	i_type = "Tools"
 
@@ -224,7 +224,7 @@
 /datum/anvil_recipe/tools/iron/shovel
 	name = "Shovel, Iron (+2 Sticks)"
 	req_bar = /obj/item/ingot/iron
-	additional_items = list(/obj/item/grown/log/tree/stick,/obj/item/grown/log/tree/stick)
+	additional_items = list(/obj/item/grown/log/tree/stick, /obj/item/grown/log/tree/stick)
 	created_item = /obj/item/rogueweapon/shovel
 	i_type = "Tools"
 
@@ -269,14 +269,14 @@
 /datum/anvil_recipe/tools/iron/hoe
 	name = "Hoe, Iron (+2 Sticks)"
 	req_bar = /obj/item/ingot/iron
-	additional_items = list(/obj/item/grown/log/tree/stick,/obj/item/grown/log/tree/stick)
+	additional_items = list(/obj/item/grown/log/tree/stick, /obj/item/grown/log/tree/stick)
 	created_item = /obj/item/rogueweapon/hoe
 	i_type = "Tools"
 
 /datum/anvil_recipe/tools/iron/pitchfork
 	name = "Pitchfork, Iron (+2 Sticks)"
 	req_bar = /obj/item/ingot/iron
-	additional_items = list(/obj/item/grown/log/tree/stick,/obj/item/grown/log/tree/stick)
+	additional_items = list(/obj/item/grown/log/tree/stick, /obj/item/grown/log/tree/stick)
 	created_item = /obj/item/rogueweapon/pitchfork
 	i_type = "Tools"
 
