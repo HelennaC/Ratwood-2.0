@@ -37,7 +37,7 @@
 		if(get_location_accessible(src, BODY_ZONE_PRECISE_GROIN, skipundies = TRUE))
 			if(!underwear)
 				return
-			src.visible_message(span_notice("[src] begins to take off [underwear]..."))
+			src.visible_message(span_notice("[user] begins to take off [(src==user)?" ":"[src]'s"][underwear]..."))
 			if(do_after(user, 30, needhand = 1, target = src))
 				var/obj/item/bodypart/chest = get_bodypart(BODY_ZONE_CHEST)
 				var/obj/item/undies/undies = underwear
@@ -50,7 +50,7 @@
 		if(get_location_accessible(src, BODY_ZONE_PRECISE_GROIN, skipundies = TRUE))
 			if(!legwear_socks)
 				return
-			src.visible_message(span_notice("[src] begins to take off [legwear_socks]..."))
+			src.visible_message(span_notice("[user] begins to take off [(src==user)?" ":"[src]'s"][legwear_socks]..."))
 			if(do_after(user, 30, needhand = 1, target = src))
 				var/obj/item/bodypart/chest = get_bodypart(BODY_ZONE_CHEST)
 				var/obj/item/legwears/legwears = legwear_socks
