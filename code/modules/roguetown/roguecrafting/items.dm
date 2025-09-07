@@ -12,7 +12,7 @@
 	skillcraft = /datum/skill/craft/crafting
 
 /datum/crafting_recipe/roguetown/survival/tneedle
-	name = "sewing needle"
+	name = "sewing needle (1 thorn, 1 fiber)"
 	result = /obj/item/needle/thorn
 	reqs = list(
 		/obj/item/natural/thorn = 1,
@@ -47,7 +47,7 @@
 	craftdiff = 0
 
 /datum/crafting_recipe/roguetown/survival/clothbelt
-	name = "cloth belt"
+	name = "cloth belt (1 cloth)"
 	result = /obj/item/storage/belt/rogue/leather/cloth
 	reqs = list(/obj/item/natural/cloth = 1)
 	craftdiff = 0
@@ -55,7 +55,7 @@
 	verbage = "ties"
 
 /datum/crafting_recipe/roguetown/survival/unclothbelt
-	name = "untie cloth belt"
+	name = "untie cloth belt (1 cloth)"
 	result = /obj/item/natural/cloth
 	reqs = list(/obj/item/storage/belt/rogue/leather/cloth = 1)
 	craftdiff = 0
@@ -70,7 +70,7 @@
 	craftdiff = 3
 
 /datum/crafting_recipe/roguetown/survival/ropebelt
-	name = "rope belt"
+	name = "rope belt (1 rope)"
 	result = /obj/item/storage/belt/rogue/leather/rope
 	reqs = list(/obj/item/rope = 1)
 	craftdiff = 0
@@ -78,7 +78,7 @@
 	verbage = "ties"
 
 /datum/crafting_recipe/roguetown/survival/unropebelt
-	name = "untie rope belt"
+	name = "untie rope belt (1 rope)"
 	result = /obj/item/rope
 	reqs = list(/obj/item/storage/belt/rogue/leather/rope = 1)
 	craftdiff = 0
@@ -112,7 +112,7 @@
 	always_availible = TRUE
 
 /datum/crafting_recipe/roguetown/survival/torch
-	name = "torch"
+	name = "torch (1 stick, 1 fiber)"
 	result = /obj/item/flashlight/flare/torch
 	reqs = list(
 		/obj/item/grown/log/tree/stick = 1,
@@ -122,13 +122,13 @@
 
 
 /datum/crafting_recipe/roguetown/survival/mortar
-	name = "alchemical mortar"
+	name = "alchemical mortar (1 stone)"
 	result = /obj/item/reagent_containers/glass/mortar
 	reqs = list(/obj/item/natural/stone = 1)
 	craftdiff = 1
 
 /datum/crafting_recipe/roguetown/survival/pestle
-	name = "stone pestle"
+	name = "stone pestle (1 stone)"
 	result = /obj/item/pestle
 	reqs = list(/obj/item/natural/stone = 1)
 	craftdiff = 1
@@ -165,7 +165,7 @@
 
 
 /datum/crafting_recipe/roguetown/survival/bait
-	name = "bait"
+	name = "bait (1 bag, 2 wheat grains)"
 	result = /obj/item/bait
 	reqs = list(
 		/obj/item/storage/roguebag = 1,
@@ -174,7 +174,7 @@
 	subtype_reqs = TRUE
 
 /datum/crafting_recipe/roguetown/survival/sbaita
-	name = "sweetbait (apple)"
+	name = "sweetbait (1 bag, 2 apples)"
 	result = /obj/item/bait/sweet
 	reqs = list(
 		/obj/item/storage/roguebag = 1,
@@ -183,7 +183,7 @@
 	subtype_reqs = TRUE
 
 /datum/crafting_recipe/roguetown/survival/sbait
-	name = "sweetbait (berry)"
+	name = "sweetbait (1 bag, 2 jacksberries)"
 	result = /obj/item/bait/sweet
 	reqs = list(
 		/obj/item/storage/roguebag = 1,
@@ -192,7 +192,7 @@
 	subtype_reqs = TRUE
 
 /datum/crafting_recipe/roguetown/survival/bloodbait
-	name = "bloodbait"
+	name = "bloodbait (1 bag, 2 meat)"
 	result = /obj/item/bait/bloody
 	reqs = list(
 		/obj/item/storage/roguebag = 1,
@@ -201,7 +201,7 @@
 	subtype_reqs = TRUE
 
 /datum/crafting_recipe/roguetown/survival/pipe
-	name = "wood pipe"
+	name = "wood pipe (1 small log)"
 	result = /obj/item/clothing/mask/cigarette/pipe/crafted
 	reqs = list(/obj/item/grown/log/tree/small = 1)
 
@@ -209,7 +209,7 @@
 	sellprice = 6
 
 /datum/crafting_recipe/roguetown/survival/broom
-	name = "broom"
+	name = "broom (1 fiber, 4 sticks)"
 	result = /obj/item/broom
 	reqs = list(
 		/obj/item/natural/fibers = 1,
@@ -218,7 +218,7 @@
 	craftdiff = 1
 
 /datum/crafting_recipe/roguetown/survival/book_crafting_kit
-	name = "book crafting kit"
+	name = "book crafting kit (2 hides, 1 cloth)"
 	result = /obj/item/book_crafting_kit
 	reqs = list(
 		/obj/item/natural/hide = 2,
@@ -228,7 +228,7 @@
 	req_table = TRUE
 
 /datum/crafting_recipe/roguetown/survival/mantrap
-	name = "mantrap"
+	name = "mantrap (1 small log, 2 fibers, 1 iron)"
 	result = list(
 		/obj/item/restraints/legcuffs/beartrap,
 		/obj/item/restraints/legcuffs/beartrap,
@@ -245,7 +245,7 @@
 	verbage = "puts together"
 
 /datum/crafting_recipe/roguetown/survival/paperscroll
-	name = "scroll of parchment (x3)"
+	name = "scroll of parchment (x3) (1 small log, 48 water)"
 	result = list(
 		/obj/item/paper/scroll,
 		/obj/item/paper/scroll,
@@ -259,35 +259,35 @@
 	craftdiff = 1
 
 /datum/crafting_recipe/roguetown/survival/prosthetic/woodleftarm
-	name = "wood arm (L)"
+	name = "wood arm (L) (1 small log)"
 	result = list(/obj/item/bodypart/l_arm/prosthetic/woodleft)
 	reqs = list(/obj/item/grown/log/tree/small = 1)
 	skillcraft = /datum/skill/craft/crafting
 	craftdiff = 3
 
 /datum/crafting_recipe/roguetown/survival/prosthetic/woodrightarm
-	name = "wood arm (R)"
+	name = "wood arm (R) (1 small log)"
 	result = list(/obj/item/bodypart/r_arm/prosthetic/woodright)
 	reqs = list(/obj/item/grown/log/tree/small = 1)
 	skillcraft = /datum/skill/craft/crafting
 	craftdiff = 3
 
 /datum/crafting_recipe/roguetown/survival/prosthetic/woodleftleft
-	name = "wood leg (L)"
+	name = "wood leg (L) (1 small log)"
 	result = list(/obj/item/bodypart/l_leg/prosthetic)
 	reqs = list(/obj/item/grown/log/tree/small = 1)
 	skillcraft = /datum/skill/craft/crafting
 	craftdiff = 3
 
 /datum/crafting_recipe/roguetown/survival/prosthetic/woodrightleg
-	name = "wood leg (R)"
+	name = "wood leg (R) (1 small log)"
 	result = list(/obj/item/bodypart/r_leg/prosthetic)
 	reqs = list(/obj/item/grown/log/tree/small = 1)
 	skillcraft = /datum/skill/craft/crafting
 	craftdiff = 3
 
 /datum/crafting_recipe/roguetown/survival/tarot_deck
-	name = "tarot deck"
+	name = "tarot deck (3 scrolls, 1 small log, 1 ash)"
 	result = list(/obj/item/toy/cards/deck/tarot)
 	reqs = list(
 		/obj/item/paper/scroll = 3,
@@ -305,7 +305,7 @@
 	tools = list(/obj/item/rogueweapon/huntingknife = 1)
 
 /datum/crafting_recipe/roguetown/survival/lumberjacking/cart_upgrade
-	name = "woodcutters wheelbrace"
+	name = "woodcutters wheelbrace (2 small logs, 1 stone)"
 	result = /obj/item/cart_upgrade/level_1
 	reqs = list(
 		/obj/item/grown/log/tree/small = 2,
@@ -314,7 +314,7 @@
 	craftdiff = 2
 
 /datum/crafting_recipe/roguetown/survival/lumberjacking/cart_upgrade2
-	name = "reinforced woodcutters wheelbrace"
+	name = "reinforced woodcutters wheelbrace (4 small logs, 1 woodcutters wheelbrace, 1 iron)"
 	result = /obj/item/cart_upgrade/level_2
 	reqs = list(
 		/obj/item/grown/log/tree/small = 4,
@@ -325,7 +325,7 @@
 
 
 /datum/crafting_recipe/hair_dye
-    name = "hair dye cream"
+    name = "hair dye cream (1 bowl, 3 jacksberries)"
     result = /obj/item/hair_dye_cream
     reqs = list(
         /obj/item/reagent_containers/glass/bowl = 1,
@@ -335,49 +335,49 @@
 // DIE
 
 /datum/crafting_recipe/roguetown/survival/d4
-	name = "bone die (d4)"
+	name = "bone die (d4) (1 bone)"
 	result = /obj/item/dice/d4
 	reqs = list(/obj/item/natural/bone = 1)
 	tools = list(/obj/item/rogueweapon/huntingknife)
 	craftdiff = 1
 
 /datum/crafting_recipe/roguetown/survival/d6
-	name = "bone die (d6)"
+	name = "bone die (d6) (1 bone)"
 	result = /obj/item/dice/d6
 	reqs = list(/obj/item/natural/bone = 1)
 	tools = list(/obj/item/rogueweapon/huntingknife)
 	craftdiff = 1
 
 /datum/crafting_recipe/roguetown/survival/d8
-	name = "bone die (d8)"
+	name = "bone die (d8) (1 bone)"
 	result = /obj/item/dice/d8
 	reqs = list(/obj/item/natural/bone = 1)
 	tools = list(/obj/item/rogueweapon/huntingknife)
 	craftdiff = 2
 
 /datum/crafting_recipe/roguetown/survival/d10
-	name = "bone die (d10)"
+	name = "bone die (d10) (1 bone)"
 	result = /obj/item/dice/d10
 	reqs = list(/obj/item/natural/bone = 1)
 	tools = list(/obj/item/rogueweapon/huntingknife)
 	craftdiff = 2
 
 /datum/crafting_recipe/roguetown/survival/d12
-	name = "bone die (d12)"
+	name = "bone die (d12) (1 bone)"
 	result = /obj/item/dice/d12
 	reqs = list(/obj/item/natural/bone = 1)
 	tools = list(/obj/item/rogueweapon/huntingknife)
 	craftdiff = 2
 
 /datum/crafting_recipe/roguetown/survival/d20
-	name = "bone die (d20)"
+	name = "bone die (d20) (1 bone)"
 	result = /obj/item/dice/d20
 	reqs = list(/obj/item/natural/bone = 1)
 	tools = list(/obj/item/rogueweapon/huntingknife)
 	craftdiff = 3
 
 /datum/crafting_recipe/roguetown/survival/dye_brush
-	name = "dye brush"
+	name = "dye brush (2 sticks, 1 fur)"
 	result = /obj/item/dye_brush
 	reqs = list(
 		/obj/item/grown/log/tree/stick = 2,
@@ -386,7 +386,7 @@
 	craftdiff = 1
 
 /datum/crafting_recipe/roguetown/survival/whetstone
-	name = "whetstone"
+	name = "whetstone (1 stone, 1 stake)"
 	result = /obj/item/natural/whetstone
 	reqs = list(
 		/obj/item/natural/stone = 1,
@@ -395,7 +395,7 @@
 	craftdiff = 0
 
 /datum/crafting_recipe/roguetown/survival/rucksack
-	name = "rucksack"
+	name = "rucksack (1 bag, 1 rope)"
 	result = /obj/item/storage/backpack/rogue/backpack/bagpack
 	reqs = list(
 		/obj/item/storage/roguebag = 1,
@@ -408,7 +408,7 @@
 				/obj/item/rope = 1)
 
 /datum/crafting_recipe/roguetown/survival/woodshaft
-	name = "wood shaft x2"
+	name = "wood shaft (x2) (1 small log)"
 	result = list(
 		/obj/item/shaft/wood,
 		/obj/item/shaft/wood
@@ -419,7 +419,7 @@
 	craftdiff = 0
 
 /datum/crafting_recipe/roguetown/survival/reinforcedshaft
-	name = "reinforced shaft"
+	name = "reinforced shaft (1 wood shaft, 2 whetstones)"
 	result = /obj/item/shaft/reinforced
 	tools = list(/obj/item/rogueweapon/hammer)
 	reqs = list(
@@ -431,7 +431,7 @@
 
 // Improvised surgey tools. They go here for now (TM)
 /datum/crafting_recipe/roguetown/survival/improvisedsaw
-	name = "improvised surgery saw (1 fiber + 1 stone + 1 stick)"
+	name = "improvised surgery saw (1 fiber, 1 stone, 1 stick)"
 	result = /obj/item/rogueweapon/surgery/saw/improv
 	reqs = list(
 		/obj/item/natural/fibers = 1, 
@@ -441,7 +441,7 @@
 	craftdiff = 1
 
 /datum/crafting_recipe/roguetown/survival/improvisedclamp
-	name = "improvised retractor ()"
+	name = "improvised retractor (1 fiber, 2 sticks)"
 	result = /obj/item/rogueweapon/surgery/retractor/improv
 	reqs = list(
 		/obj/item/natural/fibers = 1,
@@ -450,7 +450,7 @@
 	craftdiff = 1
 
 /datum/crafting_recipe/roguetown/survival/improvisedhemo
-	name = "improvised clamp (1 fiber + 2 sticks)"
+	name = "improvised clamp (1 fiber, 2 sticks)"
 	result = /obj/item/rogueweapon/surgery/hemostat/improv
 	reqs = list(
 		/obj/item/natural/fibers = 1,
@@ -465,7 +465,7 @@
 // Servant w/ high int can also make it, but it is a bit harder. Or just be middle aged / old instead lol 
 // For 1 fat, 1 log (48 reagents), you get 4 tallow + 6 piece of paper yielding 12 ration wrappers with 1 tallow leftover.
 /datum/crafting_recipe/roguetown/survival/ration_wrapper
-	name = "ration wrapping paper (x2)"
+	name = "ration wrapping paper (x2) (1 parchment, 1 tallow)"
 	result = list(
 		/obj/item/ration,
 		/obj/item/ration,
@@ -478,7 +478,7 @@
 	craftdiff = 4
 
 /datum/crafting_recipe/roguetown/survival/cheele
-	name = "cheele (1x)"
+	name = "cheele (1 lux, 1 leech)"
 	result = list(
 		/obj/item/natural/worms/leech/cheele
 		)

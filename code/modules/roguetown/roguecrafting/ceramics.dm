@@ -11,88 +11,88 @@
 
 /* 0 diff */
 /datum/crafting_recipe/roguetown/ceramics/clay/claycup
-	name = "clay cup"
+	name = "clay cup (1 clay)"
 	result = list(/obj/item/natural/clay/claycup)
 	reqs = list(/obj/item/natural/clay = 1)
 	craftdiff = 0
 
 /datum/crafting_recipe/roguetown/ceramics/clay/claycup3
-	name = "clay cup 3x"
+	name = "clay cup (3x) (3 clay)"
 	result = list(/obj/item/natural/clay/claycup, /obj/item/natural/clay/claycup, /obj/item/natural/clay/claycup)
 	reqs = list(/obj/item/natural/clay = 3)
 	craftdiff = 0
 
 /datum/crafting_recipe/roguetown/ceramics/clay/claybrick
-	name = "clay brick"
+	name = "clay brick (1 clay)"
 	result = list(/obj/item/natural/clay/claybrick)
 	reqs = list(/obj/item/natural/clay = 1)
 	craftdiff = 0
 
 /datum/crafting_recipe/roguetown/ceramics/clay/claybrick3
-	name = "clay brick 3x"
+	name = "clay brick (3x) (3 clay)"
 	result = list(/obj/item/natural/clay/claybrick, /obj/item/natural/clay/claybrick, /obj/item/natural/clay/claybrick)
 	reqs = list(/obj/item/natural/clay = 3)
 	craftdiff = 0
 
 /* 1 diff */
 /datum/crafting_recipe/roguetown/ceramics/clay/claybottle
-	name = "clay bottle"
+	name = "clay bottle (1 clay)"
 	result = list(/obj/item/natural/clay/claybottle)
 	reqs = list(/obj/item/natural/clay = 1)
 	craftdiff = 0
 
 /datum/crafting_recipe/roguetown/ceramics/clay/claybottle3
-	name = "clay bottle 3x"
+	name = "clay bottle (3x) (3 clay)"
 	result = list(/obj/item/natural/clay/claybottle, /obj/item/natural/clay/claybottle, /obj/item/natural/clay/claybottle)
 	reqs = list(/obj/item/natural/clay = 3)
 	craftdiff = 1
 
 /* 2 diff */
 /datum/crafting_recipe/roguetown/ceramics/clay/clayvase
-	name = "clay vase"
+	name = "clay vase (2 clay)"
 	result = list(/obj/item/natural/clay/clayvase)
 	reqs = list(/obj/item/natural/clay = 2)
 	craftdiff = 2
 
 /datum/crafting_recipe/roguetown/ceramics/clay/clayvase3
-	name = "clay vase 3x"
+	name = "clay vase (3x) (6 clay)"
 	result = list(/obj/item/natural/clay/clayvase, /obj/item/natural/clay/clayvase, /obj/item/natural/clay/clayvase)
-	reqs = list(/obj/item/natural/clay = 5)		//Slightly less cost to mass-craft than fancy ones.
+	reqs = list(/obj/item/natural/clay = 6)		//Slightly less cost to mass-craft than fancy ones.
 	craftdiff = 2
 
 /* 3 diff */
 /datum/crafting_recipe/roguetown/ceramics/clay/clayfancyvase
-	name = "fancy clay vase"
+	name = "fancy clay vase (2 clay)"
 	result = list(/obj/item/natural/clay/clayfancyvase)
 	reqs = list(/obj/item/natural/clay = 2)
 	craftdiff = 3
 
 /datum/crafting_recipe/roguetown/ceramics/clay/clayfancyvase3
-	name = "fancy clay vase 3x"
+	name = "fancy clay vase (3x) (6 clay)"
 	result = list(/obj/item/natural/clay/clayfancyvase, /obj/item/natural/clay/clayfancyvase, /obj/item/natural/clay/clayfancyvase)
 	reqs = list(/obj/item/natural/clay = 6)
 	craftdiff = 3
 
 /datum/crafting_recipe/roguetown/ceramics/clay/teapot
-	name = "teapot"
+	name = "teapot (2x)"
 	result = list(/obj/item/natural/clay/rawteapot)
 	reqs = list(/obj/item/natural/clay = 2)
 	craftdiff = 3
 
 /datum/crafting_recipe/roguetown/ceramics/clay/teapot3
-	name = "teapot 3x"
+	name = "teapot (3x) (6 clay)"
 	result = list(/obj/item/natural/clay/rawteapot, /obj/item/natural/clay/rawteapot, /obj/item/natural/clay/rawteapot)
 	reqs = list(/obj/item/natural/clay = 6)
 	craftdiff = 3
 
 /datum/crafting_recipe/roguetown/ceramics/clay/teacup
-	name = "teacup"
+	name = "teacup (1 clay)"
 	result = list(/obj/item/natural/clay/rawteacup)
 	reqs = list(/obj/item/natural/clay = 1)
 	craftdiff = 3
 
 /datum/crafting_recipe/roguetown/ceramics/clay/teacup
-	name = "teacup 3x"
+	name = "teacup (3x) (3 clay)"
 	result = list(/obj/item/natural/clay/rawteacup, /obj/item/natural/clay/rawteacup, /obj/item/natural/clay/rawteacup)
 	reqs = list(/obj/item/natural/clay = 3)
 	craftdiff = 3
@@ -120,20 +120,20 @@
 	*/// -SunriseOYH 
 
 /datum/crafting_recipe/roguetown/ceramics/glassraw
-	name = "glass clay"			// This is not a clay, but I don't personally think 'batch' is fitting ICly.
+	name = "glass clay (2 clay, 2 ash, 1 stone)"			// This is not a clay, but I don't personally think 'batch' is fitting ICly.
 	tools = list(/obj/item/reagent_containers/glass/mortar, /obj/item/pestle)
 	result = list(/obj/item/natural/clay/glassbatch)
 	reqs = list(/obj/item/natural/clay = 2, /obj/item/ash = 2, /obj/item/natural/stone = 1)
 	craftdiff = 4 // Knowing how to mix glass is not a trivial knowledge.
 
 /datum/crafting_recipe/roguetown/ceramics/glass/bottles3
-	name = "glass bottles(3x)"
+	name = "glass bottles (3x) (1 glass)"
 	result = list(/obj/item/reagent_containers/glass/bottle, /obj/item/reagent_containers/glass/bottle, /obj/item/reagent_containers/glass/bottle)
 	reqs = list(/obj/item/natural/glass = 1)
 	craftdiff = 4
 
 /datum/crafting_recipe/roguetown/ceramics/clay/claystatue
-	name = "clay statue"
+	name = "clay statue (2 clay)"
 	result = list(/obj/item/natural/clay/claystatue)
 	reqs = list(/obj/item/natural/clay = 2)
 	craftdiff = 4
@@ -141,13 +141,13 @@
 /* 5 diff */ // High-end glass containers. Should be a direct upgrade to clay in every possible way.
 
 /datum/crafting_recipe/roguetown/ceramics/clay/claystatue3
-	name = "ceramic statue (3x)"
+	name = "ceramic statue (3x) (6 clay)"
 	result = list(/obj/item/natural/clay/claystatue, /obj/item/natural/clay/claystatue, /obj/item/natural/clay/claystatue)
 	reqs = list(/obj/item/natural/clay = 6)
 	craftdiff = 5
 
 /datum/crafting_recipe/roguetown/ceramics/glass/statue 
-	name = "glass statue"
+	name = "glass statue (2 glass)"
 	result = list(/obj/item/roguestatue/glass)
 	reqs = list(/obj/item/natural/glass = 2)
 	craftdiff = 5
