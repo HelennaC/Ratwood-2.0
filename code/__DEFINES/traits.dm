@@ -378,7 +378,7 @@ GLOBAL_LIST_INIT(roguetraits, list(
 	TRAIT_HERESIARCH = span_warning("I know of sacred sites of worship where followers of the Ascendants convene, and the path to the nearest conclave is etched into my memory."),
 	TRAIT_GOODWRITER = span_notice("I'm proficient at writing. Any skillbooks made by me will allow the reader to learn the subject more quickly."),
 	TRAIT_PONYGIRL_RIDEABLE = span_notice("They stripped me of pride and gave me reins; I exist now only to carry anothers weight."),
-	TRAIT_VENOMOUS = span_necrosis("My bite is venomous. When chewing someone I've bitten, I will inject venom.")
+	TRAIT_VENOMOUS = span_necrosis("I am venomous. When chewing someone I've bitten, I will inject venom.")
 ))
 
 // trait accessor defines
