@@ -8,7 +8,7 @@
 	Zardman are hardy, reptilian people that share a unique bond among their kind due to being the target \
 	of oppression and enslavement by other races, particularly by Humans and Drakians. They take pride in \
 	their resilience and adaptability, and they can be found all over the world for one reason or another.<br>\
-	(+1 Constitution, +1 Endurance)"
+	(+1 Constitution, +1 Endurance, Wild Eater Trait)"
 	expanded_desc = "Zardman are hardy, reptilian people that share a unique bond among their kind due to being the target of oppression \
 	and enslavement by other races, particularly by Humans and Drakians. They take pride in their resilience and adaptability,\
 	and they can be found all over the world for one reason or another. Once a nomadic, tribal people, Zardman are often forced \
@@ -41,6 +41,7 @@
 		OFFSET_NECK_F = list(0,-1), OFFSET_MOUTH_F = list(0,-1), OFFSET_PANTS_F = list(0,0), \
 		OFFSET_SHIRT_F = list(0,0), OFFSET_ARMOR_F = list(0,0), OFFSET_UNDIES_F = list(0,-1), \
 		)
+	inherent_traits = list(TRAIT_WILD_EATER)
 	race_bonus = list(STAT_CONSTITUTION = 1, STAT_ENDURANCE = 1)
 	enflamed_icon = "widefire"
 	attack_verb = "slash"
