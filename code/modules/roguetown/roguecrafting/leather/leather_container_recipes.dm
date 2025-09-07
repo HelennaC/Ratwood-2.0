@@ -12,7 +12,7 @@
 	craftdiff = 0
 
 /datum/crafting_recipe/roguetown/leather/container/magepouch
-	name = "summoner's pouch"
+	name = "summoner's pouch (2 leather, 1 fiber)"
 	reqs = list(
 		/obj/item/natural/hide/cured = 2,
 		/obj/item/natural/fibers = 1,
@@ -21,7 +21,7 @@
 	craftdiff = 1
 
 /datum/crafting_recipe/roguetown/leather/container/meatbag
-	name = "game satchel"
+	name = "game satchel (2 leather, 1 cloth)"
 	reqs = list(
 		/obj/item/natural/hide/cured = 2,
 		/obj/item/natural/cloth = 1,
