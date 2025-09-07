@@ -76,7 +76,7 @@
 /datum/crafting_recipe/roguetown/leather/unique/buckleshoes
 	name = "buckled shoes (2 fibers, 2 leather)"
 	result = list(/obj/item/clothing/shoes/roguetown/simpleshoes/buckle)
-	reqs = list(/obj/item/natural/hide/cured = 1,
+	reqs = list(/obj/item/natural/hide/cured = 2,
 	            /obj/item/natural/fibers = 2)
 	tools = list(/obj/item/needle)
 	craftdiff = 6
@@ -138,8 +138,7 @@
 		/obj/item/natural/hide/cured = 2,
 		/obj/item/reagent_containers/food/snacks/tallow = 1,
 		/obj/item/natural/fibers = 2,
-		/obj/item/clothing/suit/roguetown/armor/basiceast = 1,
-		)
+		/obj/item/clothing/suit/roguetown/armor/basiceast = 1)
 	tools = list(/obj/item/needle)
 	craftdiff = 5
 	

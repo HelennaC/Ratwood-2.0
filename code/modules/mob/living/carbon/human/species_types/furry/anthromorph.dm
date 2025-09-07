@@ -4,7 +4,6 @@
 /datum/species/anthromorph
 	name = "Wild-Kin"
 	id = "anthromorph"
-
 	desc = "<b>Wild-Kin</b><br>\
 	Wild-kins are a highly diverse and varied group of people, the majority of which are descendants of the \
 	first followers of Dendor who rejected civilization in favour of the deep forests. However, some came from \

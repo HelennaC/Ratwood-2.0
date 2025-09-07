@@ -129,9 +129,9 @@
 	sellprice = 27
 
 /datum/crafting_recipe/roguetown/weaving/silkdress
-	name = "chemise (2 cloth, 1 silk)"
+	name = "chemise (2 cloth, 3 silk)"
 	result = list (/obj/item/clothing/suit/roguetown/shirt/dress/silkdress/random)
-	reqs = list(/obj/item/natural/fibers = 2,
+	reqs = list(/obj/item/natural/cloth = 2,
 				/obj/item/natural/silk = 3)
 	craftdiff = 5
 	sellprice = 30
@@ -147,10 +147,10 @@
 
 //Eora content from Stonekeep
 /datum/crafting_recipe/roguetown/weaving/eoramask
-	name = "eora mask (4 silk)"
+	name = "eora mask (2 silk, 1 cloth)"
 	result = list(/obj/item/clothing/head/roguetown/eoramask)
-	reqs = list(/obj/item/ingot/silver,
-				/obj/item/natural/silk = 4)
+	reqs = list(/obj/item/natural/cloth = 1,
+				/obj/item/natural/silk = 2)
 	craftdiff = 3
 	sellprice = 20
 
