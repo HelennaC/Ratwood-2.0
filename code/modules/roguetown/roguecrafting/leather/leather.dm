@@ -141,7 +141,7 @@
 /datum/crafting_recipe/roguetown/leather/drum
 	name = "Drum (2 leather, 1 log)"
 	result = /obj/item/rogue/instrument/drum
-	reqs = list(/obj/item/natural/hide/cured = 1,/obj/item/grown/log/tree/small = 1)
+	reqs = list(/obj/item/natural/hide/cured = 2,/obj/item/grown/log/tree/small = 1)
 
 /datum/crafting_recipe/roguetown/leather/vest/sailor
 	name = "leather sea jacket (2 leather)"
