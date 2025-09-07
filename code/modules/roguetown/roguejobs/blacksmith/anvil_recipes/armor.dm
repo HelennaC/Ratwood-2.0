@@ -125,14 +125,14 @@
 /datum/anvil_recipe/armor/aalloy/halfplate
 	name = "Half-Plate, Decrepit (+2 Alloy, +1 Cured Leather)"
 	req_bar = /obj/item/ingot/aalloy
-	additional_items = list(/obj/item/ingot/aalloy,/obj/item/ingot/aalloy,/obj/item/natural/hide/cured)
+	additional_items = list(/obj/item/ingot/aalloy, /obj/item/ingot/aalloy, /obj/item/natural/hide/cured)
 	created_item = /obj/item/clothing/suit/roguetown/armor/plate/aalloy
 	craftdiff = 1
 
 /datum/anvil_recipe/armor/paalloy/halfplate
 	name = "Half-Plate, Ancient (+2 Purified Alloy, +1 Cured Leather)"
 	req_bar = /obj/item/ingot/purifiedaalloy
-	additional_items = list(/obj/item/ingot/purifiedaalloy,/obj/item/ingot/purifiedaalloy,/obj/item/natural/hide/cured)
+	additional_items = list(/obj/item/ingot/purifiedaalloy, /obj/item/ingot/purifiedaalloy, /obj/item/natural/hide/cured)
 	created_item = /obj/item/clothing/suit/roguetown/armor/plate/paalloy
 	craftdiff = 3
 
@@ -316,13 +316,13 @@
 	craftdiff = 0
 
 /datum/anvil_recipe/armor/iron/splintlegs
-	name = "Splinted Chausses (+1 leather pants)"
+	name = "Splinted Chausses (+1 Leather Pants)"
 	req_bar = /obj/item/ingot/iron
 	additional_items = list(/obj/item/clothing/under/roguetown/trou/leather)//basically you just add a lot of iron bits to the pants
 	created_item = /obj/item/clothing/under/roguetown/splintlegs/iron
 
 /datum/anvil_recipe/armor/iron/platelegs
-	name = "Plate Chausses, Iron (+1 Bar)"
+	name = "Plate Chausses, Iron (+1 Iron)"
 	req_bar = /obj/item/ingot/iron
 	additional_items = list(/obj/item/ingot/iron)
 	created_item = /obj/item/clothing/under/roguetown/platelegs/iron
@@ -349,7 +349,7 @@
 	craftdiff = 0
 
 /datum/anvil_recipe/armor/iron/splintarms
-	name = "Splinted Bracers (+1 leather bracers)" //you modify the bracers to have splints and cover the arm way more
+	name = "Splinted Bracers (+1 Leather Bracers)" //you modify the bracers to have splints and cover the arm way more
 	req_bar = /obj/item/ingot/iron
 	additional_items = list(/obj/item/clothing/wrists/roguetown/bracers/leather)
 	created_item = /obj/item/clothing/wrists/roguetown/splintarms/iron
@@ -443,7 +443,7 @@
 // --------- STEEL RECIPES -----------
 
 /datum/anvil_recipe/armor/steel/lbrigandine
-	name = "Light Brigandine (+1 cured leather)"
+	name = "Light Brigandine (+1 Cured Leather)"
 	req_bar = /obj/item/ingot/steel
 	additional_items = list(/obj/item/natural/hide/cured)
 	created_item = /obj/item/clothing/suit/roguetown/armor/brigandine/light
@@ -479,7 +479,7 @@
 /datum/anvil_recipe/armor/steel/halfplate
 	name = "Half-Plate, Steel (+2 Steel, +1 Cured Leather)"
 	req_bar = /obj/item/ingot/steel
-	additional_items = list(/obj/item/ingot/steel,/obj/item/ingot/steel,/obj/item/natural/hide/cured)
+	additional_items = list(/obj/item/ingot/steel, /obj/item/ingot/steel, /obj/item/natural/hide/cured)
 	created_item = /obj/item/clothing/suit/roguetown/armor/plate
 	craftdiff = 3
 
@@ -542,7 +542,7 @@
 /datum/anvil_recipe/armor/steel/coatplates
 	name = "Coat Of Plates, Steel (+1 Steel, +1 Cured Leather)"
 	req_bar = /obj/item/ingot/steel
-	additional_items = list(/obj/item/ingot/steel,/obj/item/natural/hide/cured)
+	additional_items = list(/obj/item/ingot/steel, /obj/item/natural/hide/cured)
 	created_item = /obj/item/clothing/suit/roguetown/armor/brigandine/coatplates
 	craftdiff = 2
 
@@ -630,7 +630,7 @@
 	craftdiff = 3
 
 /datum/anvil_recipe/armor/steel/lightcuirass
-	name = "Fencing Cuirass, Steel (+1 Fur, +1 Tallow, +3 Cured Leather)"
+	name = "Fencing Cuirass, Steel (+1 Steel, +2 Fur, +1 Tallow, +3 Cured Leather)"
 	req_bar = /obj/item/ingot/steel
 	additional_items = list(/obj/item/ingot/steel, /obj/item/natural/fur, /obj/item/natural/fur, /obj/item/reagent_containers/food/snacks/tallow, /obj/item/natural/hide/cured, /obj/item/natural/hide/cured, /obj/item/natural/hide/cured)
 	created_item = /obj/item/clothing/suit/roguetown/armor/plate/half/fencer
@@ -899,13 +899,13 @@
 	craftdiff = 2
 
 /datum/anvil_recipe/armor/steel/splintarms
-	name = "Brigandine Bracers (+1 leather bracers)" 
+	name = "Brigandine Bracers (+1 Leather Bracers)" 
 	req_bar = /obj/item/ingot/steel
 	additional_items = list(/obj/item/clothing/wrists/roguetown/bracers/leather)
 	created_item = /obj/item/clothing/wrists/roguetown/splintarms
 
 /datum/anvil_recipe/armor/steel/splintlegs
-	name = "Brigandine Chausses (+1 leather pants)"
+	name = "Brigandine Chausses (+1 Leather Pants)"
 	req_bar = /obj/item/ingot/steel
 	additional_items = list(/obj/item/clothing/under/roguetown/trou/leather)//basically you just add a lot of iron bits to the pants
 	created_item = /obj/item/clothing/under/roguetown/splintlegs
