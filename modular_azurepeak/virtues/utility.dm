@@ -15,6 +15,8 @@
 	desc = "I thrive in social settings, easily reading the emotions of others and charming those around me. My presence is always felt at any gathering."
 	custom_text = "Incompatible with Ugly virtue. Grants empathic insight."
 	added_traits = list(TRAIT_BEAUTIFUL, TRAIT_GOODLOVER, TRAIT_EMPATH)
+	added_stashed_items = list(
+		"Hand Mirror" = /obj/item/handmirror)
 
 /datum/virtue/utility/socialite/handle_traits(mob/living/carbon/human/recipient)
 	..()
@@ -113,7 +115,7 @@
 	)
 
 /datum/virtue/utility/linguist/apply_to_human(mob/living/carbon/human/recipient)
-	recipient.change_stat("intelligence", 1)
+	recipient.change_stat(STATKEY_INT, 1)
 	addtimer(CALLBACK(src, .proc/linguist_apply, recipient), 50)
 
 /datum/virtue/utility/linguist/proc/linguist_apply(mob/living/carbon/human/recipient)

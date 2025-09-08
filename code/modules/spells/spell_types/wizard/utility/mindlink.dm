@@ -4,13 +4,13 @@
 	clothes_req = FALSE
 	overlay_state = "mindlink"
 	associated_skill = /datum/skill/magic/arcane
-	cost = 4
+	cost = 3
 	xp_gain = TRUE
 	recharge_time = 5 MINUTES
 	spell_tier = 3
 	invocations = list("Mens Nexu")
 	invocation_type = "whisper"
-	
+
 	// Charged spell variables
 	chargedloop = /datum/looping_sound/invokegen
 	chargedrain = 1
@@ -26,7 +26,7 @@
 	. = ..()
 	if(!istype(user))
 		return
-	
+
 	var/list/possible_targets = list()
 	if(user.mind.known_people.len)
 		for(var/people in user.mind.known_people)
@@ -40,7 +40,7 @@
 
 	if(user.client)
 		possible_targets = list(user.real_name) + possible_targets // Oohhhhhh this looks bad. But this is supposed to append ourselves at the start of the ordered list.
-	
+
 	var/first_target_name = input(user, "Choose the first person to link", "Mindlink") as null|anything in possible_targets
 
 	if(!first_target_name)
@@ -54,7 +54,7 @@
 			first_target = HL
 
 	possible_targets -= first_target_name
-	
+
 	var/second_target_name = input(user, "Choose the second person to link", "Mindlink") as null|anything in possible_targets
 
 	if(!second_target_name)
@@ -74,11 +74,11 @@
 		return FALSE
 
 	user.visible_message(span_notice("[user] touches their temples and concentrates..."), span_notice("I establish a mental connection between [first_target] and [second_target]..."))
-	
+
 	// Create the mindlink
 	var/datum/mindlink/link = new(first_target, second_target)
 	GLOB.mindlinks += link
-	
+
 	to_chat(first_target, span_notice("A mindlink has been established with [second_target]! Use ,y before a message to communicate telepathically."))
 	to_chat(second_target, span_notice("A mindlink has been established with [first_target]! Use ,y before a message to communicate telepathically."))
 	
@@ -92,10 +92,10 @@
 /obj/effect/proc_holder/spell/invoked/mindlink/proc/break_link(datum/mindlink/link)
 	if(!link)
 		return
-	
+
 	to_chat(link.owner, span_warning("The mindlink with [link.target] fades away..."))
 	to_chat(link.target, span_warning("The mindlink with [link.owner] fades away..."))
-	
+
 	GLOB.mindlinks -= link
 	qdel(link)
 

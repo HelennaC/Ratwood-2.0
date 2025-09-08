@@ -34,6 +34,23 @@
 		passed_descriptors += desc_type
 	return passed_descriptors
 
+/mob/living/proc/get_mob_descriptors_unknown(is_obscured, mob/watcher)
+	var/list/descriptors = list()
+	if(mob_descriptors)
+		descriptors += mob_descriptors
+	var/list/extras = get_extra_mob_descriptors()
+	if(extras)
+		descriptors += extras
+	var/list/passed_descriptors = list()
+	for(var/desc_type in descriptors)
+		var/datum/mob_descriptor/descriptor = MOB_DESCRIPTOR(desc_type)
+		if(!descriptor.can_describe(src))
+			continue
+		if(!descriptor.can_user_see(src, watcher))
+			continue
+		passed_descriptors += desc_type
+	return passed_descriptors
+
 /mob/living/proc/get_extra_mob_descriptors()
 	return list(
 		/datum/mob_descriptor/age,

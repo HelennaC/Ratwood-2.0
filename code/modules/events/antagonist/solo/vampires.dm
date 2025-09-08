@@ -49,7 +49,7 @@
 		"Servant",
 		"Seneschal",
 		"Court Physician",
-		"Town Elder",
+		"Town Crier",
 		"Captain",
 		"Archivist",
 		"Knight",

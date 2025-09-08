@@ -72,6 +72,7 @@
 #define TRAIT_PERMAMUTE "Permanent Mute"
 #define TRAIT_EXCOMMUNICATED "Excommunicated"
 #define TRAIT_HERESIARCH "Forbidden Knowledge" //allows entry to ascendant church
+#define TRAIT_DREAMWALKER "Dreamwalker"
 #define TRAIT_JACKOFALLTRADES "Jack of All Trades"	//Reduces skill up cost
 #define TRAIT_PONYGIRL_RIDEABLE "Slave" //riding
 
@@ -204,6 +205,7 @@
 #define TRAIT_MEDICINE_EXPERT "Medicine Expert"
 #define TRAIT_DYES "Dyemaster"
 #define TRAIT_GOODWRITER "Great Writer"
+#define TRAIT_COMBAT_AWARE	"Combat Aware"
 // ARMOR / CLOTHING GIVEN TRAITS (GIVEN BY WEARING CLOTHES/ARMOR PIECES)
 #define TRAIT_MONK_ROBE	"Holy Vestatures"
 #define TRAIT_RACISMISBAD "Heritage Vision"
@@ -212,6 +214,9 @@
 // If you want description to show up you gotta have the trait name defined BEFORE this lol
 
 GLOBAL_LIST_INIT(roguetraits, list(
+	TRAIT_STEELHEARTED = span_info("I have hardened nerves, and do not waiver from the sight of violence in battle."),
+	TRAIT_OUTLANDER = span_info("Azurians see me as not of their land."),
+	TRAIT_OUTLAW = span_info("This land's meisters and castificos reject my touch."),
 	TRAIT_LEPROSY = span_necrosis("I'm a disgusting leper..."),
 	TRAIT_UNDIVIDED = span_info("I have seen past petty squabbles, and am a true follower of the Ten Undivided. I feel most comfortable around churchmen."),
 	TRAIT_TAVERN_FIGHTER = span_info("I am vigilant in my duties. The Tavern is my home, none shall dare oppose me or skip out on payment."),
@@ -378,7 +383,9 @@ GLOBAL_LIST_INIT(roguetraits, list(
 	TRAIT_HERESIARCH = span_warning("I know of sacred sites of worship where followers of the Ascendants convene, and the path to the nearest conclave is etched into my memory."),
 	TRAIT_GOODWRITER = span_notice("I'm proficient at writing. Any skillbooks made by me will allow the reader to learn the subject more quickly."),
 	TRAIT_PONYGIRL_RIDEABLE = span_notice("They stripped me of pride and gave me reins; I exist now only to carry anothers weight."),
-	TRAIT_VENOMOUS = span_necrosis("I am venomous. When chewing someone I've bitten, I will inject venom.")
+	TRAIT_VENOMOUS = span_necrosis("I am venomous. When chewing someone I've bitten, I will inject venom."),
+	TRAIT_COMBAT_AWARE = span_notice("My honed senses and intuition allow me to spot notable things in the midst of battle with ease."),
+	TRAIT_DREAMWALKER = span_warning("I walk the dream and reality at the same time. My mind frays, but my vision shall be reality.")
 ))
 
 // trait accessor defines
