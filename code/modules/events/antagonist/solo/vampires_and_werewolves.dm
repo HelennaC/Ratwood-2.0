@@ -47,7 +47,7 @@
 		"Servant",
 		"Seneschal",
 		"Court Physician",
-		"Town Crier",
+		"Town Elder",
 		"Captain",
 		"Archivist",
 		"Knight",

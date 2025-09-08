@@ -105,9 +105,9 @@
 		return
 	var/can_remove = FALSE
 	var/can_premium = FALSE
-	if(user.job in list("Man at Arms","Inquisitor", "Knight", "Sergeant", "Knight Captain", "Orthodoxist", "Absolver", "Marshal")) //why was KC here but not marshal ?
+	if(user.job in list("Man at Arms","Inquisitor", "Knight", "Sergeant", "Knight Captain", "Orthodoxist", "Absolver",))
 		can_remove = TRUE
-	if(user.job in list("Nightmaster","Merchant", "Innkeeper", "Steward", "Court Magician", "Town Crier"))
+	if(user.job in list("Nightmaster","Merchant", "Innkeeper", "Steward", "Court Magician"))
 		can_premium = TRUE
 	var/contents
 	contents += "<center>NOTICEBOARD<BR>"

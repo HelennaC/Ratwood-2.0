@@ -110,7 +110,7 @@ GLOBAL_LIST_INIT(yeoman_positions, list(
 	"Innkeeper",
 	"Archivist",
 	"Scribe",
-	"Town Crier",
+	"Town Elder",
 	"Bathmaster",
 	"Guildmaster",
 	"Guildsman",

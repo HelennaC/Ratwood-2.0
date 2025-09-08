@@ -45,7 +45,7 @@
 		"Magos Thrall",
 		"Servant",
 		"Court Physician",
-		"Town Crier",
+		"Town Elder",
 		"Captain",
 		"Archivist",
 		"Knight",
