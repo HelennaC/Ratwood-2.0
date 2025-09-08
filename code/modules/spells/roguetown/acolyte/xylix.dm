@@ -1,4 +1,4 @@
-/obj/effect/proc_holder/spell/invoked/wheel
+	/obj/effect/proc_holder/spell/invoked/wheel
 	name = "The Wheel"
 	desc = "Spins the wheel, either buffing or debuffing the targets fortune."
 	releasedrain = 10
@@ -213,7 +213,7 @@
 #define MALUM "malum"
 #define EORA "eora"
 
-//Говно ксайликса
+//JACKPOOOOOOOT 777
 /datum/status_effect/xylix_blessed_luck
 	id = "xylix_blessed_luck"
 	status_type = STATUS_EFFECT_UNIQUE
@@ -226,11 +226,10 @@
 	. = ..()
 
 /atom/movable/screen/alert/status_effect/buff/xylix_blessed_luck
-	name = "Благославление Ксаликса"
-	desc = "Хоть вы и не выиграли одно из его одолжений, он все же благоволит вас."
+	name = "Xylixian Blessed Luck"
+	desc = "Even though you haven't won one of his favors, he still favors you."
 	icon_state = "status"
 
-//Говно астраты
 /particles/astartian_favor
 	icon = 'icons/effects/particles/generic.dmi'
 	icon_state = list("dot" = 8,"curl" = 1)
@@ -250,7 +249,7 @@
 	scale = generator("vector", list(2, 2), list(4,4), NORMAL_RAND)
 	drift = list(0)
 
-
+//Astrata Jackpot
 /datum/status_effect/astrata_favor
 	id = "astrata_favor"
 	status_type = STATUS_EFFECT_UNIQUE
@@ -276,11 +275,11 @@
 	. = ..()
 
 /atom/movable/screen/alert/status_effect/buff/astrata_favor
-	name = "Одолжение Астраты"
-	desc = "Хоть его и было сложно заполучить, но Ксайликс воспользовался им. Вы практически бессмертны... Временно"
+	name = "Astrata's Favor"
+	desc = "Although it was difficult to obtain, Xylix used it. You are practically immortal."
 	icon_state = "status"
 
-//Говно Нок
+//Noc Jackpot
 /datum/status_effect/noc_favor
 	id = "noc_favor"
 	status_type = STATUS_EFFECT_UNIQUE
@@ -297,11 +296,11 @@
 	. = ..()
 
 /atom/movable/screen/alert/status_effect/buff/noc_favor
-	name = "Одолжение Нок"
-	desc = "Знание, свет и тень Нок укрывает вас."
+	name = "Noc's Favor"
+	desc = "Knowledge, light and shadow of Noc covers you."
 	icon_state = "status"
 
-//Говно Зизо
+//Zizo punishment
 /datum/status_effect/zizo_unfavor
 	id = "zizo_unfavor"
 	status_type = STATUS_EFFECT_UNIQUE
@@ -313,11 +312,11 @@
 	. = ..()
 
 /atom/movable/screen/alert/status_effect/buff/zizo_unfavor
-	name = "Вмешательство Зизо"
-	desc = "Ваш покровитель не был достаточно внимателен."
+	name = "Zizo's Intervention"
+	desc = "Your patron was not attentive enough and caught Zizo's attention. You feel weaker."
 	icon_state = "status"
 
-//Говно Равокса
+//Ravox Jackpot
 /datum/status_effect/ravox_favor
 	id = "ravox_favor"
 	status_type = STATUS_EFFECT_UNIQUE
@@ -329,11 +328,11 @@
 	. = ..()
 
 /atom/movable/screen/alert/status_effect/buff/ravox_favor
-	name = "Одолжение Равокса"
-	desc = "Сила Равокса поддерживает вас."
+	name = "Favor of Ravox"
+	desc = "The power of Ravox supports you."
 	icon_state = "status"
 
-//Говно Малума
+//Malum Jackpot
 /datum/status_effect/malum_favor
 	id = "malum_favor"
 	status_type = STATUS_EFFECT_UNIQUE
@@ -350,11 +349,11 @@
 	. = ..()
 
 /atom/movable/screen/alert/status_effect/buff/malum_favor
-	name = "Одолжение Малума"
-	desc = "Малум доработал работу ремесленников на ваше снаряжение."
+	name = "Favor of Malum"
+	desc = "Malum has refined the work of the artisans on your equipment."
 	icon_state = "status"
 
-//Говно Эоры
+//Eora Jackpot
 /datum/status_effect/eora_favor
 	id = "eora_favor"
 	status_type = STATUS_EFFECT_UNIQUE
@@ -370,13 +369,13 @@
 	. = ..()
 
 /atom/movable/screen/alert/status_effect/buff/eora_favor
-	name = "Одолжение Эоры"
-	desc = "Эора окружает вас своей любовью."
+	name = "A Favor from Eora"
+	desc = "Eora surrounds you with her love."
 	icon_state = "status"
 
 /obj/effect/proc_holder/spell/invoked/xylixlian_luck
-	name = "Ксайликситова удача"
-	desc = "Бросьте вызов своей удаче и вашему покровителю"
+	name = "Xylix's Fortune"
+	desc = "Challenge your luck and your patron"
 	overlay_state = "xylixfortune"
 	invocation_type = "none"
 	associated_skill = /datum/skill/magic/holy
@@ -395,7 +394,7 @@
 /obj/effect/proc_holder/spell/invoked/xylixlian_luck/cast(list/targets,mob/living/carbon/human/user = usr)
 	user.play_overhead_indicator('modular_twilight_axis/icons/mob/overhead_effects.dmi', "xylix_fortune", 30, MUTATIONS_LAYER, soundin = 'modular_twilight_axis/sound/slotmachine.ogg', y_offset = 24)
 
-	to_chat(user, span_danger("Ксайликс дает вам шанс, использовать одно из его одолжений"))
+	to_chat(user, span_danger("Xylix gives you a chance to use one of his favors"))
 	var/luck_bonus = 0
 	luck_bonus -= used_times * 5
 	luck_bonus += 1.9444 * ((world.time - last_used) / bonus_luck_threshould)
@@ -414,28 +413,28 @@
 
 	switch(result)
 		if(NOTHING)
-			to_chat(user, span_danger("Вы выиграли... Ничего!"))
+			to_chat(user, span_danger("You won... Nothing!"))
 		if(XYLIX)
 			user.apply_status_effect(/datum/status_effect/xylix_blessed_luck)
-			to_chat(user, span_danger("Удача Ксайликса благоволит вам!"))
+			to_chat(user, span_danger("Xylix's fortune favors you!"))
 		if(ASTRATA)
 			user.apply_status_effect(/datum/status_effect/astrata_favor)
-			to_chat(user, span_danger("Свет Астраты дает вам сил!"))
+			to_chat(user, span_danger("The Light of Astrata gives you strength!"))
 		if(NOC)
 			user.apply_status_effect(/datum/status_effect/noc_favor)
-			to_chat(user, span_danger("Тень от серебрянного света Нок укрывает вас!"))
+			to_chat(user, span_danger("The shadow of Noc's silver light covers you!"))
 		if(ZIZO)
 			user.apply_status_effect(/datum/status_effect/zizo_unfavor)
-			to_chat(user, span_danger("Лик Зизо насмехается над вами!"))
+			to_chat(user, span_danger("Zizo's face is mocking you!"))
 		if(RAVOX)
 			user.apply_status_effect(/datum/status_effect/ravox_favor)
-			to_chat(user, span_danger("Равокс благославляет вашу силу!"))
+			to_chat(user, span_danger("Ravox blesses you with power!"))
 		if(MALUM)
 			user.apply_status_effect(/datum/status_effect/malum_favor)
-			to_chat(user, span_danger("Малум благославляет изделия ремесленников носимых вами!"))
+			to_chat(user, span_danger("Malum blesses the artisan products you wear!"))
 		if(EORA)
 			user.apply_status_effect(/datum/status_effect/eora_favor)
-			to_chat(user, span_danger("Любовь Эоры окутывает вас!"))
+			to_chat(user, span_danger("Eora's love envelops you!"))
 	return ..()
 
 #undef NOTHING
