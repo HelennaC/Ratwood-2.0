@@ -11,7 +11,7 @@
 	warriors to those who earn their loyalty. Thanks to their pack minded nature they are slow to trust the other races \
 	but form deep connections with those they do. In recent years they have been driven from the forests by unrest and the \
 	inevitable spread of the rot and pressed into cohabitation with races they'd deem lesser.<br>\
-	(+1 Constitution, +1 Intelligence, Sleuth Trait)"
+	(+1 Constitution, +1 Intelligence)"
 	expanded_desc = "Lupians live under elective monarchies, forms of feudalism where the king of a pack is chosen from, and by, the military council. \
 	The leader of the pack is a philosopher king, a paragon of virtue and one who should inspire awe and loyalty among the population \
 	while the real power is held by the military leadership. Should a king fail his people it is not uncommon for the entire kingdom \
@@ -55,7 +55,6 @@
 		OFFSET_NECK_F = list(0,-1), OFFSET_MOUTH_F = list(0,-1), OFFSET_PANTS_F = list(0,0), \
 		OFFSET_SHIRT_F = list(0,0), OFFSET_ARMOR_F = list(0,0), OFFSET_UNDIES_F = list(0,-1), \
 		)
-	inherent_traits = list(TRAIT_SLEUTH)
 	race_bonus = list(STAT_INTELLIGENCE = 1, STAT_CONSTITUTION = 1)
 	enflamed_icon = "widefire"
 	organs = list(

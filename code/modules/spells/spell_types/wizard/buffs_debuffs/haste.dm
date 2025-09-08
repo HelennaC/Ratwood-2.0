@@ -51,7 +51,7 @@
 	var/outline_colour ="#F0E68C" // Hopefully not TOO yellow
 	id = "haste"
 	alert_type = /atom/movable/screen/alert/status_effect/buff/haste
-	effectedstats = list(STATKEY_SPD = 5)
+	effectedstats = list("speed" = 5)
 	duration = 1.5 MINUTES
 
 /datum/status_effect/buff/haste/other

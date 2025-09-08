@@ -8,7 +8,7 @@
 	Kobolds are a nomadic tribal people known for their small stature and swift speed. \
 	They prefer mountainous terrain or underground cave systems, but they are adaptable \
 	to new environments. They are often found in the service of dragons or Drakian rulers.<br>\
-	(+1 Fortune, Eating Rocks and Gems Trait)"
+	(+1 Fortune)"
 
 	expanded_desc =	"Kobolds are a nomadic tribal people known for their small stature and swift speed. \
 	They prefer mountainous terrain or underground cave systems, but they are adaptable \

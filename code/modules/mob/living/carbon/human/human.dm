@@ -31,35 +31,32 @@
 				else
 					held_item.melee_attack_chain(user, src, params)
 		return
-	if(get_num_arms(FALSE) < 1)
-		return
-	if(user.zone_selected == BODY_ZONE_PRECISE_GROIN)
-		if(get_location_accessible(src, BODY_ZONE_PRECISE_GROIN, skipundies = TRUE))
-			if(!underwear)
-				return
-			src.visible_message(span_notice("[user] begins to take off [(src==user)?" ":"[src]'s"][underwear]..."))
-			if(do_after(user, 30, needhand = 1, target = src))
-				var/obj/item/bodypart/chest = get_bodypart(BODY_ZONE_CHEST)
-				var/obj/item/undies/undies = underwear
-				underwear = null
-				undies.forceMove(get_turf(src))
-				user.put_in_hands(undies)
-				chest.remove_bodypart_feature(undies.undies_feature)
+	if(user == src)
+		if(get_num_arms(FALSE) < 1)
 			return
-	if((user.zone_selected == BODY_ZONE_L_LEG) || (user.zone_selected == BODY_ZONE_R_LEG))
-		if(get_location_accessible(src, BODY_ZONE_PRECISE_GROIN, skipundies = TRUE))
-			if(!legwear_socks)
-				return
-			src.visible_message(span_notice("[user] begins to take off [(src==user)?" ":"[src]'s"][legwear_socks]..."))
-			if(do_after(user, 30, needhand = 1, target = src))
-				var/obj/item/bodypart/chest = get_bodypart(BODY_ZONE_CHEST)
-				var/obj/item/legwears/legwears = legwear_socks
-				legwear_socks = null
-				legwears.forceMove(get_turf(src))
-				user.put_in_hands(legwears)
-				chest.remove_bodypart_feature(legwears.legwears_feature)
-			return
-	if(HAS_TRAIT(src, TRAIT_PONYGIRL_RIDEABLE))
+		if(user.zone_selected == BODY_ZONE_PRECISE_GROIN)
+			if(get_location_accessible(src, BODY_ZONE_PRECISE_GROIN, skipundies = TRUE))
+				if(!underwear)
+					return
+				src.visible_message(span_notice("[src] begins to take off [underwear]..."))
+				if(do_after(user, 30, needhand = 1, target = src))
+					var/obj/item/bodypart/chest = get_bodypart(BODY_ZONE_CHEST)
+					chest.remove_bodypart_feature(underwear.undies_feature)
+					underwear.forceMove(get_turf(src))
+					src.put_in_hands(underwear)
+					underwear = null
+		if((user.zone_selected == BODY_ZONE_L_LEG) || (user.zone_selected == BODY_ZONE_R_LEG))
+			if(get_location_accessible(src, BODY_ZONE_PRECISE_GROIN, skipundies = TRUE))
+				if(!legwear_socks)
+					return
+				src.visible_message(span_notice("[src] begins to take off [legwear_socks]..."))
+				if(do_after(user, 30, needhand = 1, target = src))
+					var/obj/item/bodypart/chest = get_bodypart(BODY_ZONE_CHEST)
+					chest.remove_bodypart_feature(legwear_socks.legwears_feature)
+					legwear_socks.forceMove(get_turf(src))
+					src.put_in_hands(legwear_socks)
+					legwear_socks = null
+	else if(HAS_TRAIT(src, TRAIT_PONYGIRL_RIDEABLE))
 		var/mob/living/livinguser = user
 		user.visible_message(span_notice("[livinguser] is trying to mount [src]..."))
 		if(!do_after(livinguser, 15, target = src))
