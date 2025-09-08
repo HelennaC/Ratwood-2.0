@@ -5,7 +5,7 @@
 	var/STAPER = 10
 	var/STAINT = 10
 	var/STACON = 10
-	var/STAEND = 10
+	var/STAWIL = 10
 	var/STASPD = 10
 	var/STALUC = 10
 	//buffers, the 'true' amount of each stat
@@ -46,7 +46,7 @@
 	STAPER = 10
 	STAINT = 10
 	STACON = 10
-	STAEND = 10
+	STAWIL = 10
 	STASPD = 10
 	STALUC = 10
 	if(ishuman(src))
@@ -62,24 +62,23 @@
 					H.change_stat(stat, amt)
 		switch(H.age)
 			if(AGE_MIDDLEAGED)
-				change_stat("speed", -1)
-				change_stat("constitution", 1)
-				change_stat("fortune", 1)
+				change_stat(STATKEY_SPD, -1)
+				change_stat(STATKEY_WIL, 1)
 			if(AGE_OLD)
-				change_stat("strength", -1)
-				change_stat("speed", -2)
-				change_stat("perception", -1)
-				change_stat("constitution", -2)
-				change_stat("intelligence", 2)
-				change_stat("fortune", 1)
+				change_stat(STATKEY_STR, -1)
+				change_stat(STATKEY_SPD, -2)
+				change_stat(STATKEY_PER, -1)
+				change_stat(STATKEY_CON, -2)
+				change_stat(STATKEY_INT, 2)
+				change_stat(STATKEY_LCK, 1)
 		if(key)
 			if(check_blacklist(ckey(key)))
-				change_stat("strength", -5)
-				change_stat("speed", -20)
-				change_stat("endurance", -2)
-				change_stat("constitution", -2)
-				change_stat("intelligence", -20)
-				change_stat("fortune", -20)
+				change_stat(STATKEY_STR, -5)
+				change_stat(STATKEY_SPD, -20)
+				change_stat(STATKEY_WIL, -2)
+				change_stat(STATKEY_CON, -2)
+				change_stat(STATKEY_INT, -20)
+				change_stat(STATKEY_LCK, -20)
 			if(check_psychokiller(ckey(key)))
 				testing("foundpsych")
 				H.eye_color = "ff0000"
@@ -97,8 +96,8 @@
 			return STAINT
 		if(STAT_CONSTITUTION)
 			return STACON
-		if(STAT_ENDURANCE)
-			return STAEND
+		if(STAT_WILLPOWER)
+			return STAWIL
 		if(STAT_SPEED)
 			return STASPD
 		if(STAT_FORTUNE)
@@ -125,7 +124,7 @@
 //			statindex[index]["amt"] = amt
 	var/newamt = 0
 	switch(stat)
-		if("strength")
+		if(STATKEY_STR)
 			newamt = STASTR + amt
 			if(BUFSTR < 0)
 				BUFSTR = BUFSTR + amt
@@ -145,7 +144,7 @@
 				BUFSTR++
 			STASTR = newamt
 
-		if("perception")
+		if(STATKEY_PER)
 			newamt = STAPER + amt
 			if(BUFPER < 0)
 				BUFPER = BUFPER + amt
@@ -167,7 +166,7 @@
 
 			update_fov_angles()
 
-		if("intelligence")
+		if(STATKEY_INT)
 			newamt = STAINT + amt
 			if(BUFINT < 0)
 				BUFINT = BUFINT + amt
@@ -187,7 +186,7 @@
 				BUFINT++
 			STAINT = newamt
 
-		if("constitution")
+		if(STATKEY_CON)
 			newamt = STACON + amt
 			if(BUFCON < 0)
 				BUFCON = BUFCON + amt
@@ -207,17 +206,17 @@
 				BUFCON++
 			STACON = newamt
 
-		if("endurance")
-			newamt = STAEND + amt
+		if(STATKEY_WIL)
+			newamt = STAWIL + amt
 			if(BUFEND < 0)
 				BUFEND = BUFEND + amt
 				if(BUFEND > 0)
-					newamt = STAEND + BUFEND
+					newamt = STAWIL + BUFEND
 					BUFEND = 0
 			if(BUFEND > 0)
 				BUFEND = BUFEND + amt
 				if(BUFEND < 0)
-					newamt = STAEND + BUFEND
+					newamt = STAWIL + BUFEND
 					BUFEND = 0
 			while(newamt < 1)
 				newamt++
@@ -225,9 +224,9 @@
 			while(newamt > 20)
 				newamt--
 				BUFEND++
-			STAEND = newamt
+			STAWIL = newamt
 
-		if("speed")
+		if(STATKEY_SPD)
 			newamt = STASPD + amt
 			if(BUFSPE < 0)
 				BUFSPE = BUFSPE + amt
@@ -248,7 +247,7 @@
 			STASPD = newamt
 			update_move_intent_slowdown()
 
-		if("fortune")
+		if(STATKEY_LCK)
 			newamt = STALUC + amt
 			if(BUFLUC < 0)
 				BUFLUC = BUFLUC + amt
@@ -289,8 +288,8 @@
 			return STASTR
 		if(STATKEY_PER)
 			return STAPER
-		if(STATKEY_END)
-			return STAEND
+		if(STATKEY_WIL)
+			return STAWIL
 		if(STATKEY_CON)
 			return STACON
 		if(STATKEY_INT)
@@ -348,14 +347,14 @@
 			STACON = new_amt
 
 		if("endurance")
-			get_stat_level(STATKEY_END)
-			if(STAEND < min_amt)
-				result_amt = min_amt - STAEND
-				new_amt = STAEND + result_amt
-			if(STAEND > max_amt)
-				result_amt = STAEND - max_amt
-				new_amt = STAEND - result_amt
-			STAEND = new_amt
+			get_stat_level(STATKEY_WIL)
+			if(STAWIL < min_amt)
+				result_amt = min_amt - STAWIL
+				new_amt = STAWIL + result_amt
+			if(STAWIL > max_amt)
+				result_amt = STAWIL - max_amt
+				new_amt = STAWIL - result_amt
+			STAWIL = new_amt
 
 		if("speed")
 			get_stat_level(STATKEY_SPD)

@@ -32,7 +32,6 @@
 	hitscan = TRUE
 	movement_type = UNSTOPPABLE
 	damage = 60
-	npc_damage_mult = 2
 	damage_type = BURN
 	nodamage = FALSE
 	speed = 0.3

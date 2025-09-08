@@ -42,7 +42,7 @@
 	aggressive = 1
 
 	STACON = 17
-	STAEND = 17
+	STAWIL = 17
 	STASTR = 13
 	STASPD = 5
 
@@ -59,8 +59,6 @@
 	new /obj/item/magic/elementalfragment(deathspot)
 	new /obj/item/magic/elementalshard(deathspot)
 	new /obj/item/magic/elementalshard(deathspot)
-	new /obj/item/magic/elementalmote(deathspot)
-	new /obj/item/magic/elementalmote(deathspot)
 	new /obj/item/magic/elementalmote(deathspot)
 	new /obj/item/magic/elementalmote(deathspot)
 	new /obj/item/magic/melded/t1(deathspot)

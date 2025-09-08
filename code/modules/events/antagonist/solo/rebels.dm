@@ -10,7 +10,9 @@
 
 	base_antags = 1
 	maximum_antags = 3
+
 	denominator = 50 // adds 1 possible rebel for every 50 players
+
 	max_occurrences = 1
 
 	earliest_start = 0 SECONDS
@@ -36,6 +38,7 @@
 		"Templar",
 		"Councillor",
 		"Bandit",
+		"Servant",
 		"Prince",
 		"Princess",
 		"Hand",
@@ -47,6 +50,7 @@
 		"Archivist",
 		"Knight",
 		"Dame",
+		"Knight Captain",
 		"Court Magician",
 		"Inquisitor",
 		"Orthodoxist",
