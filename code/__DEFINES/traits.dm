@@ -207,6 +207,7 @@
 // ARMOR / CLOTHING GIVEN TRAITS (GIVEN BY WEARING CLOTHES/ARMOR PIECES)
 #define TRAIT_MONK_ROBE	"Holy Vestatures"
 #define TRAIT_RACISMISBAD "Heritage Vision"
+#define TRAIT_VENOMOUS "Venomous"
 
 // If you want description to show up you gotta have the trait name defined BEFORE this lol
 
@@ -376,7 +377,8 @@ GLOBAL_LIST_INIT(roguetraits, list(
 	TRAIT_RACISMISBAD = span_warning("The Black Oaks can spot ANY Foreigners and Outsiders, no matter how long they've lived in the vale. This is an easy skill to master, as it is simply identifying who isn't an elf."),
 	TRAIT_HERESIARCH = span_warning("I know of sacred sites of worship where followers of the Ascendants convene, and the path to the nearest conclave is etched into my memory."),
 	TRAIT_GOODWRITER = span_notice("I'm proficient at writing. Any skillbooks made by me will allow the reader to learn the subject more quickly."),
-	TRAIT_PONYGIRL_RIDEABLE = span_notice("They stripped me of pride and gave me reins; I exist now only to carry anothers weight.")
+	TRAIT_PONYGIRL_RIDEABLE = span_notice("They stripped me of pride and gave me reins; I exist now only to carry anothers weight."),
+	TRAIT_VENOMOUS = span_necrosis("My bite is venomous. When chewing someone I've bitten, I will inject venom.")
 ))
 
 // trait accessor defines

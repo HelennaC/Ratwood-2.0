@@ -34,11 +34,11 @@
 			user.visible_message(span_notice("[user] tries to put [src] on [H]..."))
 			if(do_after(user, 50, needhand = 1, target = H))
 				var/obj/item/bodypart/chest = H.get_bodypart(BODY_ZONE_CHEST)
-				chest.add_bodypart_feature(legwears_feature)
 				user.dropItemToGround(src)
 				forceMove(H)
 				H.legwear_socks = src
 				legwears_feature.accessory_colors = color
+				chest.add_bodypart_feature(legwears_feature)
 
 /obj/item/legwears/Destroy()
 	legwears_feature = null

@@ -63,7 +63,7 @@
 		remove_bodypart_feature(existing_feature)
 	bodypart_features += feature
 	if(owner)
-		owner.update_body()
+		owner.update_body(TRUE)
 	return TRUE
 
 /obj/item/bodypart/proc/remove_bodypart_feature(datum/bodypart_feature/feature)
@@ -71,7 +71,7 @@
 		return
 	bodypart_features -= feature
 	if(owner)
-		owner.update_body()
+		owner.update_body(TRUE)
 	return
 
 /obj/item/bodypart/proc/remove_all_bodypart_features()
@@ -79,7 +79,7 @@
 		return
 	bodypart_features.Cut()
 	if(owner)
-		owner.update_body()
+		owner.update_body(TRUE)
 
 /mob/living/carbon/proc/remove_all_bodypart_features()
 	for(var/obj/item/bodypart/bodypart as anything in bodyparts)
