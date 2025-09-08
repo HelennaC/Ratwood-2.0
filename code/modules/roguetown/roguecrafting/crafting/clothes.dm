@@ -1,5 +1,5 @@
 /datum/crafting_recipe/roguetown/survival/skullmask
-	name = "skull mask"
+	name = "skull mask (3 bones, 1 fiber)"
 	category = "Clothes"
 	result = /obj/item/clothing/mask/rogue/skullmask
 	reqs = list(
@@ -13,7 +13,7 @@
 
 
 /datum/crafting_recipe/roguetown/survival/antlerhood
-	name = "antlerhood"
+	name = "antlerhood (1 hide, 2 bones)"
 	category = "Clothes"
 	result = /obj/item/clothing/head/roguetown/antlerhood
 	reqs = list(
@@ -43,7 +43,7 @@
 	craftdiff = 0
 
 /datum/crafting_recipe/roguetown/leather/neck/leather_collar
-	name = "leather collar (1 cured hide)"
+	name = "leather collar (1 leather)"
 	category = "Clothes"
 	result = /obj/item/clothing/neck/roguetown/collar/leather
 	reqs = list(/obj/item/natural/hide/cured = 1)
@@ -54,7 +54,7 @@
 	always_availible = TRUE
 
 /datum/crafting_recipe/roguetown/leather/neck/catbell_collar
-	name = "catbell collar (1 cured leather, catbell)"
+	name = "catbell collar (1 leather, 1 catbell)"
 	result = /obj/item/clothing/neck/roguetown/collar/catbell
 	reqs = list(/obj/item/natural/hide/cured = 1, /obj/item/catbell = 1)
 	tools = list(/obj/item/needle)
@@ -64,7 +64,7 @@
 	always_availible = TRUE
 
 /datum/crafting_recipe/roguetown/leather/neck/cowbell_collar
-	name = "cowbell collar (1 curedleather, cowbell)"
+	name = "cowbell collar (1 leather, 1 cowbell)"
 	result = /obj/item/clothing/neck/roguetown/collar/cowbell
 	reqs = list(/obj/item/natural/hide/cured = 1, /obj/item/catbell/cow = 1)
 	tools = list(/obj/item/needle)
@@ -74,7 +74,7 @@
 	always_availible = TRUE
 
 /datum/crafting_recipe/roguetown/leather/neck/leather_leash
-	name = "leather leash (1 cured hide)"
+	name = "leather leash (1 leather)"
 	result = /obj/item/leash/leather
 	reqs = list(/obj/item/natural/hide/cured = 1)
 	tools = list(/obj/item/needle)
@@ -84,7 +84,7 @@
 	always_availible = TRUE
 
 /datum/crafting_recipe/roguetown/survival/goodluckcharm
-	name = "cabbit's foot luck charm"
+	name = "cabbit's foot luck charm (1 rabbit foot, 2 fibers)"
 	category = "Clothes"
 	result = /obj/item/clothing/neck/roguetown/luckcharm // +1 fortune when worn
 	reqs = list(
@@ -96,7 +96,7 @@
 // BOUQUETS & CROWNS
 
 /datum/crafting_recipe/roguetown/survival/bouquet_rosa
-	name = "rosa bouquet"
+	name = "rosa bouquet (4 rosa, 2 fibers, 1 scroll)"
 	category = "Clothes"
 	result = /obj/item/bouquet/rosa
 	reqs = list(
@@ -109,7 +109,7 @@
 	verbage = "arranges"
 
 /datum/crafting_recipe/roguetown/survival/bouquet_salvia
-	name = "salvia bouquet"
+	name = "salvia bouquet (4 salvia, 2 fibers, 1 scroll)"
 	category = "Clothes"
 	result = /obj/item/bouquet/salvia
 	reqs = list(
@@ -122,7 +122,7 @@
 	verbage = "arranges"
 
 /datum/crafting_recipe/roguetown/survival/bouquet_matricaria
-	name = "matricaria bouquet"
+	name = "matricaria bouquet (4 matricaria, 2 fibers, 1 scroll)"
 	category = "Clothes"
 	result = /obj/item/bouquet/matricaria
 	reqs = list(
@@ -135,7 +135,7 @@
 	verbage = "arranges"
 
 /datum/crafting_recipe/roguetown/survival/bouquet_calendula
-	name = "calendula bouquet"
+	name = "calendula bouquet (4 calendula, 2 fibers, 1 scroll)"
 	category = "Clothes"
 	result = /obj/item/bouquet/calendula
 	reqs = list(
@@ -148,7 +148,7 @@
 	verbage = "arranges"
 
 /datum/crafting_recipe/roguetown/survival/flowercrown_rosa
-	name = "rosa crown"
+	name = "rosa crown (4 rosa, 2 fibers)"
 	category = "Clothes"
 	result = /obj/item/flowercrown/rosa
 	reqs = list(
@@ -160,7 +160,7 @@
 	verbage = "ties"
 
 /datum/crafting_recipe/roguetown/survival/flowercrown_salvia
-	name = "salvia crown"
+	name = "salvia crown (4 salvia, 2 fibers)"
 	category = "Clothes"
 	result = /obj/item/flowercrown/salvia
 	reqs = list(
@@ -173,7 +173,7 @@
 
 // Amulet
 /datum/crafting_recipe/roguetown/survival/pearlcross
-	name = "amulet (pearls)"
+	name = "amulet (pearls) (3 pearls, 1 fiber)"
 	category = "Clothes"
 	result = /obj/item/clothing/neck/roguetown/psicross/pearl
 	reqs = list(
@@ -183,7 +183,7 @@
 	craftdiff = 2
 
 /datum/crafting_recipe/roguetown/survival/bpearlcross
-	name = "amulet (blue pearls)"
+	name = "amulet (blue pearls) (3 blue pearls, 1 fiber)"
 	category = "Clothes"
 	result = /obj/item/clothing/neck/roguetown/psicross/bpearl
 	reqs = list(
@@ -193,7 +193,7 @@
 	craftdiff = 2
 
 /datum/crafting_recipe/roguetown/survival/shellnecklace
-	name = "shell necklace"
+	name = "shell necklace (5 oyster shells, 1 fiber)"
 	category = "Clothes"
 	result = /obj/item/clothing/neck/roguetown/psicross/shell
 	reqs = list(
@@ -202,7 +202,7 @@
 		)
 
 /datum/crafting_recipe/roguetown/survival/shellbracelet
-	name = "shell bracelet"
+	name = "shell bracelet (3 oyster shells, 1 fiber)"
 	category = "Clothes"
 	result = /obj/item/clothing/neck/roguetown/psicross/shell/bracelet
 	reqs = list(
@@ -211,7 +211,7 @@
 		)
 
 /datum/crafting_recipe/roguetown/survival/abyssoramulet
-	name = "amulet of abyssor"
+	name = "amulet of abyssor (1 blue pearl, 1 fiber)"
 	category = "Clothes"
 	result = /obj/item/clothing/neck/roguetown/psicross/abyssor
 	reqs = list(
@@ -220,7 +220,7 @@
 		)
 
 /datum/crafting_recipe/roguetown/survival/woodcross
-	name = "wooden amulet"
+	name = "wooden amulet (2 sticks, 2 fibers)"
 	category = "Clothes"
 	result = /obj/item/clothing/neck/roguetown/psicross/wood
 	reqs = list(
@@ -229,7 +229,7 @@
 		)
 
 /datum/crafting_recipe/roguetown/survival/wickercloak
-	name = "wickercloak"
+	name = "wickercloak (1 dirtclod, 5 sticks, 3 fibers)"
 	category = "Clothes"
 	result = /obj/item/clothing/cloak/wickercloak
 	reqs = list(

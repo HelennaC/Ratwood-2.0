@@ -175,20 +175,20 @@
 
 
 /datum/anvil_recipe/weapons/aalloy/bardiche
-	name = "Bardiche, Decrepit (+1 log, +1 Alloy)"
+	name = "Bardiche, Decrepit (+1 Alloy, +1 Small Log)"
 	appro_skill = /datum/skill/craft/weaponsmithing
 	req_bar = /obj/item/ingot/aalloy
 	created_item = /obj/item/rogueweapon/halberd/bardiche/aalloy
-	additional_items = list(/obj/item/ingot/iron, /obj/item/grown/log/tree/small)
+	additional_items = list(/obj/item/ingot/aalloy, /obj/item/grown/log/tree/small)
 	craftdiff = 0
 
 
 /datum/anvil_recipe/weapons/paalloy/bardiche
-	name = "Bardiche, Ancient (+1 log, +1 Purified Alloy)"
+	name = "Bardiche, Ancient (+1 Purified Alloy, +1 Small Log)"
 	appro_skill = /datum/skill/craft/weaponsmithing
 	req_bar = /obj/item/ingot/purifiedaalloy
 	created_item = /obj/item/rogueweapon/halberd/bardiche/paalloy
-	additional_items = list(/obj/item/ingot/iron, /obj/item/grown/log/tree/small)
+	additional_items = list(/obj/item/ingot/purifiedaalloy, /obj/item/grown/log/tree/small)
 	craftdiff = 0
 
 /datum/anvil_recipe/weapons/aalloy/grandmace
@@ -543,12 +543,12 @@
 	created_item = /obj/item/rogueweapon/greatsword
 	craftdiff = 4
 
-/*datum/anvil_recipe/weapons/steel/steelzweihander //leaving this here for now; discussion with devgeneral.
-	name = "Zweihander, Steel (+2 Steel)"
+/datum/anvil_recipe/weapons/steel/steelzweihander //greatsword returned with 4 bars needed
+	name = "Zweihander, Steel (+3 Steel)"
 	req_bar = /obj/item/ingot/steel
-	additional_items = list(/obj/item/ingot/steel, /obj/item/ingot/steel)
+	additional_items = list(/obj/item/ingot/steel, /obj/item/ingot/steel, /obj/item/ingot/steel)
 	created_item = /obj/item/rogueweapon/greatsword/grenz
-	craftdiff = 4*/
+	craftdiff = 4
 
 /datum/anvil_recipe/weapons/estoc
 	name = "Estoc, Steel (+1 Steel)"
@@ -564,11 +564,12 @@
 	created_item = /obj/item/rogueweapon/stoneaxe/woodcut/steel
 	craftdiff = 2
 
-/*/datum/anvil_recipe/weapons/steel/pulaski // We left the other holy steel recipes in, so I'll leave this for now.
+/datum/anvil_recipe/weapons/steel/pulaski //returned and balanced with craftdiff added
 	name = "Pulaski axe (+1 Stick)"
 	req_bar = /obj/item/ingot/steel
 	additional_items = list(/obj/item/grown/log/tree/stick)
-	created_item = /obj/item/rogueweapon/stoneaxe/woodcut/pick */
+	created_item = /obj/item/rogueweapon/stoneaxe/woodcut/pick
+	craftdiff = 2
 
 /datum/anvil_recipe/weapons/steel/greataxe
 	name = "Greataxe, Steel (+1 Steel, +1 Small Log)"
@@ -644,7 +645,7 @@
 	name = "Tossblade, Steel (x4)"
 	req_bar = /obj/item/ingot/steel
 	created_item = /obj/item/rogueweapon/huntingknife/throwingknife/steel
-	craftdiff = 0
+	craftdiff = 2
 	createditem_num = 4
 
 /datum/anvil_recipe/weapons/steel/javelin
@@ -723,7 +724,7 @@
 	name = "Dagger, Silver"
 	req_bar = /obj/item/ingot/silver
 	created_item = /obj/item/rogueweapon/huntingknife/idagger/silver
-	craftdiff = 2
+	craftdiff = 3
 
 /datum/anvil_recipe/weapons/silver/sword
 	name = "Sword, Silver (+1 Silver)"
@@ -774,7 +775,7 @@
 	req_bar = /obj/item/ingot/bronze
 	additional_items = list(/obj/item/ingot/bronze, /obj/item/grown/log/tree/small)
 	created_item = /obj/item/rogueweapon/spear/bronze
-	craftdiff = 0
+	craftdiff = 2
 
 /datum/anvil_recipe/weapons/bronze/bronzeknuckle
 	name = "Knuckles, Bronze"
@@ -831,6 +832,7 @@
 	req_bar = /obj/item/ingot/steel
 	additional_items = list(/obj/item/grown/log/tree/small, /obj/item/natural/fibers)
 	created_item = /obj/item/gun/ballistic/revolver/grenadelauncher/crossbow
+	craftdiff = 2
 
 /datum/anvil_recipe/weapons/iron/bolts
 	name = "Crossbow Bolts (+2 Stick) (x10)"
@@ -839,6 +841,7 @@
 	created_item = /obj/item/ammo_casing/caseless/rogue/bolt
 	createditem_num = 10
 	i_type = "Ammo"
+	craftdiff = 1
 
 /datum/anvil_recipe/weapons/aalloy/bolts
 	name = "Bolts, Decrepit (+2 Stick) (x10)"
@@ -847,6 +850,7 @@
 	created_item = /obj/item/ammo_casing/caseless/rogue/bolt/aalloy
 	createditem_num = 10
 	i_type = "Ammo"
+	craftdiff = 1
 
 /datum/anvil_recipe/weapons/paalloy/bolts
 	name = "Bolts, Ancient (+2 Stick) (x10)"
@@ -855,6 +859,7 @@
 	created_item = /obj/item/ammo_casing/caseless/rogue/bolt/paalloy
 	createditem_num = 10
 	i_type = "Ammo"
+	craftdiff = 1
 
 /// BOWS
 /datum/anvil_recipe/weapons/iron/arrows
@@ -920,11 +925,12 @@
 
 //Rarity
 /datum/anvil_recipe/valuables/steel/execution
-	name = "Execution Sword, Steel (+1 Steel, +1 Iron)"
+	name = "Execution Sword, Steel (+1 Iron, +2 Steel)"
 	req_bar = /obj/item/ingot/steel
-	additional_items = list(/obj/item/ingot/iron, /obj/item/ingot/steel)
+	additional_items = list(/obj/item/ingot/iron, /obj/item/ingot/steel, /obj/item/ingot/steel)
 	created_item = /obj/item/rogueweapon/sword/long/exe
 	i_type = "Weapons"
+	craftdiff = 4
 
 // BLACKSTEEL
 

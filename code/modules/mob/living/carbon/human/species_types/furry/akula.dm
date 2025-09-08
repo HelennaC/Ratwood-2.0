@@ -8,7 +8,7 @@
 	Axians are a proud, shark-like people that have a heritage founded in maritime trade, tax evasion, and piracy. \
 	While known for being strong in spirit and promoting robust commercial practices, they have gained infamy for \
 	possessing an intense distaste for both the nobility and taxes, making them a prime target of discrimination and suspicion.<br>\
-	(+1 Constitution, +1 Endurance)"
+	(+1 Constitution, +1 Endurance, Waterbreathing, Sea Water Drinking Trait)"
 	expanded_desc =	"Axians are a proud, shark-like people that have a heritage founded in maritime trade, tax evasion, and piracy. While known for \
 	being strong in spirit and promoting robust commercial practices, they have gained infamy for possessing an intense distaste for \
 	both the nobility and taxes, making them a prime target of discrimination and suspicion. They are oftentimes scapegoats for crime \
@@ -25,7 +25,6 @@
 	the Great Sissean Uprisings plunged the republic into economic and moral chaos with many leaders accused of Matthiosan worship. This turmoil \
 	eventually sparked the brutal Ainoan Crusade, splintering the republic into several rump states led by merchant warlords and so-called pirate kings. \
 	However, instead of trying to reclaim the glory of the past, Axians embrace their new lifestyle and thrive in the chaos."
-	species_traits = list(EYECOLOR,LIPS,STUBBLE,MUTCOLORS)
 	species_traits = list(EYECOLOR,LIPS,STUBBLE,MUTCOLORS)
 	inherent_traits = list(TRAIT_WATERBREATHING, TRAIT_SEA_DRINKER)
 	possible_ages = ALL_AGES_LIST
