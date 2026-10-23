@@ -288,6 +288,7 @@ SAVEFILE UPDATING/VERSIONING - 'Simplified', or rather, more coder-friendly ~Car
 
 
 	S["default_slot"]		>> default_slot
+	S["favorited_slots"]	>> favorited_slots
 	S["chat_toggles"]		>> chat_toggles
 	S["toggles"]			>> toggles
 	S["floating_text_toggles"]>> floating_text_toggles
@@ -346,6 +347,15 @@ SAVEFILE UPDATING/VERSIONING - 'Simplified', or rather, more coder-friendly ~Car
 	buttons_locked	= sanitize_integer(buttons_locked, 0, 1, initial(buttons_locked))
 	windowflashing	= sanitize_integer(windowflashing, 0, 1, initial(windowflashing))
 	default_slot	= sanitize_integer(default_slot, 1, max_save_slots, initial(default_slot))
+	if(!islist(favorited_slots))
+		favorited_slots = list()
+	else
+		var/list/sanitized_favorites = list()
+		for(var/favorite_slot in favorited_slots)
+			var/valid_favorite = sanitize_integer(text2num("[favorite_slot]"), 1, max_save_slots, 0)
+			if(valid_favorite && !(valid_favorite in sanitized_favorites))
+				sanitized_favorites += valid_favorite
+		favorited_slots = sanitized_favorites
 	toggles			= sanitize_integer(toggles, 0, INFINITY, initial(toggles))
 	floating_text_toggles = sanitize_integer(floating_text_toggles, 0, INFINITY, initial(floating_text_toggles))
 	admin_chat_toggles = sanitize_integer(admin_chat_toggles, 0, INFINITY, initial(admin_chat_toggles))
@@ -486,6 +496,7 @@ SAVEFILE UPDATING/VERSIONING - 'Simplified', or rather, more coder-friendly ~Car
 	WRITE_FILE(S["windowflash"], windowflashing)
 	WRITE_FILE(S["be_special"], be_special)
 	WRITE_FILE(S["default_slot"], default_slot)
+	WRITE_FILE(S["favorited_slots"], favorited_slots)
 	WRITE_FILE(S["toggles"], toggles)
 	WRITE_FILE(S["chat_toggles"], chat_toggles)
 	WRITE_FILE(S["floating_text_toggles"], floating_text_toggles)

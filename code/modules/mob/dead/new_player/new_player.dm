@@ -5,6 +5,7 @@ GLOBAL_LIST_INIT(roleplay_readme, world.file2list("strings/rt/rp_prompt.txt"))
 	var/ready = 0
 	var/spawning = 0//Referenced when you want to delete the new_player later on in the code.
 	var/topjob = "Hero!"
+	var/tmp/late_join_menu_open = FALSE
 	flags_1 = NONE
 
 	invisibility = INVISIBILITY_ABSTRACT
@@ -114,6 +115,231 @@ GLOBAL_LIST_INIT(roleplay_readme, world.file2list("strings/rt/rp_prompt.txt"))
 		if(client.prefs)
 			client.prefs.ShowChoices(src, 4)
 
+/mob/dead/new_player/ui_interact(mob/user, datum/tgui/ui)
+	if(user != src || !client)
+		return
+	ui = SStgui.try_update_ui(user, src, ui)
+	if(!ui)
+		ui = new(user, src, "NewPlayerPanel", "Ratwood Lobby")
+		ui.open()
+
+/mob/dead/new_player/ui_state(mob/user)
+	return GLOB.tgui_always_state
+
+/mob/dead/new_player/ui_status(mob/user, datum/ui_state/state)
+	return user == src && client ? UI_INTERACTIVE : UI_CLOSE
+
+/mob/dead/new_player/ui_data(mob/user)
+	var/time_remaining = SSticker.GetTimeLeft()
+	var/timer_status
+	if(time_remaining > 0)
+		timer_status = "[round(time_remaining / 10)] seconds"
+	else if(time_remaining == -10)
+		timer_status = "Delayed"
+	else
+		timer_status = "Starting soon"
+	var/late_join_delay = 5 MINUTES
+#ifdef ALLOWPLAY
+	late_join_delay = 1 SECONDS
+#endif
+#ifdef TESTSERVER
+	late_join_delay = 0
+#endif
+	var/can_late_join = SSticker.IsRoundInProgress() && !SSticker.late_join_disabled
+	if(can_late_join && SSticker.round_start_time && world.time < SSticker.round_start_time + late_join_delay)
+		can_late_join = FALSE
+	var/list/late_join_roles = list()
+	if(SSticker.IsRoundInProgress())
+		if(has_world_trait(/datum/world_trait/skeleton_siege))
+			late_join_roles += list(list("title" = "Skeleton", "name" = "Skeleton", "department" = "Special", "tutorial" = "Join the skeleton siege.", "available_slots" = 0, "unlimited" = TRUE))
+		if(has_world_trait(/datum/world_trait/goblin_siege))
+			late_join_roles += list(list("title" = "Goblin", "name" = "Goblin", "department" = "Special", "tutorial" = "Join the goblin siege.", "available_slots" = 0, "unlimited" = TRUE))
+		if(!has_world_trait(/datum/world_trait/skeleton_siege) && !has_world_trait(/datum/world_trait/goblin_siege))
+			for(var/datum/job/job as anything in SSjob.occupations)
+				if(!job.spawn_positions || job.title in GLOB.villain_positions)
+					continue
+				var/job_availability = IsJobUnavailable(job.title, latejoin = TRUE)
+				if(job_availability != JOB_AVAILABLE && !job.always_show_on_latechoices)
+					continue
+				var/display_name = job.display_title || job.title
+				if((client.prefs.pronouns == SHE_HER || client.prefs.pronouns == THEY_THEM_F) && job.f_title)
+					display_name = job.f_title
+				late_join_roles += list(list(
+					"title" = job.title,
+					"name" = display_name,
+					"department" = SSjob.bitflag_to_department(job.department_flag),
+					"tutorial" = job.tutorial,
+					"available_slots" = max(0, job.total_positions - job.current_positions),
+					"unlimited" = job.total_positions == -1,
+					"always_show" = job.always_show_on_latechoices
+				))
+	return list(
+		"ready" = ready,
+		"ready_to_play" = PLAYER_READY_TO_PLAY,
+		"not_ready" = PLAYER_NOT_READY,
+		"ready_to_observe" = PLAYER_READY_TO_OBSERVE,
+		"ready_count" = SSticker.totalPlayersReady,
+		"timer_status" = timer_status,
+		"round_started" = SSticker.IsRoundInProgress(),
+		"can_late_join" = can_late_join,
+		"late_join_disabled" = SSticker.late_join_disabled,
+		"late_join_menu_open" = late_join_menu_open,
+		"late_join_roles" = late_join_roles,
+		"motd" = global.config.motd,
+		"ready_classes" = SSlobbymenu.ready_classes
+	)
+
+/mob/dead/new_player/ui_act(action, list/params, datum/tgui/ui)
+	. = ..()
+	if(ui.user != src || !client)
+		return FALSE
+	switch(action)
+		if("set_ready")
+			var/ready_state = text2num(params["state"])
+			if(ready_state < PLAYER_NOT_READY || ready_state > PLAYER_READY_TO_OBSERVE)
+				return FALSE
+			return set_lobby_ready_state(ready_state)
+		if("late_join")
+			return request_late_join(FALSE, null, TRUE)
+		if("cancel_late_join")
+			late_join_menu_open = FALSE
+			return TRUE
+		if("select_late_join_role")
+			return attempt_late_spawn(params["job"])
+		if("observe")
+			if(SSticker.current_state <= GAME_STATE_PREGAME)
+				ready = PLAYER_READY_TO_OBSERVE
+				return TRUE
+			return make_me_an_observer()
+		if("open_character")
+			client.prefs.ShowChoices(src, 4)
+			return TRUE
+		if("open_settings")
+			if(!client.toggles_menu)
+				client.toggles_menu = new(client)
+			client.toggles_menu.ui_interact(src)
+			return TRUE
+		if("open_manifest")
+			ViewManifest()
+			return TRUE
+		if("open_changelog")
+			var/datum/changelog/changelog_ui = GLOB.changelog_tgui
+			if(!changelog_ui)
+				changelog_ui = new /datum/changelog
+				GLOB.changelog_tgui = changelog_ui
+			changelog_ui.ui_interact(src)
+			return TRUE
+	return FALSE
+
+/mob/dead/new_player/proc/set_lobby_ready_state(ready_state)
+	if(ready_state == PLAYER_NOT_READY && SSticker.job_change_locked)
+		return FALSE
+	if(SSticker.current_state <= GAME_STATE_PREGAME)
+		if(ready_state == PLAYER_READY_TO_PLAY)
+			if(length(client.prefs.flavortext) < MINIMUM_FLAVOR_TEXT)
+				to_chat(src, span_boldwarning("You need a minimum of [MINIMUM_FLAVOR_TEXT] characters in your flavor text in order to play."))
+				return FALSE
+			if(length(client.prefs.ooc_notes) < MINIMUM_OOC_NOTES)
+				to_chat(src, span_boldwarning("You need at least a few words in your OOC notes in order to play."))
+				return FALSE
+		if(ready != ready_state)
+			ready = ready_state
+		return TRUE
+	if(ready_state == PLAYER_READY_TO_OBSERVE)
+		ready = ready_state
+		return make_me_an_observer()
+	return FALSE
+
+/mob/dead/new_player/proc/request_late_join(override = FALSE, relevant_cap, show_tgui = FALSE)
+	if(!SSticker?.IsRoundInProgress())
+		to_chat(src, span_boldwarning("The game is starting. You cannot join yet."))
+		return FALSE
+	if(SSticker.late_join_disabled)
+		to_chat(src, span_warning("Late-joining is currently disabled."))
+		return FALSE
+	if(client && client.prefs.is_active_migrant())
+		to_chat(src, span_boldwarning("You are in the migrant queue."))
+		return FALSE
+	if(override)
+		LateChoices()
+		return TRUE
+
+	var/timetojoin = 5 MINUTES
+#ifdef ALLOWPLAY
+	timetojoin = 1 SECONDS
+#endif
+#ifdef TESTSERVER
+	timetojoin = 0
+#endif
+	if(SSticker.round_start_time && world.time < SSticker.round_start_time + timetojoin)
+		var/ttime = round((SSticker.round_start_time + timetojoin - world.time) / 10)
+		var/list/messages = list("Not yet.", "You cannot join yet.", "It won't work yet.", "Please be patient.", "Try again later.", "Late-joining is not yet possible.")
+		to_chat(src, span_warning("[pick(messages)] ([ttime])."))
+		return FALSE
+
+	if(!relevant_cap)
+		var/hard_popcap = CONFIG_GET(number/hard_popcap)
+		var/extreme_popcap = CONFIG_GET(number/extreme_popcap)
+		if(hard_popcap && extreme_popcap)
+			relevant_cap = min(hard_popcap, extreme_popcap)
+		else
+			relevant_cap = max(hard_popcap, extreme_popcap)
+
+	var/patreon_level = client.patreonlevel()
+	if(!IsPatreon(ckey))
+		if(SSticker.queued_players.len || (relevant_cap && living_player_count() >= relevant_cap && !(ckey(key) in GLOB.admin_datums) && patreon_level < 1))
+			to_chat(src, span_danger("[CONFIG_GET(string/hard_popcap_message)]"))
+			var/queue_position = SSticker.queued_players.Find(src)
+			if(queue_position == 1)
+				to_chat(src, span_notice("Thou art next in line to join the game. You will be notified when a slot opens up."))
+			else if(queue_position)
+				to_chat(src, span_notice("Thou art [queue_position-1] players in front of you in the queue to join the game."))
+			else
+				SSticker.queued_players += src
+				to_chat(src, span_notice("Thou have been added to the queue to join the game. Your queue position is [SSticker.queued_players.len]."))
+			return FALSE
+	if(show_tgui)
+		late_join_menu_open = TRUE
+	else
+		LateChoices()
+	return TRUE
+
+/mob/dead/new_player/proc/attempt_late_spawn(job_title)
+	if(!SSticker?.IsRoundInProgress())
+		to_chat(src, span_danger("The round is either not ready, or has already finished..."))
+		return FALSE
+	if(SSticker.late_join_disabled)
+		to_chat(src, span_warning("Late-joining is currently disabled."))
+		return FALSE
+	if(!GLOB.enter_allowed)
+		to_chat(src, span_notice("There is a lock on entering the game!"))
+		return FALSE
+
+	var/hard_popcap = CONFIG_GET(number/hard_popcap)
+	var/extreme_popcap = CONFIG_GET(number/extreme_popcap)
+	var/relevant_cap = (hard_popcap && extreme_popcap) ? min(hard_popcap, extreme_popcap) : max(hard_popcap, extreme_popcap)
+	if(SSticker.queued_players.len && !(ckey(key) in GLOB.admin_datums))
+		if((living_player_count() >= relevant_cap) || (src != SSticker.queued_players[1]))
+			to_chat(src, span_warning("Server is full."))
+			return FALSE
+	if(client && client.prefs.is_active_migrant())
+		to_chat(src, span_boldwarning("You are in the migrant queue."))
+		return FALSE
+	if(length(client.prefs.flavortext) < MINIMUM_FLAVOR_TEXT)
+		to_chat(src, span_boldwarning("You need a minimum of [MINIMUM_FLAVOR_TEXT] characters in your flavor text in order to play."))
+		return FALSE
+	if(length(client.prefs.ooc_notes) < MINIMUM_OOC_NOTES)
+		to_chat(src, span_boldwarning("You need at least a few words in your OOC notes in order to play."))
+		return FALSE
+	var/is_special_siege_role = (job_title == "Skeleton" && has_world_trait(/datum/world_trait/skeleton_siege)) || (job_title == "Goblin" && has_world_trait(/datum/world_trait/goblin_siege))
+	var/datum/job/job = SSjob.GetJob(job_title)
+	if(!is_special_siege_role && (!job || !(job in SSjob.occupations) || job.title in GLOB.villain_positions || (IsJobUnavailable(job.title, latejoin = TRUE) != JOB_AVAILABLE && !job.always_show_on_latechoices)))
+		to_chat(src, span_warning("That class is not currently available."))
+		return FALSE
+	late_join_menu_open = FALSE
+	AttemptLateSpawn(is_special_siege_role ? job_title : job.title)
+	return TRUE
+
 /mob/dead/new_player/Topic(href, href_list[])
 	if(src != usr)
 		return 0
@@ -170,29 +396,7 @@ GLOBAL_LIST_INIT(roleplay_readme, world.file2list("strings/rt/rp_prompt.txt"))
 
 	if(href_list["ready"])
 		var/tready = text2num(href_list["ready"])
-		//Avoid updating ready if we're after PREGAME (they should use latejoin instead)
-		//This is likely not an actual issue but I don't have time to prove that this
-		//no longer is required
-		if(tready == PLAYER_NOT_READY)
-			if(SSticker.job_change_locked)
-				return
-		if(SSticker.current_state <= GAME_STATE_PREGAME)
-			if(tready == PLAYER_READY_TO_PLAY)
-				if(length(client.prefs.flavortext) < MINIMUM_FLAVOR_TEXT)
-					to_chat(src, span_boldwarning("You need a minimum of [MINIMUM_FLAVOR_TEXT] characters in your flavor text in order to play."))
-					return
-				if(length(client.prefs.ooc_notes) < MINIMUM_OOC_NOTES)
-					to_chat(src, span_boldwarning("You need at least a few words in your OOC notes in order to play."))
-					return
-
-			if(ready != tready)
-				ready = tready
-		//if it's post initialisation and they're trying to observe we do the needful
-		
-		if(!SSticker.current_state < GAME_STATE_PREGAME && tready == PLAYER_READY_TO_OBSERVE)
-			ready = tready
-			make_me_an_observer()
-			return
+		set_lobby_ready_state(tready)
 
 	if(href_list["refresh"])
 		winshow(src, "preferencess_window", FALSE)
@@ -205,57 +409,7 @@ GLOBAL_LIST_INIT(roleplay_readme, world.file2list("strings/rt/rp_prompt.txt"))
 //		return
 
 	if(href_list["late_join"])
-		if(!SSticker?.IsRoundInProgress())
-			to_chat(usr, span_boldwarning("The game is starting. You cannot join yet."))
-			return
-
-		if(client && client.prefs.is_active_migrant())
-			to_chat(usr, span_boldwarning("You are in the migrant queue."))
-			return
-
-		if(href_list["late_join"] == "override")
-			LateChoices()
-			return
-/*#ifdef MATURESERVER
-		if(key && (world.time < GLOB.respawntimes[key] + RESPAWNTIME))
-			to_chat(usr, span_warning("I can return in [GLOB.respawntimes[key] + RESPAWNTIME - world.time]."))
-			return
-#else*/
-
-
-		var/timetojoin = 5 MINUTES
-#ifdef ALLOWPLAY
-		timetojoin = 1 SECONDS
-#endif
-#ifdef TESTSERVER
-		timetojoin = 0
-#endif
-		if(SSticker.round_start_time)
-			if(world.time < SSticker.round_start_time + timetojoin)
-				var/ttime = round((SSticker.round_start_time + timetojoin - world.time) / 10)
-				var/list/choicez = list("Not yet.", "You cannot join yet.", "It won't work yet.", "Please be patient.", "Try again later.", "Late-joining is not yet possible.")
-				to_chat(usr, span_warning("[pick(choicez)] ([ttime])."))
-				return
-
-		var/plevel = 0
-		if(ismob(usr))
-			var/mob/user = usr
-			if(user.client)
-				plevel = user.client.patreonlevel()
-		if(!IsPatreon(ckey))
-			if(SSticker.queued_players.len || (relevant_cap && living_player_count() >= relevant_cap && !(ckey(key) in GLOB.admin_datums) && plevel < 1))
-				to_chat(usr, span_danger("[CONFIG_GET(string/hard_popcap_message)]"))
-
-				var/queue_position = SSticker.queued_players.Find(usr)
-				if(queue_position == 1)
-					to_chat(usr, span_notice("Thou art next in line to join the game. You will be notified when a slot opens up."))
-				else if(queue_position)
-					to_chat(usr, span_notice("Thou art [queue_position-1] players in front of you in the queue to join the game."))
-				else
-					SSticker.queued_players += usr
-					to_chat(usr, span_notice("Thou have been added to the queue to join the game. Your position in queue is [SSticker.queued_players.len]."))
-				return
-		LateChoices()
+		request_late_join(href_list["late_join"] == "override", relevant_cap)
 
 	if(href_list["villains"])
 		VillainChoices()

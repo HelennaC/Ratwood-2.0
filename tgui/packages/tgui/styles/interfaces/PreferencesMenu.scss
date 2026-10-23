@@ -23,6 +23,26 @@ $department_map: (
 }
 
 .PreferencesMenu {
+  &__Sidebar {
+    border-right: var(--border-thickness-small) solid var(--color-border);
+    padding-right: var(--space-s);
+
+    &__Preview {
+      border: var(--border-thickness-medium) solid var(--color-border);
+      border-radius: var(--border-radius-medium);
+      min-height: 18rem;
+      padding: 0;
+    }
+  }
+
+  .Tabs {
+    border-bottom: var(--border-thickness-small) solid var(--color-border);
+  }
+
+  .Section {
+    border-radius: var(--border-radius-medium);
+  }
+
   &__Antags {
     &__antagSelection {
       gap: var(--space-l);

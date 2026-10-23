@@ -47,7 +47,7 @@ INITIALIZE_IMMEDIATE(/mob/dead)
 	loc = destination
 	Moved(oldloc, NONE, TRUE)
 
-/mob/dead/new_player/proc/lobby_refresh(actor_list)
+/mob/dead/new_player/proc/lobby_refresh()
 	set waitfor = 0
 	if(!client)
 		return
@@ -55,56 +55,12 @@ INITIALIZE_IMMEDIATE(/mob/dead)
 	if(client.is_new_player())
 		return
 
-	var/time_remaining = SSticker.GetTimeLeft()
-	if(SSticker.HasRoundStarted() || time_remaining <= 0)
-		client << browse(null, "window=lobby_window")
-		return
-	if(!winexists(client, "lobby_window"))
-		open_lobby()  // creates window + browser control
-		sleep(0)
-		if(!client) // client vanished while we slept
-			return
-	var/lobby_visible = winget(client, "lobby_window", "is-visible")
-	if(lobby_visible == "false") // winget returns a string...
-		client << browse(null, "window=lobby_window")
-		open_lobby()
-		sleep(0)
-		if(!client) // client vanished while we slept
-			return
-
-	// UPDATE TIMER -- Script in html\lobby\lobby.html / .js
-	var/timer_text
-	if (time_remaining > 0)
-		timer_text = "Time To Start: [round(time_remaining/10)]s"
-	else if (time_remaining == -10)
-		timer_text = "Time To Start: DELAYED"
-	else
-		timer_text = "Time To Start: SOON"
-		client << browse(null, "window=lobby_window")
-		return
-	client << output(timer_text, "lobby_window.browser:update_timer")
-
-	// Update players ready!!
-	client << output(
-	"Total players ready: [SSticker.totalPlayersReady]",
-	"lobby_window.browser:update_ready_count"
-	)
-	// Ready bonus
-	var/bonus_html
-	if (src.ready)
-		bonus_html = span_good("Ready Bonus!")
-	else
-		bonus_html = span_highlight("No bonus! Ready up!")
-	client << output(bonus_html, "lobby_window.browser:update_ready_bonus")
-	client << output(actor_list, "lobby_window.browser:update_jobs")
+	open_lobby()
 
 /mob/dead/new_player/proc/open_lobby()
 	if (!client)
 		return
-	client << browse(
-		file("html/lobby/lobby.html"),
-		"window=lobby_window;size=330x430"
-	)
+	ui_interact(src)
 /mob/dead/proc/server_hop()
 	set category = "OOC"
 	set name = "Server Hop!"

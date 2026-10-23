@@ -10,6 +10,7 @@ GLOBAL_LIST_EMPTY(chosen_names)
 	var/path
 	var/default_slot = 1				//Holder so it doesn't default to slot 1, rather the last one used
 	var/max_save_slots = 60
+	var/list/favorited_slots = list()
 
 	//non-preference stuff
 	var/muted = 0
@@ -537,6 +538,13 @@ GLOBAL_LIST_EMPTY(chosen_names)
 
 /datum/preferences/proc/ShowChoices(mob/user, tabchoice)
 	if(!user || !user.client)
+		return
+	if(tabchoice == 4)
+		current_tab = PREFERENCE_TAB_CHARACTER_CREATOR
+	else if(tabchoice != null)
+		current_tab = tabchoice
+	if(current_tab == PREFERENCE_TAB_CHARACTER_CREATOR)
+		ui_interact(user)
 		return
 	if(slot_randomized)
 		load_character(default_slot) // Reloads the character slot. Prevents random features from overwriting the slot if saved.
@@ -1139,6 +1147,8 @@ GLOBAL_LIST_EMPTY(chosen_names)
 #undef MAX_MUTANT_ROWS
 
 /datum/preferences/proc/CaptureKeybinding(mob/user, datum/keybinding/kb, old_key)
+	var/encoded_binding_name = url_encode(kb.name)
+	var/encoded_previous_key = old_key ? url_encode(old_key) : ""
 	var/HTML = {"
 	<div id='focus' style="outline: 0;" tabindex=0>Keybinding: [kb.full_name]<br>[kb.description]<br><br><b>Press any key to change<br>Press ESC to clear</b></div>
 	<script>
@@ -1149,17 +1159,9 @@ GLOBAL_LIST_EMPTY(chosen_names)
 		var ctrl = e.ctrlKey ? 1 : 0;
 		var shift = e.shiftKey ? 1 : 0;
 		var numpad = (95 < e.keyCode && e.keyCode < 112) ? 1 : 0;
-		var main_key = e.key;
-		switch (main_key){
-			case '#':main_key = '%23';
-			break;
-			case '&':main_key = '%26';
-			break;
-			case '=':main_key = '%3D';
-			break;
-		};
+		var main_key = encodeURIComponent(e.key);
 		var escPressed = e.keyCode == 27 ? 1 : 0;
-		var url = 'byond://?_src_=prefs;preference=keybinds;task=keybindings_set;keybinding=[kb.name];old_key=[old_key];clear_key='+escPressed+';key='+main_key+';alt='+alt+';ctrl='+ctrl+';shift='+shift+';numpad='+numpad+';key_code='+e.keyCode;
+		var url = 'byond://?_src_=prefs;preference=keybinds;task=keybindings_set;keybinding=[encoded_binding_name];old_key=[encoded_previous_key];clear_key='+escPressed+';key='+main_key+';alt='+alt+';ctrl='+ctrl+';shift='+shift+';numpad='+numpad+';key_code='+e.keyCode;
 		window.location=url;
 		deedDone = true;
 	}
@@ -1733,7 +1735,7 @@ Slots: [job.spawn_positions] [job.round_contrib_points ? "RCP: +[job.round_contr
 				var/kb_name = href_list["keybinding"]
 				if(!kb_name)
 					user << browse(null, "window=capturekeypress")
-					SetKeybinds(user)
+					refresh_keybindings_menu(user)
 					return
 
 				var/clear_key = text2num(href_list["clear_key"])
@@ -1744,8 +1746,9 @@ Slots: [job.spawn_positions] [job.round_contrib_points ? "RCP: +[job.round_contr
 						if(!length(key_bindings[old_key]))
 							key_bindings -= old_key
 					user << browse(null, "window=capturekeypress")
+					user.client.update_movement_keys()
 					save_preferences()
-					SetKeybinds(user)
+					refresh_keybindings_menu(user)
 					return
 
 				var/new_key = uppertext(href_list["key"])
@@ -1778,17 +1781,17 @@ Slots: [job.spawn_positions] [job.round_contrib_points ? "RCP: +[job.round_contr
 				user << browse(null, "window=capturekeypress")
 				user.client.update_movement_keys()
 				save_preferences()
-				SetKeybinds(user)
+				refresh_keybindings_menu(user)
 
 			if("keybindings_reset")
 				var/choice = tgalert(user, "Do you really want to reset your keybindings?", "Setup keybindings", "Do It", "Cancel")
 				if(choice == "Cancel")
-					SetKeybinds(user)
+					refresh_keybindings_menu(user)
 					return
 				hotkeys = (choice == "Do It")
 				key_bindings = (hotkeys) ? deepCopyList(GLOB.hotkey_keybinding_list_by_key) : deepCopyList(GLOB.classic_keybinding_list_by_key)
 				user.client.update_movement_keys()
-				SetKeybinds(user)
+				refresh_keybindings_menu(user)
 			else
 				SetKeybinds(user)
 		return TRUE
